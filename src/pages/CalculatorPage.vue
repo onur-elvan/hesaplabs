@@ -18,6 +18,14 @@
       </div>
 
       <p class="text-gray-600 mt-2">{{ calc.description }}</p>
+      <div
+        v-if="calc.seoText"
+        class="mt-5 rounded-xl border bg-gray-50 p-4 text-sm text-gray-700 leading-relaxed"
+      >
+        <div class="font-semibold text-gray-900 mb-2">Bilgi</div>
+        <p class="whitespace-pre-line">{{ calc.seoText }}</p>
+      </div>
+
       <!-- Bilgilendirme kutusu (varsa) -->
       <div v-if="calc.info" class="mt-5 rounded-xl border bg-blue-50 p-4">
         <div class="font-semibold text-gray-900">
@@ -206,9 +214,10 @@ function format(val) {
 useSeo({
   title: computed(() =>
     calc.value
-      ? `${calc.value.title} | Hesaplabs`
+      ? `${calc.value.seoTitle || calc.value.title} | Hesaplabs`
       : "Hesaplabs | Akıllı Hesaplama Araçları"
   ),
+
   description: computed(() =>
     calc.value
       ? calc.value.description
