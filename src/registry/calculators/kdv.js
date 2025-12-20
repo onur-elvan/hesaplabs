@@ -3,6 +3,27 @@ export default {
   title: "KDV Hesaplama",
   category: "Muhasebe",
   description: "KDV dahil/hariç tutara göre KDV ve toplamı hesaplar.",
+  seoTitle: "KDV Hesaplama – %1, %10 ve %20 KDV Dahil ve Hariç Hesaplama Aracı",
+  seoText: `
+KDV hesaplama aracı ile bir ürün veya hizmetin
+KDV dahil ve KDV hariç tutarını saniyeler içinde hesaplayabilirsin.
+
+Bu araç sayesinde:
+- %1, %10 ve %20 KDV oranlarına göre hesaplama yapabilirsin
+- KDV dahil fiyattan KDV tutarını ayırabilirsin
+- KDV hariç fiyata KDV ekleyerek satış fiyatını görebilirsin
+
+Kimler için uygundur?
+- Esnaflar
+- Muhasebeciler
+- Öğrenciler
+- E-ticaret ile uğraşanlar
+
+Türkiye’de güncel KDV oranları esas alınarak hazırlanmıştır.
+
+Not: Hesaplama sonuçları bilgilendirme amaçlıdır, resmi işlemler için muhasebe kayıtları esas alınmalıdır.
+`.trim(),
+
   inputs: [
     {
       key: "amount",

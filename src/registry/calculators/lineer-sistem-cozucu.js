@@ -4,6 +4,30 @@ export default {
   title: "Lineer Denklem Sistemi Çözücü (2/3 Bilinmeyen)",
   description:
     "Ax=b sistemini (2 veya 3 bilinmeyen) Gauss eliminasyonu ile çözer. Tek çözüm / sonsuz / çözümsüz durumlarını ayırt eder.",
+  seoTitle:
+    "Lineer Denklem Sistemi Çözme – 2x2 / 3x3 Denklem Çözücü (Gauss, Determinant) + Adım Mantığı",
+  seoText: `
+Lineer sistem çözücü; birden fazla bilinmeyenli denklem takımını (lineer denklem sistemi)
+sayısal yöntemlerle çözmene yardımcı olur. Özellikle 2x2 ve 3x3 sistemlerde
+Gauss eleme mantığı, determinant (Cramer) yaklaşımı gibi yöntemlerin çıktısını pratik şekilde görmeyi sağlar.
+
+Bu hesaplayıcı ile:
+- Katsayılar matrisi ve sabitler vektörü ile sistemi tanımlarsın
+- Çözümün tekil mi, sonsuz mu, yok mu (tutarsız) olduğunu anlayabilirsin
+- Sonucu sayısal olarak elde edersin (yaklaşım/hassasiyet dahil)
+
+Ne zaman kullanılır?
+- Mühendislik (statik, devre analizleri, denge denklemleri)
+- Ekonomi/işletme (denge modelleri)
+- Üniversite matematiği (lineer cebir)
+
+İpucu:
+Eğer determinant 0’a çok yakınsa sistem “kötü koşullu” olabilir; küçük veri değişimleri
+sonucu ciddi etkileyebilir. Bu durumda daha dikkatli yorumlamak gerekir.
+
+Not: Sonuçlar sayısal hesaplamadır; girdilerin doğruluğu sonucu doğrudan etkiler.
+`.trim(),
+
   inputs: [
     {
       key: "boyut",

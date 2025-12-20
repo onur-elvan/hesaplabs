@@ -3,6 +3,25 @@ export default {
   category: "Eğitim",
   title: "Vize Final Ortalama Hesaplama",
   description: "Vize ve final notuna göre dönem ortalamasını hesaplar.",
+  seoTitle: "Vize Final Not Hesaplama – Geçme Notu ve Ortalama Hesaplama",
+  seoText: `
+Vize final not hesaplama aracı,
+vize ve final sınav notlarını ve ağırlık oranlarını kullanarak
+ders ortalamanı ve geçip geçmediğini hesaplar.
+
+Bu hesaplayıcı ile:
+- Vize ve final katkı oranlarını belirleyebilirsin
+- Finalden kaç alman gerektiğini görebilirsin
+- Dönem sonu not ortalamanı öğrenebilirsin
+
+Öğrenciler için:
+- Sınav öncesi strateji belirleme
+- Not hedefi koyma
+- Ders geçme ihtimalini önceden görme
+
+Not: Üniversite ve okul sistemlerine göre oranlar değişebilir.
+`.trim(),
+
   inputs: [
     {
       key: "vize",

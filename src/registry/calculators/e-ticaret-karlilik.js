@@ -4,6 +4,30 @@ export default {
   title: "E-Ticaret Karlılık Simülatörü",
   description:
     "Alış maliyeti, KDV, platform komisyonu, kargo/paketleme, reklam vb. kalemlerle kârlılığı ve zarar etmeme satış fiyatını hesaplar.",
+  seoTitle:
+    "E-Ticaret Karlılık Hesaplama – Komisyon, Kargo ve KDV Dahil Net Kazanç",
+  seoText: `
+E-ticaret karlılık hesaplama aracı,
+bir ürünü satarken tüm maliyetleri hesaba katarak
+gerçek net kazancını görmeni sağlar.
+
+Hesaplamaya dahil edilenler:
+- Ürün alış maliyeti
+- KDV
+- Platform komisyonu (Trendyol, Hepsiburada, Amazon vb.)
+- Kargo ve paketleme giderleri
+- Reklam ve pazarlama maliyetleri
+
+Bu araç sayesinde:
+- Ürünü en az kaça satman gerektiğini öğrenirsin
+- Belirli bir satış fiyatında net karını görürsün
+- Zarar etmeden satış stratejisi oluşturabilirsin
+
+Özellikle e-ticarete yeni başlayanlar için kritik bir araçtır.
+
+Not: Platform komisyon oranları zamanla değişebilir.
+`.trim(),
+
   inputs: [
     // Maliyetler
     {

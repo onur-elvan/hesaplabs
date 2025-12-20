@@ -18,6 +18,32 @@ export default {
     disclaimer:
       "Bu araç bilgilendirme amaçlıdır; tanı koymaz. Risk yüksek çıkarsa veya şikâyetin varsa bir sağlık profesyoneline danış.",
   },
+  seoTitle:
+    "Framingham Risk Skoru Hesaplama – 10 Yıllık Kalp-Damar Riski (Yaş, Kolesterol, Tansiyon, Sigara)",
+  seoText: `
+Framingham Risk Skoru, kişinin bazı temel sağlık ölçümleri ve yaşam tarzı bilgilerine göre
+önümüzdeki 10 yıl içinde kalp-damar hastalığı (kalp krizi vb.) yaşama olasılığını
+yüzde olarak tahmin etmeye yardımcı olan bir risk değerlendirme yöntemidir.
+
+Bu hesaplayıcıda kullanılan bilgiler:
+- Yaş ve cinsiyet
+- Total kolesterol ve HDL kolesterol
+- Sistolik tansiyon (ve tedavi kullanımı varsa)
+- Sigara kullanımı (var/yok)
+(Bazı modeller diyabet bilgisini de içerir; hesaplayıcının alanlarına göre değişebilir.)
+
+Sonuç nasıl yorumlanır?
+- Düşük risk: genelde yaşam tarzı iyileştirmeleri ile yönetilebilir
+- Orta/yüksek risk: doktor değerlendirmesi ile takip, tetkik ve tedavi planı gerekebilir
+
+Kalp sağlığını destekleyen öneriler:
+- Düzenli yürüyüş/egzersiz
+- Dengeli beslenme (lif, sebze, sağlıklı yağlar)
+- Sigarayı bırakma
+- Tansiyon ve kolesterol kontrolü
+
+Not: Bu araç tıbbi tanı değildir. Sonuçlar bilgilendirme amaçlıdır ve doktor değerlendirmesinin yerini tutmaz.
+`.trim(),
 
   inputs: [
     {

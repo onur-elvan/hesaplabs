@@ -4,16 +4,26 @@ export default {
   title: "Klima BTU Hesaplama (Gelişmiş)",
   description:
     "Oda ve kullanım koşullarına göre tahmini BTU/h hesaplar; ekonomi/önerilen/konfor seçenekleri sunar.",
-  seoTitle: "Klima BTU Hesaplama | Odaya Göre Doğru Klima Kapasitesi",
+  seoTitle:
+    "Klima BTU Hesaplama – Oda m², Cephe, Kişi Sayısına Göre Doğru Klima Seçimi",
   seoText: `
-Bu hesaplayıcı; oda m², cephe, yalıtım, kişi sayısı ve pencere durumuna göre
-önerilen klima kapasitesini (BTU) tahmini olarak hesaplar.
+Klima BTU hesaplama aracı, bulunduğun odanın metrekaresi, cephe yönü, yalıtım durumu,
+odada bulunan kişi sayısı ve pencere faktörlerini dikkate alarak
+ihtiyacın olan ideal klima kapasitesini (BTU) tahmini olarak hesaplar.
+
+Yanlış BTU seçimi:
+- Düşük BTU → Yetersiz soğutma ve sürekli çalışan klima
+- Yüksek BTU → Gereksiz elektrik tüketimi ve konforsuz ortam
+
+Bu hesaplayıcıyı kullanarak:
+- Odan için kaç BTU klima gerektiğini öğrenebilirsin
+- Bir üst veya alt BTU tercihi yapman gerekip gerekmediğini görebilirsin
 
 İpucu:
-- Güneş alan (güney/batı) cephelerde kapasite ihtiyacı artar.
-- Yalıtımı zayıf ve çok camlı odalarda bir üst BTU tercih etmek konfor sağlar.
+Güney ve batı cepheli, çok camlı veya yalıtımsız odalarda
+hesaplanan değerin bir üst BTU seviyesi tercih edilebilir.
 
-Not: Sonuçlar bilgilendirme amaçlıdır; kesin seçim için keşif/uzman görüşü önerilir.
+Not: Sonuçlar bilgilendirme amaçlıdır. Kesin seçim için keşif ve uzman görüşü önerilir.
 `.trim(),
 
   inputs: [

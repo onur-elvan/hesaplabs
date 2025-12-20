@@ -15,6 +15,27 @@ export default {
     disclaimer:
       "Sayısal yöntemler yaklaşık sonuç verir. Adım (h) ve bölme sayısı (n) sonuçları etkiler.",
   },
+  seoTitle:
+    "Sayısal Türev ve İntegral Hesaplama – Fonksiyon, Adım (h) ve Aralık ile Yaklaşık Sonuç",
+  seoText: `
+Bu araç sembolik (kapalı form) değil, sayısal (yaklaşık) yöntemlerle türev ve integral hesaplar.
+Fonksiyonun karmaşık olduğu veya analitik çözümün zor olduğu durumlarda hızlı tahmin için idealdir.
+
+Sayısal türev:
+- Seçtiğin noktada fonksiyonun değişim hızını yaklaşık hesaplar
+- İleri fark / geri fark / merkezi fark gibi yöntemler kullanılabilir (hesaplayıcı tasarımına göre)
+
+Sayısal integral:
+- Belirlediğin [a, b] aralığında alanı yaklaşık hesaplar
+- Dikdörtgen, trapez (yamuk) veya Simpson yöntemi gibi yaklaşımlar kullanılabilir
+
+Daha doğru sonuç için ipuçları:
+- Adım (h) çok büyük olursa hata artar
+- Adım (h) aşırı küçük olursa yuvarlama hataları büyüyebilir
+- Trapez/Simpson genelde basit yöntemlerden daha isabetlidir
+
+Not: Sayısal sonuçlar yaklaşık değerdir; hassas uygulamalarda adım sayısı ve yöntem seçimi dikkatle yapılmalıdır.
+`.trim(),
 
   inputs: [
     {

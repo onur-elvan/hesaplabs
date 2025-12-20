@@ -3,6 +3,32 @@ export default {
   category: "Sağlık",
   title: "Vücut Kitle İndeksi (BMI)",
   description: "Boy ve kiloya göre BMI hesaplar ve sınıflandırır.",
+  seoTitle:
+    "Vücut Kitle İndeksi (BMI) Hesaplama – Boy ve Kilo ile İdeal Kilo Analizi",
+  seoText: `
+Vücut Kitle İndeksi (BMI) hesaplama aracı,
+boy ve kilo bilgilerine göre vücut ağırlığının
+sağlık açısından hangi aralıkta olduğunu gösterir.
+
+BMI değerleri ile:
+- Zayıf
+- Normal kilolu
+- Fazla kilolu
+- Obez
+
+sınıflandırmasını görebilirsin.
+
+Bu araç sayesinde:
+- Kilonun boyuna göre sağlıklı aralıkta olup olmadığını öğrenirsin
+- Kilo kontrolü ve yaşam tarzı değişiklikleri için fikir edinirsin
+
+Önemli:
+BMI tek başına kesin sağlık göstergesi değildir.
+Kas oranı, yaş ve cinsiyet gibi faktörler de değerlendirilmelidir.
+
+Not: Sonuçlar bilgilendirme amaçlıdır, tıbbi tanı yerine geçmez.
+`.trim(),
+
   inputs: [
     { key: "heightCm", label: "Boy (cm)", type: "number", default: 175 },
     { key: "weightKg", label: "Kilo (kg)", type: "number", default: 75 },
