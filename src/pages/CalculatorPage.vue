@@ -149,6 +149,7 @@ import {
   getFavorites,
   toggleFavorite,
 } from "../registry/calculators";
+import { useSeo } from "../composables/useSeo";
 
 const route = useRoute();
 const calc = ref(null);
@@ -202,4 +203,22 @@ function format(val) {
   }
   return val;
 }
+useSeo({
+  title: computed(() =>
+    calc.value
+      ? `${calc.value.title} | Hesaplabs`
+      : "Hesaplabs | Akıllı Hesaplama Araçları"
+  ),
+  description: computed(() =>
+    calc.value
+      ? calc.value.description
+      : "Finans, matematik, eğitim ve sağlık için hızlı ve mobil uyumlu hesaplayıcılar."
+  ),
+  ogTitle: computed(() =>
+    calc.value ? `${calc.value.title} | Hesaplabs` : "Hesaplabs"
+  ),
+  ogDescription: computed(() =>
+    calc.value ? calc.value.description : "Hesaplabs hesaplayıcıları."
+  ),
+});
 </script>
