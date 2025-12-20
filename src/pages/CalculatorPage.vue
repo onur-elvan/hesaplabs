@@ -18,12 +18,14 @@
       </div>
 
       <p class="text-gray-600 mt-2">{{ calc.description }}</p>
+
+      <!-- ✅ SEO Bilgi: seoText varsa onu, yoksa otomatik metni göster -->
       <div
-        v-if="calc.seoText"
+        v-if="seoText"
         class="mt-5 rounded-xl border bg-gray-50 p-4 text-sm text-gray-700 leading-relaxed"
       >
         <div class="font-semibold text-gray-900 mb-2">Bilgi</div>
-        <p class="whitespace-pre-line">{{ calc.seoText }}</p>
+        <p class="whitespace-pre-line">{{ seoText }}</p>
       </div>
 
       <!-- Bilgilendirme kutusu (varsa) -->
@@ -59,18 +61,12 @@
             class="w-full px-4 py-2 rounded-lg border"
             :placeholder="input.placeholder"
           />
+
+          <!-- Text (tek versiyon) -->
           <input
             v-else-if="input.type === 'text'"
             v-model="values[input.key]"
             type="text"
-            class="w-full px-4 py-2 rounded-lg border"
-            :placeholder="input.placeholder"
-          />
-          <input
-            v-else-if="input.type === 'text'"
-            v-model="values[input.key]"
-            type="text"
-            inputmode="decimal"
             class="w-full px-4 py-2 rounded-lg border"
             :placeholder="input.placeholder"
           />
@@ -99,6 +95,7 @@
           </select>
         </div>
       </div>
+
       <div v-if="hasAdvanced" class="mt-6 flex items-center justify-between">
         <div class="text-sm text-gray-500">
           Daha doğru sonuç için gelişmiş ayarları kullanabilirsin.
@@ -198,6 +195,34 @@ watchEffect(() => {
   }
 });
 
+/** ✅ seoText fallback:
+ *  - calc.seoText varsa onu kullan
+ *  - yoksa otomatik üret (title + category + input etiketleri)
+ */
+const seoText = computed(() => {
+  if (!calc.value) return "";
+  if (calc.value.seoText) return calc.value.seoText;
+
+  const inputs = (calc.value.inputs || [])
+    .slice(0, 6)
+    .map((i) => `- ${i.label}`)
+    .join("\n");
+
+  const cat = calc.value.category?.toLowerCase() || "genel";
+
+  return `
+${
+  calc.value.title
+} aracı, ${cat} kategorisinde hızlı ve pratik hesaplama yapmanı sağlar.
+
+Nasıl kullanılır:
+${inputs || "- Gerekli alanları doldur"}
+- "Hesapla" butonuna bas
+
+Not: Sonuçlar bilgilendirme amaçlıdır. Resmi işlemler için ilgili kurum/uzman doğrulaması önerilir.
+`.trim();
+});
+
 function run() {
   if (!calc.value) return;
   result.value = calc.value.compute(values);
@@ -211,20 +236,22 @@ function format(val) {
   }
   return val;
 }
+
 useSeo({
   title: computed(() =>
     calc.value
       ? `${calc.value.seoTitle || calc.value.title} | Hesaplabs`
       : "Hesaplabs | Akıllı Hesaplama Araçları"
   ),
-
   description: computed(() =>
     calc.value
       ? calc.value.description
       : "Finans, matematik, eğitim ve sağlık için hızlı ve mobil uyumlu hesaplayıcılar."
   ),
   ogTitle: computed(() =>
-    calc.value ? `${calc.value.title} | Hesaplabs` : "Hesaplabs"
+    calc.value
+      ? `${calc.value.seoTitle || calc.value.title} | Hesaplabs`
+      : "Hesaplabs"
   ),
   ogDescription: computed(() =>
     calc.value ? calc.value.description : "Hesaplabs hesaplayıcıları."
