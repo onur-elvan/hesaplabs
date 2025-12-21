@@ -111,6 +111,35 @@
       </div>
     </div>
 
+    <!-- ✅ Popüler Hesaplamalar (arama yokken göster) -->
+    <section v-if="!q && popular.length" class="mt-10">
+      <div class="flex items-end justify-between gap-4 flex-wrap">
+        <div>
+          <h2 class="text-2xl font-bold">Popüler Hesaplamalar</h2>
+          <p class="text-sm text-gray-600 mt-1">
+            En çok aranan araçlara hızlıca ulaş.
+          </p>
+        </div>
+
+        <span class="text-xs text-gray-500">
+          (Google için de keşfi hızlandırır ✅)
+        </span>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+        <RouterLink
+          v-for="c in popular"
+          :key="c.id"
+          :to="`/c/${c.id}`"
+          class="bg-white rounded-xl border hover:shadow p-5 transition"
+        >
+          <div class="text-sm text-gray-500">{{ c.category }}</div>
+          <div class="mt-1 text-lg font-semibold">{{ c.title }}</div>
+          <div class="mt-2 text-gray-600 text-sm">{{ c.description }}</div>
+        </RouterLink>
+      </div>
+    </section>
+
     <!-- Filtreler -->
     <div class="mt-10">
       <div class="flex items-center justify-between gap-4">
@@ -191,6 +220,29 @@ const recent = computed(() =>
 
 const favorites = computed(() => favIds.value.map(findById).filter(Boolean));
 
+/**
+ * ✅ Popüler hesaplar (SEO + UX)
+ * İd’leri burada sabit tutuyoruz.
+ */
+const popularIds = [
+  "net-brut-maas",
+  "kdv",
+  "faiz-basit",
+  "faiz-bilesik",
+  "kar-marj",
+  "e-ticaret-karlilik",
+  "ebob-ekok",
+  "birim-donusturucu",
+  "bmi",
+  "bel-kalca-orani",
+  "damga",
+  "lineer-sistem-cozucu",
+];
+
+const popular = computed(() =>
+  popularIds.map(findById).filter(Boolean).slice(0, 12)
+);
+
 const q = ref("");
 const selectedCategory = ref("Tümü");
 
@@ -244,20 +296,15 @@ const categories = computed(() => {
   return ["Tümü", ...Array.from(set)];
 });
 
-/* ✅ Temizleme butonları
-   Not: registry'de localStorage key'lerini bilmediğim için (adı sende neyse)
-   burada güvenli yöntem: mevcut fonksiyonlar üzerinden “sıfırlama” yapıyoruz.
-   Eğer registry'de doğrudan clearFavorites/clearRecent eklediysen daha temiz olur.
-*/
 function clearFavorites() {
   const ok = confirm("Tüm favorileri silmek istiyor musun?");
   if (!ok) return;
-  favIds.value = clearFavoritesRegistry(); // ✅ registry temizler + döndürür
+  favIds.value = clearFavoritesRegistry();
 }
 
 function clearRecent() {
   const ok = confirm("Son kullanılanları temizlemek istiyor musun?");
   if (!ok) return;
-  recentIds.value = clearRecentRegistry(); // ✅ registry temizler + döndürür
+  recentIds.value = clearRecentRegistry();
 }
 </script>

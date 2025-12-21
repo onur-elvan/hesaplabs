@@ -1,5 +1,5 @@
 // src/composables/useSeo.js
-import { watchEffect } from "vue";
+import { watchEffect, isRef, unref } from "vue";
 
 function ensureMeta(name, attr = "name") {
   let el = document.head.querySelector(`meta[${attr}="${name}"]`);
@@ -32,10 +32,27 @@ function ensureScript(id) {
   return el;
 }
 
+// Ref/Computed/Object içindeki ref'leri güvenle düz objeye çevirir
+function deepUnwrap(input) {
+  const v = isRef(input) ? unref(input) : input;
+
+  if (Array.isArray(v)) return v.map(deepUnwrap);
+
+  if (v && typeof v === "object") {
+    const out = {};
+    for (const [k, val] of Object.entries(v)) out[k] = deepUnwrap(val);
+    return out;
+  }
+
+  return v;
+}
+
 export function useSeo(seoRef) {
   watchEffect(() => {
-    const seo =
+    const raw =
       typeof seoRef === "function" ? seoRef() : seoRef?.value || seoRef;
+
+    const seo = deepUnwrap(raw);
     if (!seo) return;
 
     // Title
@@ -83,30 +100,48 @@ export function useSeo(seoRef) {
     if (seo.twitterImage)
       ensureMeta("twitter:image").setAttribute("content", seo.twitterImage);
 
-    // JSON-LD (WebPage + FAQ)
-    const ld = {
+    /**
+     * JSON-LD
+     * - seo.schema: array veya object olarak eklenebilir (BreadcrumbList, SoftwareApplication vs.)
+     * - seo.faq: varsa otomatik FAQPage ekler
+     * - default: WebPage ekler
+     */
+    const graph = [];
+
+    // 1) Dışarıdan verilmiş schema varsa ekle
+    if (seo.schema) {
+      if (Array.isArray(seo.schema)) graph.push(...seo.schema);
+      else graph.push(seo.schema);
+    }
+
+    // 2) FAQ varsa ekle
+    if (Array.isArray(seo.faq) && seo.faq.length) {
+      graph.push({
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        inLanguage: "tr-TR",
+        mainEntity: seo.faq
+          .filter((x) => x?.q && x?.a)
+          .map((x) => ({
+            "@type": "Question",
+            name: x.q,
+            acceptedAnswer: { "@type": "Answer", text: x.a },
+          })),
+      });
+    }
+
+    // 3) Default WebPage (yoksa ekle)
+    graph.push({
       "@context": "https://schema.org",
       "@type": "WebPage",
       name: seo.title || seo.ogTitle,
       description: seo.description || seo.ogDescription,
       url: seo.canonical || seo.ogUrl,
       inLanguage: "tr-TR",
-    };
+    });
 
-    // FAQ schema ekle (varsa)
-    if (Array.isArray(seo.faq) && seo.faq.length) {
-      ld.mainEntity = seo.faq
-        .filter((x) => x?.q && x?.a)
-        .map((x) => ({
-          "@type": "Question",
-          name: x.q,
-          acceptedAnswer: { "@type": "Answer", text: x.a },
-        }));
-      // Tipi FAQPage’e çevir (Google daha sever)
-      ld["@type"] = "FAQPage";
-    }
-
+    // Birden fazla JSON-LD bas
     const script = ensureScript("seo-jsonld");
-    script.textContent = JSON.stringify(ld);
+    script.textContent = JSON.stringify(graph.length === 1 ? graph[0] : graph);
   });
 }

@@ -163,6 +163,9 @@ const values = reactive({});
 const result = ref(null);
 const showAdvanced = ref(false);
 
+const baseUrl = "https://hesaplabs.com";
+const pageUrl = computed(() => `${baseUrl}${route.fullPath}`);
+
 const hasAdvanced = computed(
   () => calc.value?.inputs?.some((i) => i.advanced) ?? false
 );
@@ -239,24 +242,68 @@ function format(val) {
 }
 
 /**
- * ✅ KRİTİK DÜZELTME:
- * useSeo'ya computed/ref DEĞİL, düz string gönderiyoruz.
- * Ayrıca calc/route değişince meta da güncellensin diye watchEffect içinde çağırıyoruz.
+ * ✅ C2 (Schema): Breadcrumb + SoftwareApplication (+ default WebPage useSeo'da zaten var)
+ * ✅ useSeo'yu 1 kez çağırıyoruz, içine computed veriyoruz (deepUnwrap sayesinde sorun çıkmaz)
  */
-watchEffect(() => {
-  const pageTitle = calc.value
-    ? `${calc.value.seoTitle || calc.value.title} | Hesaplabs`
-    : "Hesaplabs | Akıllı Hesaplama Araçları";
+useSeo({
+  title: computed(() =>
+    calc.value
+      ? `${calc.value.seoTitle || calc.value.title} | Hesaplabs`
+      : "Hesaplabs | Akıllı Hesaplama Araçları"
+  ),
+  description: computed(() =>
+    calc.value
+      ? calc.value.description
+      : "Finans, matematik, eğitim ve sağlık için hızlı ve mobil uyumlu hesaplayıcılar."
+  ),
 
-  const pageDesc = calc.value
-    ? calc.value.description
-    : "Finans, matematik, eğitim ve sağlık için hızlı ve mobil uyumlu hesaplayıcılar.";
+  canonical: pageUrl,
+  ogUrl: pageUrl,
+  ogType: "website",
+  ogSiteName: "Hesaplabs",
+  twitterCard: "summary_large_image",
 
-  useSeo({
-    title: pageTitle,
-    description: pageDesc,
-    ogTitle: calc.value ? pageTitle : "Hesaplabs",
-    ogDescription: pageDesc,
-  });
+  schema: computed(() => {
+    if (!calc.value) return [];
+
+    const title = `${calc.value.seoTitle || calc.value.title} | Hesaplabs`;
+
+    return [
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Hesaplabs",
+            item: `${baseUrl}/`,
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Hesaplayıcılar",
+            item: `${baseUrl}/`,
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: calc.value.title,
+            item: pageUrl.value,
+          },
+        ],
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        name: title,
+        applicationCategory: "CalculatorApplication",
+        operatingSystem: "Web",
+        url: pageUrl.value,
+        description: calc.value.description,
+        offers: { "@type": "Offer", price: "0", priceCurrency: "TRY" },
+      },
+    ];
+  }),
 });
 </script>
