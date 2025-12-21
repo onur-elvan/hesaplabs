@@ -229,6 +229,14 @@ Not: Sonuçlar bilgilendirme amaçlıdır. Resmi işlemler için ilgili kurum/uz
 
 function run() {
   if (!calc.value) return;
+  if (typeof window.gtag === "function") {
+    window.gtag("event", "calculate", {
+      calculator_id: calc.value.id,
+      calculator_title: calc.value.title,
+      category: calc.value.category,
+      page_path: `/c/${calc.value.id}`,
+    });
+  }
   result.value = calc.value.compute(values);
 }
 

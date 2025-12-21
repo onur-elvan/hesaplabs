@@ -2,7 +2,8 @@
   <div class="max-w-7xl mx-auto px-4 py-10">
     <div class="flex items-end justify-between gap-4 flex-wrap">
       <div>
-        <h2 class="text-3xl font-bold">Hesaplayıcılar</h2>
+        <!-- ✅ Ana sayfada 1 tane H1 -->
+        <h1 class="text-3xl font-bold">Hesaplayıcılar</h1>
         <p class="text-gray-600 mt-2">İstediğini seç, hemen hesapla.</p>
       </div>
 
@@ -55,7 +56,7 @@
     <!-- Favoriler (arama yokken göster) -->
     <div v-if="!q && favorites.length" class="mt-8">
       <div class="flex items-center justify-between gap-3">
-        <h3 class="text-lg font-semibold">Favoriler</h3>
+        <h2 class="text-lg font-semibold">Favoriler</h2>
 
         <button
           class="text-sm text-gray-500 hover:text-red-600"
@@ -83,10 +84,10 @@
     <!-- Son Kullanılanlar (arama yokken göster) -->
     <div v-if="!q && recent.length" class="mt-8">
       <div class="flex items-center justify-between gap-3">
-        <h3 class="text-lg font-semibold">
+        <h2 class="text-lg font-semibold">
           Son Kullanılanlar
           <span class="text-xs text-gray-500 font-normal">(son 3)</span>
-        </h3>
+        </h2>
 
         <button
           class="text-sm text-gray-500 hover:text-red-600"
@@ -143,7 +144,7 @@
     <!-- Filtreler -->
     <div class="mt-10">
       <div class="flex items-center justify-between gap-4">
-        <h3 class="text-lg font-semibold">Filtrele</h3>
+        <h2 class="text-lg font-semibold">Filtrele</h2>
         <button
           v-if="selectedCategory !== 'Tümü'"
           class="text-sm text-gray-500 hover:text-blue-600"
