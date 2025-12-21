@@ -183,9 +183,26 @@ function onToggleFav() {
   favs.value = toggleFavorite(calc.value.id);
 }
 
+// ✅ aynı sayfada tekrar tekrar view event basmamak için küçük koruma
+let lastViewedId = null;
+
 watchEffect(() => {
   calc.value = findCalculatorById(route.params.id);
-  if (calc.value) addRecent(calc.value.id);
+
+  if (calc.value) {
+    addRecent(calc.value.id);
+
+    // ✅ GA4: sayfa görüntülendi
+    if (typeof window.gtag === "function" && lastViewedId !== calc.value.id) {
+      lastViewedId = calc.value.id;
+      window.gtag("event", "calculator_view", {
+        calculator_id: calc.value.id,
+        calculator_title: calc.value.title,
+        category: calc.value.category,
+        page_path: route.fullPath,
+      });
+    }
+  }
 
   result.value = null;
   showAdvanced.value = false;
@@ -229,15 +246,46 @@ Not: Sonuçlar bilgilendirme amaçlıdır. Resmi işlemler için ilgili kurum/uz
 
 function run() {
   if (!calc.value) return;
+
+  // 1) calculate_click: butona basıldı
   if (typeof window.gtag === "function") {
-    window.gtag("event", "calculate", {
+    window.gtag("event", "calculate_click", {
       calculator_id: calc.value.id,
       calculator_title: calc.value.title,
       category: calc.value.category,
-      page_path: `/c/${calc.value.id}`,
+      page_path: route.fullPath,
     });
   }
-  result.value = calc.value.compute(values);
+
+  // hesabı çalıştır
+  const out = calc.value.compute(values);
+  result.value = out;
+
+  // 2) calculation_error / calculation_done
+  if (typeof window.gtag === "function") {
+    const isError = out && typeof out === "object" && "hata" in out;
+
+    if (isError) {
+      window.gtag("event", "calculation_error", {
+        calculator_id: calc.value.id,
+        calculator_title: calc.value.title,
+        category: calc.value.category,
+        page_path: route.fullPath,
+        error_message: String(out.hata || "Bilinmeyen hata").slice(0, 120),
+      });
+    } else {
+      window.gtag("event", "calculation_done", {
+        calculator_id: calc.value.id,
+        calculator_title: calc.value.title,
+        category: calc.value.category,
+        page_path: route.fullPath,
+        result_keys:
+          out && typeof out === "object"
+            ? Object.keys(out).slice(0, 12).join(",")
+            : "",
+      });
+    }
+  }
 }
 
 function format(val) {
@@ -251,7 +299,6 @@ function format(val) {
 
 /**
  * ✅ C2 (Schema): Breadcrumb + SoftwareApplication (+ default WebPage useSeo'da zaten var)
- * ✅ useSeo'yu 1 kez çağırıyoruz, içine computed veriyoruz (deepUnwrap sayesinde sorun çıkmaz)
  */
 useSeo({
   title: computed(() =>
