@@ -20,6 +20,15 @@ export default {
   category: "Matematik",
   title: "Birim Dönüştürücü",
   description: "Uzunluk / Ağırlık / Sıcaklık birim dönüşümü yapar.",
+  seoTitle: "Birim Dönüştürücü – Uzunluk, Ağırlık ve Hacim Çevirme",
+
+  seoText: `
+Birim dönüştürücü aracı ile farklı ölçü birimleri arasında
+hızlı ve doğru dönüşüm yapabilirsin.
+
+Eğitim, mühendislik ve günlük kullanım için uygundur.
+`.trim(),
+
   inputs: [
     {
       key: "type",

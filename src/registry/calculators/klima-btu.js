@@ -1,30 +1,44 @@
 export default {
   id: "klima-btu",
+  title: "Klima BTU Hesaplama",
   category: "Ev & Yaşam",
-  title: "Klima BTU Hesaplama (Gelişmiş)",
   description:
-    "Oda ve kullanım koşullarına göre tahmini BTU/h hesaplar; ekonomi/önerilen/konfor seçenekleri sunar.",
+    "Oda büyüklüğü, cephe, kişi sayısı ve iklime göre ideal klima BTU değerini hesaplar.",
+
   seoTitle:
-    "Klima BTU Hesaplama – Oda m², Cephe, Kişi Sayısına Göre Doğru Klima Seçimi",
+    "Klima BTU Hesaplama – Oda m²’ye Göre Doğru Klima Kapasitesi Hesaplama",
+
   seoText: `
-Klima BTU hesaplama aracı, bulunduğun odanın metrekaresi, cephe yönü, yalıtım durumu,
-odada bulunan kişi sayısı ve pencere faktörlerini dikkate alarak
-ihtiyacın olan ideal klima kapasitesini (BTU) tahmini olarak hesaplar.
+Klima BTU hesaplama aracı ile bulunduğun odanın büyüklüğüne, kullanım koşullarına
+ve iklim özelliklerine göre kaç BTU klima alman gerektiğini kolayca öğrenebilirsin.
 
-Yanlış BTU seçimi:
-- Düşük BTU → Yetersiz soğutma ve sürekli çalışan klima
-- Yüksek BTU → Gereksiz elektrik tüketimi ve konforsuz ortam
+Doğru BTU seçimi neden önemlidir?
+- Düşük BTU → Oda yeterince soğumaz
+- Yüksek BTU → Gereksiz elektrik tüketimi ve nem sorunları
 
-Bu hesaplayıcıyı kullanarak:
-- Odan için kaç BTU klima gerektiğini öğrenebilirsin
-- Bir üst veya alt BTU tercihi yapman gerekip gerekmediğini görebilirsin
+Bu hesaplama:
+- Oda metrekare (m²)
+- Odanın güneş alma durumu (cephe)
+- Odayı kullanan kişi sayısı
+- Pencere sayısı
+- Bölgenin iklim durumu
 
-İpucu:
-Güney ve batı cepheli, çok camlı veya yalıtımsız odalarda
-hesaplanan değerin bir üst BTU seviyesi tercih edilebilir.
+gibi faktörleri dikkate alır.
 
-Not: Sonuçlar bilgilendirme amaçlıdır. Kesin seçim için keşif ve uzman görüşü önerilir.
+Sonuç olarak sana önerilen minimum klima BTU kapasitesi gösterilir.
 `.trim(),
+
+  info: {
+    title: "BTU Seçim Rehberi",
+    items: [
+      "Küçük odalar için düşük BTU, büyük alanlar için yüksek BTU gerekir.",
+      "Güneş alan odalarda BTU ihtiyacı artar.",
+      "Kalabalık odalar daha yüksek kapasite ister.",
+      "Yanlış BTU seçimi faturayı artırır.",
+    ],
+    disclaimer:
+      "Bu hesaplama bilgilendirme amaçlıdır. Kesin seçim için uzman görüşü önerilir.",
+  },
 
   inputs: [
     // Hızlı (temel)

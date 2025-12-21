@@ -27,6 +27,14 @@ Bu araç sayesinde:
 
 Not: Platform komisyon oranları zamanla değişebilir.
 `.trim(),
+  info: {
+    title: "Neden Karlılık Hesaplaması Yapmalısın?",
+    items: [
+      "Zarar etmeyeceğin satış fiyatını görürsün.",
+      "Komisyon ve giderleri netleştirir.",
+      "Fiyat stratejisi oluşturmanı sağlar.",
+    ],
+  },
 
   inputs: [
     // Maliyetler

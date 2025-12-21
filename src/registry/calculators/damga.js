@@ -3,6 +3,15 @@ export default {
   title: "Damga Vergisi Hesaplama",
   category: "Muhasebe",
   description: "Tutar ve oran (binde) ile damga vergisini hesaplar.",
+  seoTitle: "Damga Vergisi Hesaplama – Sözleşme ve Resmi Belgeler",
+
+  seoText: `
+Damga vergisi hesaplama aracı ile sözleşme ve resmi belgeler için
+ödenecek damga vergisini hızlıca hesaplayabilirsin.
+
+Türkiye’de geçerli damga vergisi oranları esas alınır.
+`.trim(),
+
   inputs: [
     { key: "amount", label: "Tutar", type: "number", default: 0 },
     {

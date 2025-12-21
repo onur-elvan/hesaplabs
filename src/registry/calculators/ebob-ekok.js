@@ -14,6 +14,15 @@ export default {
   category: "Matematik",
   title: "EBOB – EKOK",
   description: "İki sayının EBOB ve EKOK değerlerini hesaplar.",
+  seoTitle: "EBOB ve EKOK Hesaplama – En Büyük ve En Küçük Ortak Kat",
+
+  seoText: `
+EBOB ve EKOK hesaplama aracı ile iki veya daha fazla sayının
+en büyük ortak bölenini ve en küçük ortak katını kolayca bulabilirsin.
+
+İlköğretim ve ortaöğretim matematik konularında sıkça kullanılır.
+`.trim(),
+
   inputs: [
     { key: "x", label: "1. Sayı", type: "number", default: 12 },
     { key: "y", label: "2. Sayı", type: "number", default: 18 },

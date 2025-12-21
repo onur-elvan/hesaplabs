@@ -4,6 +4,15 @@ export default {
   title: "Limit & Seri (Sayısal Yaklaşım)",
   description:
     "Fonksiyon limiti, dizi limiti veya seri toplamını sayısal yöntemlerle (yakınsama kontrolü + hata uyarılarıyla) hesaplar.",
+  seoTitle: "Limit ve Seri Hesaplama – Sayısal Yaklaşım ile",
+
+  seoText: `
+Limit ve seri hesaplama aracı, matematiksel fonksiyonların limit ve
+seri değerlerini sayısal yöntemlerle yaklaşık olarak hesaplar.
+
+Üniversite seviyesinde matematik çalışan öğrenciler için uygundur.
+`.trim(),
+
   info: {
     title: "Desteklenen ifade örnekleri",
     items: [

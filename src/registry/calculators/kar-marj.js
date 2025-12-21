@@ -4,6 +4,15 @@ export default {
   category: "İşletme",
   description:
     "Maliyet ve satış fiyatına göre kâr tutarı ve oranlarını hesaplar.",
+  seoTitle: "Kar Marjı Hesaplama – Brüt ve Net Kar Oranı",
+
+  seoText: `
+Kar marjı hesaplama aracı ile maliyet ve satış fiyatına göre
+brüt ve net kar oranını kolayca hesaplayabilirsin.
+
+İşletmeler ve esnaflar için temel finansal göstergelerden biridir.
+`.trim(),
+
   inputs: [
     { key: "cost", label: "Maliyet", type: "number", default: 0 },
     { key: "price", label: "Satış Fiyatı", type: "number", default: 0 },

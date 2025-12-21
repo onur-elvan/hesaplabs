@@ -3,6 +3,21 @@ export default {
   category: "Sağlık",
   title: "Bel / Kalça Oranı (WHR)",
   description: "Bel çevresinin kalça çevresine oranını hesaplar (WHR).",
+  seoTitle: "Bel Kalça Oranı Hesaplama – Vücut Yağ Dağılımı",
+
+  seoText: `
+Bel kalça oranı hesaplama aracı ile vücut yağ dağılımını analiz edebilirsin.
+Bu oran, kalp-damar hastalıkları riskini değerlendirmede kullanılır.
+`.trim(),
+
+  info: {
+    title: "Bel Kalça Oranı Ne Anlama Gelir?",
+    items: [
+      "Düşük oran daha sağlıklı kabul edilir.",
+      "Yüksek oran kalp hastalığı riskini artırabilir.",
+    ],
+  },
+
   inputs: [
     { key: "waistCm", label: "Bel (cm)", type: "number", default: 85 },
     { key: "hipCm", label: "Kalça (cm)", type: "number", default: 100 },

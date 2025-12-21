@@ -34,6 +34,8 @@ import LineerSistem from "./lineer-sistem-cozucu.js";
 import framinghamRisk from "./framingham-risk.js";
 import ETicaretKarlilik from "./e-ticaret-karlilik.js";
 import KlimaBTU from "./klima-btu.js";
+import iban from "./iban.js";
+import netBrutMaas from "./net-brut-maas.js";
 
 // burada senin ekleyeceğin diğerleri de olacak:
 // import stopaj from "./stopaj"; gibi
@@ -41,11 +43,13 @@ import KlimaBTU from "./klima-btu.js";
 export const calculators = [
   kdv,
   LimitSeri,
+  iban,
   faizBasit,
   faizBilesik,
   MatrisTersDet,
   LineerSistem,
   SayisalKalkulus,
+  netBrutMaas,
   framinghamRisk,
   ETicaretKarlilik,
   KlimaBTU,

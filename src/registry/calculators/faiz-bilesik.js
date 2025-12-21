@@ -4,6 +4,25 @@ export default {
   category: "Finans",
   description:
     "Anapara, faiz oranı ve dönem sayısına göre bileşik faiz hesaplar.",
+  seoTitle: "Bileşik Faiz Hesaplama – Faiz Faize Nasıl Eklenir?",
+
+  seoText: `
+Bileşik faiz hesaplama aracı, faizin her dönem anaparaya eklenmesiyle
+oluşan toplam tutarı hesaplamanı sağlar.
+
+Uzun vadeli yatırımlarda bileşik faiz, basit faize göre çok daha yüksek getiri sağlar.
+Bu nedenle yatırım ve birikim planlamasında kritik öneme sahiptir.
+`.trim(),
+
+  info: {
+    title: "Bileşik Faiz Avantajı",
+    items: [
+      "Faiz her dönem anaparaya eklenir.",
+      "Uzun vadede büyük fark yaratır.",
+      "Yatırım ve tasarruf hesaplarında kullanılır.",
+    ],
+  },
+
   inputs: [
     { key: "principal", label: "Anapara", type: "number", default: 0 },
     { key: "rate", label: "Faiz Oranı (%)", type: "number", default: 0 },

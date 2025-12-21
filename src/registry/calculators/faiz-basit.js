@@ -3,6 +3,25 @@ export default {
   title: "Basit Faiz Hesaplama",
   category: "Finans",
   description: "Anapara, faiz oranı ve süreye göre basit faiz hesaplar.",
+  seoTitle: "Basit Faiz Hesaplama – Anapara, Faiz Oranı ve Süreye Göre",
+
+  seoText: `
+Basit faiz hesaplama aracı ile anapara, faiz oranı ve süre bilgilerini girerek
+elde edeceğin faiz tutarını ve toplam geri ödemeyi kolayca hesaplayabilirsin.
+
+Basit faiz, faiz tutarının sadece anapara üzerinden hesaplandığı faiz türüdür.
+Genellikle kısa vadeli yatırımlar ve borç hesaplamalarında kullanılır.
+`.trim(),
+
+  info: {
+    title: "Basit Faiz Nedir?",
+    items: [
+      "Faiz yalnızca anapara üzerinden hesaplanır.",
+      "Faiz faize eklenmez.",
+      "Kısa vadeli işlemler için uygundur.",
+    ],
+  },
+
   inputs: [
     { key: "principal", label: "Anapara", type: "number", default: 0 },
     { key: "rate", label: "Faiz Oranı (%)", type: "number", default: 0 },

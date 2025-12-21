@@ -3,26 +3,35 @@ export default {
   title: "KDV Hesaplama",
   category: "Muhasebe",
   description: "KDV dahil/hariç tutara göre KDV ve toplamı hesaplar.",
-  seoTitle: "KDV Hesaplama – %1, %10 ve %20 KDV Dahil ve Hariç Hesaplama Aracı",
+
+  // ✅ Daha doğal ve güçlü başlık
+  seoTitle: "KDV Hesaplama: %1, %10, %20 KDV Dahil/Hariç Hesaplama (Net-Brüt)",
+
+  // ✅ Snippet + kullanıcı odaklı SEO metni
   seoText: `
-KDV hesaplama aracı ile bir ürün veya hizmetin
-KDV dahil ve KDV hariç tutarını saniyeler içinde hesaplayabilirsin.
+KDV hesaplama aracı ile KDV hariç (net) veya KDV dahil (brüt) tutar üzerinden KDV tutarını ve toplam fiyatı saniyeler içinde hesaplayabilirsin.
 
-Bu araç sayesinde:
-- %1, %10 ve %20 KDV oranlarına göre hesaplama yapabilirsin
-- KDV dahil fiyattan KDV tutarını ayırabilirsin
-- KDV hariç fiyata KDV ekleyerek satış fiyatını görebilirsin
+KDV nasıl hesaplanır?
+- KDV hariç fiyat → KDV = Net × (Oran/100), Toplam = Net + KDV
+- KDV dahil fiyat → Net = Brüt / (1 + Oran/100), KDV = Brüt − Net
 
-Kimler için uygundur?
-- Esnaflar
-- Muhasebeciler
-- Öğrenciler
-- E-ticaret ile uğraşanlar
+Bu araçta Türkiye’de yaygın kullanılan %1, %10 ve %20 KDV oranlarıyla hesaplama yapabilirsin.
+E-ticaret ürün fiyatı, fatura kalemi, hizmet bedeli veya muhasebe ödevi gibi durumlarda hızlıca net/brüt ayrımı yapmak için uygundur.
 
-Türkiye’de güncel KDV oranları esas alınarak hazırlanmıştır.
-
-Not: Hesaplama sonuçları bilgilendirme amaçlıdır, resmi işlemler için muhasebe kayıtları esas alınmalıdır.
+Not: Sonuçlar bilgilendirme amaçlıdır. Resmi işlemler için muhasebe kayıtları ve güncel mevzuat esas alınmalıdır.
 `.trim(),
+
+  // ✅ Sayfa içinde mavi bilgilendirme kutusu (isteğe bağlı ama SEO + UX için çok iyi)
+  info: {
+    title: "Hızlı Rehber",
+    items: [
+      "Net (KDV hariç) girersen: KDV tutarı ve KDV dahil toplamı görürsün.",
+      "Brüt (KDV dahil) girersen: Net tutarı ve içindeki KDV’yi ayırır.",
+      "Oranı seç: %1, %10 veya %20.",
+    ],
+    disclaimer:
+      "Bilgilendirme amaçlıdır. Resmi işlemlerde muhasebe kayıtları esas alınmalıdır.",
+  },
 
   inputs: [
     {
@@ -70,26 +79,27 @@ Not: Hesaplama sonuçları bilgilendirme amaçlıdır, resmi işlemler için muh
 
     // KDV hariç girildiyse:
     if (mode === "haric") {
-      const kdvTutar = amount * rate;
-      const toplam = amount + kdvTutar;
+      const kdvTutari = amount * rate;
+      const toplam = amount + kdvTutari;
 
       return {
         net: amount,
-        kdvOrani: ratePercent, // % olarak
-        kdvTutari: kdvTutar,
-        toplam: toplam,
+        kdvOrani: ratePercent,
+        kdvTutari,
+        toplam,
       };
     }
 
     // KDV dahil girildiyse:
     const net = amount / (1 + rate);
-    const kdvTutar = amount - net;
+    const kdvTutari = amount - net;
 
     return {
       brut: amount,
-      kdvOrani: ratePercent, // % olarak
-      net: net,
-      kdvTutari: kdvTutar,
+      kdvOrani: ratePercent,
+      net,
+      kdvTutari,
+      toplam: amount, // ✅ kullanıcı sonucu listesinde "toplam" görmek istiyor genelde
     };
   },
 };

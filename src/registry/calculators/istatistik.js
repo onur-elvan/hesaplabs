@@ -22,6 +22,15 @@ export default {
   category: "Matematik",
   title: "İstatistik (Ortalama, Medyan, Std. Sapma)",
   description: "Sayı listesinden temel istatistikleri hesaplar.",
+  seoTitle: "İstatistik Hesaplama – Ortalama, Medyan, Mod ve Dağılım",
+
+  seoText: `
+İstatistik hesaplama aracı ile sayı dizilerinin ortalama, medyan, mod ve
+temel dağılım ölçülerini hızlıca hesaplayabilirsin.
+
+Öğrenciler, öğretmenler ve veri analizi yapanlar için pratik bir araçtır.
+`.trim(),
+
   inputs: [
     {
       key: "list",

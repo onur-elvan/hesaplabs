@@ -3,6 +3,15 @@ export default {
   category: "Matematik",
   title: "Geometri (Alan / Çevre)",
   description: "Seçilen şeklin alan ve çevresini hesaplar.",
+  seoTitle: "Geometri Alan ve Çevre Hesaplama – Kare, Dikdörtgen, Daire",
+
+  seoText: `
+Geometri alan ve çevre hesaplama aracı ile temel geometrik şekillerin
+alan ve çevre değerlerini kolayca hesaplayabilirsin.
+
+Bu araç eğitim, sınav hazırlığı ve günlük ölçüm ihtiyaçları için uygundur.
+`.trim(),
+
   inputs: [
     {
       key: "shape",
