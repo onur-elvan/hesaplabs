@@ -19,12 +19,12 @@
 
       <p class="text-gray-600 mt-2">{{ calc.description }}</p>
 
-      <!-- ✅ SEO Bilgi: seoText varsa onu, yoksa otomatik metni göster -->
+      <!-- ✅ SEO Bilgi: calc.seoText varsa onu, yoksa otomatik metni göster -->
       <div
         v-if="seoText"
         class="mt-5 rounded-xl border bg-gray-50 p-4 text-sm text-gray-700 leading-relaxed"
       >
-        <div class="font-semibold text-gray-900 mb-2">Bilgi</div>
+        <h2 class="font-semibold text-gray-900 mb-2">Bilgi</h2>
         <p class="whitespace-pre-line">{{ seoText }}</p>
       </div>
 
@@ -62,7 +62,7 @@
             :placeholder="input.placeholder"
           />
 
-          <!-- Text (tek versiyon) -->
+          <!-- Text -->
           <input
             v-else-if="input.type === 'text'"
             v-model="values[input.key]"
@@ -122,7 +122,7 @@
       </button>
 
       <div v-if="result" class="mt-6 rounded-xl bg-gray-50 border p-4">
-        <div class="font-semibold">Sonuç</div>
+        <h2 class="font-semibold">Sonuç</h2>
 
         <div class="grid sm:grid-cols-2 gap-3 mt-3">
           <div
@@ -130,9 +130,10 @@
             :key="key"
             class="bg-white rounded-lg border p-3"
           >
-            <div class="text-xs uppercase tracking-wide text-gray-500">
+            <h3 class="text-xs uppercase tracking-wide text-gray-500">
               {{ key }}
-            </div>
+            </h3>
+
             <div class="text-lg font-semibold text-gray-800">
               {{ format(val) }}
             </div>
@@ -186,7 +187,6 @@ watchEffect(() => {
   result.value = null;
   showAdvanced.value = false;
 
-  // inputları default değerlerle doldur
   Object.keys(values).forEach((k) => delete values[k]);
   if (calc.value) {
     for (const inp of calc.value.inputs) {
@@ -195,20 +195,22 @@ watchEffect(() => {
   }
 });
 
-/** ✅ seoText fallback:
- *  - calc.seoText varsa onu kullan
- *  - yoksa otomatik üret (title + category + input etiketleri)
+/**
+ * ✅ seoText fallback:
+ * - calc.seoText varsa onu göster
+ * - yoksa otomatik üret
  */
 const seoText = computed(() => {
   if (!calc.value) return "";
   if (calc.value.seoText) return calc.value.seoText;
 
-  const inputs = (calc.value.inputs || [])
+  const labels = (calc.value.inputs || [])
+    .filter((i) => i?.label)
     .slice(0, 6)
     .map((i) => `- ${i.label}`)
     .join("\n");
 
-  const cat = calc.value.category?.toLowerCase() || "genel";
+  const cat = (calc.value.category || "Genel").toString().toLowerCase();
 
   return `
 ${
@@ -216,8 +218,7 @@ ${
 } aracı, ${cat} kategorisinde hızlı ve pratik hesaplama yapmanı sağlar.
 
 Nasıl kullanılır:
-${inputs || "- Gerekli alanları doldur"}
-- "Hesapla" butonuna bas
+${labels || "- Gerekli alanları doldur\n- Hesapla butonuna bas"}
 
 Not: Sonuçlar bilgilendirme amaçlıdır. Resmi işlemler için ilgili kurum/uzman doğrulaması önerilir.
 `.trim();
@@ -237,24 +238,25 @@ function format(val) {
   return val;
 }
 
-useSeo({
-  title: computed(() =>
-    calc.value
-      ? `${calc.value.seoTitle || calc.value.title} | Hesaplabs`
-      : "Hesaplabs | Akıllı Hesaplama Araçları"
-  ),
-  description: computed(() =>
-    calc.value
-      ? calc.value.description
-      : "Finans, matematik, eğitim ve sağlık için hızlı ve mobil uyumlu hesaplayıcılar."
-  ),
-  ogTitle: computed(() =>
-    calc.value
-      ? `${calc.value.seoTitle || calc.value.title} | Hesaplabs`
-      : "Hesaplabs"
-  ),
-  ogDescription: computed(() =>
-    calc.value ? calc.value.description : "Hesaplabs hesaplayıcıları."
-  ),
+/**
+ * ✅ KRİTİK DÜZELTME:
+ * useSeo'ya computed/ref DEĞİL, düz string gönderiyoruz.
+ * Ayrıca calc/route değişince meta da güncellensin diye watchEffect içinde çağırıyoruz.
+ */
+watchEffect(() => {
+  const pageTitle = calc.value
+    ? `${calc.value.seoTitle || calc.value.title} | Hesaplabs`
+    : "Hesaplabs | Akıllı Hesaplama Araçları";
+
+  const pageDesc = calc.value
+    ? calc.value.description
+    : "Finans, matematik, eğitim ve sağlık için hızlı ve mobil uyumlu hesaplayıcılar.";
+
+  useSeo({
+    title: pageTitle,
+    description: pageDesc,
+    ogTitle: calc.value ? pageTitle : "Hesaplabs",
+    ogDescription: pageDesc,
+  });
 });
 </script>
