@@ -1,3 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/* Uzun içeriklerin (IBAN, link, uzun sayı) taşmasını engelle */
+* {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+/* Input / textarea da taşmasın */
+input,
+textarea {
+  max-width: 100%;
+}

@@ -134,7 +134,7 @@
               {{ key }}
             </h3>
 
-            <div class="text-lg font-semibold text-gray-800">
+            <div class="text-lg font-semibold text-gray-800 result-value">
               {{ format(val) }}
             </div>
           </div>
