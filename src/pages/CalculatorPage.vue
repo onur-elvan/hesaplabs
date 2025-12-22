@@ -19,7 +19,7 @@
 
       <p class="text-gray-600 mt-2">{{ calc.description }}</p>
 
-      <!-- ✅ SEO Bilgi: calc.seoText varsa onu, yoksa otomatik metni göster -->
+      <!-- ✅ SEO Bilgi -->
       <div
         v-if="seoText"
         class="mt-5 rounded-xl border bg-gray-50 p-4 text-sm text-gray-700 leading-relaxed"
@@ -46,13 +46,13 @@
         </div>
       </div>
 
+      <!-- Inputs -->
       <div class="grid sm:grid-cols-2 gap-4 mt-6">
         <div v-for="input in visibleInputs" :key="input.key">
           <label class="block text-sm font-medium text-gray-700 mb-1">
             {{ input.label }}
           </label>
 
-          <!-- Number -->
           <input
             v-if="input.type === 'number'"
             v-model="values[input.key]"
@@ -62,7 +62,6 @@
             :placeholder="input.placeholder"
           />
 
-          <!-- Text -->
           <input
             v-else-if="input.type === 'text'"
             v-model="values[input.key]"
@@ -71,7 +70,14 @@
             :placeholder="input.placeholder"
           />
 
-          <!-- Date -->
+          <textarea
+            v-else-if="input.type === 'textarea'"
+            v-model="values[input.key]"
+            class="w-full px-4 py-2 rounded-lg border"
+            :placeholder="input.placeholder"
+            :rows="input.rows || 5"
+          ></textarea>
+
           <input
             v-else-if="input.type === 'date'"
             v-model="values[input.key]"
@@ -79,7 +85,6 @@
             class="w-full px-4 py-2 rounded-lg border bg-white"
           />
 
-          <!-- Select -->
           <select
             v-else-if="input.type === 'select'"
             v-model="values[input.key]"
@@ -93,9 +98,18 @@
               {{ opt.label }}
             </option>
           </select>
+
+          <input
+            v-else
+            v-model="values[input.key]"
+            type="text"
+            class="w-full px-4 py-2 rounded-lg border"
+            :placeholder="input.placeholder"
+          />
         </div>
       </div>
 
+      <!-- Advanced -->
       <div v-if="hasAdvanced" class="mt-6 flex items-center justify-between">
         <div class="text-sm text-gray-500">
           Daha doğru sonuç için gelişmiş ayarları kullanabilirsin.
@@ -121,12 +135,70 @@
         Hesapla
       </button>
 
+      <!-- SONUÇ -->
       <div v-if="result" class="mt-6 rounded-xl bg-gray-50 border p-4">
         <h2 class="font-semibold">Sonuç</h2>
 
-        <div class="grid sm:grid-cols-2 gap-3 mt-3">
+        <!-- Grafik (SVG) -->
+        <div v-if="plotSvg" class="mt-4">
+          <h3 class="text-sm font-semibold text-gray-800 mb-2">Grafik</h3>
+
+          <div class="rounded-xl border bg-white p-3 overflow-x-auto">
+            <div class="min-w-[520px]" v-html="plotSvg"></div>
+          </div>
+
+          <p v-if="plotCaption" class="mt-2 text-xs text-gray-500">
+            {{ plotCaption }}
+          </p>
+        </div>
+
+        <!-- Tablo -->
+        <div v-if="tableRows.length" class="mt-4">
+          <h3 class="text-sm font-semibold text-gray-800 mb-2">Tablo</h3>
+
+          <div class="rounded-xl border bg-white overflow-x-auto">
+            <table class="min-w-full text-sm">
+              <thead class="bg-gray-50">
+                <tr>
+                  <th
+                    v-for="(h, i) in tableHeaders"
+                    :key="i"
+                    class="text-left px-3 py-2 font-semibold text-gray-700 border-b whitespace-nowrap"
+                  >
+                    {{ h }}
+                  </th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr
+                  v-for="(row, rIdx) in normalizedTableRows"
+                  :key="rIdx"
+                  class="hover:bg-gray-50"
+                >
+                  <td
+                    v-for="(h, i) in tableHeaders"
+                    :key="i"
+                    class="px-3 py-2 border-b text-gray-800 align-top"
+                  >
+                    <span class="break-words">
+                      {{ formatCell(row[h]) }}
+                    </span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div v-if="tableNote" class="mt-2 text-xs text-gray-500">
+            {{ tableNote }}
+          </div>
+        </div>
+
+        <!-- Normal sonuç kartları -->
+        <div v-if="resultEntries.length" class="grid sm:grid-cols-2 gap-3 mt-4">
           <div
-            v-for="(val, key) in result"
+            v-for="[key, val] in resultEntries"
             :key="key"
             class="bg-white rounded-lg border p-3"
           >
@@ -134,10 +206,21 @@
               {{ key }}
             </h3>
 
-            <div class="text-lg font-semibold text-gray-800 result-value">
+            <div
+              class="text-lg font-semibold text-gray-800 overflow-x-auto"
+              :class="valueClass(val)"
+              :title="isLongString(val) ? String(val) : ''"
+            >
               {{ format(val) }}
             </div>
           </div>
+        </div>
+
+        <div
+          v-if="!resultEntries.length && (plotSvg || tableRows.length)"
+          class="mt-3 text-xs text-gray-500"
+        >
+          Not: Bu hesaplama grafik/tablo formatında sonuç üretir.
         </div>
       </div>
     </div>
@@ -192,7 +275,6 @@ watchEffect(() => {
   if (calc.value) {
     addRecent(calc.value.id);
 
-    // ✅ GA4: sayfa görüntülendi
     if (typeof window.gtag === "function" && lastViewedId !== calc.value.id) {
       lastViewedId = calc.value.id;
       window.gtag("event", "calculator_view", {
@@ -215,11 +297,6 @@ watchEffect(() => {
   }
 });
 
-/**
- * ✅ seoText fallback:
- * - calc.seoText varsa onu göster
- * - yoksa otomatik üret
- */
 const seoText = computed(() => {
   if (!calc.value) return "";
   if (calc.value.seoText) return calc.value.seoText;
@@ -247,7 +324,6 @@ Not: Sonuçlar bilgilendirme amaçlıdır. Resmi işlemler için ilgili kurum/uz
 function run() {
   if (!calc.value) return;
 
-  // 1) calculate_click: butona basıldı
   if (typeof window.gtag === "function") {
     window.gtag("event", "calculate_click", {
       calculator_id: calc.value.id,
@@ -257,11 +333,9 @@ function run() {
     });
   }
 
-  // hesabı çalıştır
   const out = calc.value.compute(values);
   result.value = out;
 
-  // 2) calculation_error / calculation_done
   if (typeof window.gtag === "function") {
     const isError = out && typeof out === "object" && "hata" in out;
 
@@ -288,18 +362,154 @@ function run() {
   }
 }
 
+/** ---------------------------
+ *  SONUÇ: Grafik / Tablo / Kart
+ *  Konvansiyon:
+ *   result.__plot: string(svg) veya { svg, caption }
+ *   result.__table: { headers?:[], rows:[] , note?:string }  (rows: array<object> veya array<array>)
+ * -------------------------- */
+const plotSvg = computed(() => {
+  const out = result.value;
+  if (!out || typeof out !== "object") return "";
+
+  const p = out.__plot || out.plot || out.__plotSvg;
+  if (!p) return "";
+
+  if (typeof p === "string") return p;
+  if (typeof p === "object" && typeof p.svg === "string") return p.svg;
+
+  return "";
+});
+
+const plotCaption = computed(() => {
+  const out = result.value;
+  if (!out || typeof out !== "object") return "";
+  const p = out.__plot || out.plot || out.__plotSvg;
+  if (p && typeof p === "object" && p.caption) return String(p.caption);
+  return "";
+});
+
+const tableData = computed(() => {
+  const out = result.value;
+  if (!out || typeof out !== "object") return null;
+  return out.__table || out.table || null;
+});
+
+const tableRows = computed(() => {
+  const t = tableData.value;
+  if (!t) return [];
+
+  if (t && typeof t === "object" && Array.isArray(t.rows)) return t.rows;
+  if (Array.isArray(t)) return t;
+
+  return [];
+});
+
+const tableHeaders = computed(() => {
+  const t = tableData.value;
+  const rows = tableRows.value;
+
+  if (
+    t &&
+    typeof t === "object" &&
+    Array.isArray(t.headers) &&
+    t.headers.length
+  )
+    return t.headers.map(String);
+
+  // array-of-array ise headers otomatik: col1,col2...
+  if (rows.length && Array.isArray(rows[0])) {
+    return rows[0].map((_, idx) => `col${idx + 1}`);
+  }
+
+  // array-of-object ise union keys
+  const keys = new Set();
+  for (const r of rows) {
+    if (r && typeof r === "object" && !Array.isArray(r)) {
+      Object.keys(r).forEach((k) => keys.add(k));
+    }
+  }
+  return Array.from(keys);
+});
+
+const normalizedTableRows = computed(() => {
+  const rows = tableRows.value;
+  if (!rows.length) return [];
+
+  // array-of-array -> object'a çevir
+  if (Array.isArray(rows[0])) {
+    const headers = tableHeaders.value;
+    return rows.map((arr) => {
+      const obj = {};
+      headers.forEach((h, i) => (obj[h] = arr[i]));
+      return obj;
+    });
+  }
+
+  return rows;
+});
+
+const tableNote = computed(() => {
+  const t = tableData.value;
+  if (t && typeof t === "object" && t.note) return String(t.note);
+  return "";
+});
+
+const resultEntries = computed(() => {
+  const out = result.value;
+
+  if (typeof out === "string" || typeof out === "number") {
+    return [["sonuc", out]];
+  }
+
+  if (!out || typeof out !== "object") return [];
+
+  return Object.entries(out).filter(([k]) => {
+    if (k.startsWith("__")) return false; // __plot, __table vs
+    if (k === "plot" || k === "table") return false;
+    return true;
+  });
+});
+
 function format(val) {
   if (typeof val === "number") {
     return new Intl.NumberFormat("tr-TR", {
       maximumFractionDigits: 2,
     }).format(val);
   }
+
+  if (val && typeof val === "object") {
+    try {
+      return JSON.stringify(val);
+    } catch {
+      return String(val);
+    }
+  }
+
   return val;
 }
 
-/**
- * ✅ C2 (Schema): Breadcrumb + SoftwareApplication (+ default WebPage useSeo'da zaten var)
- */
+function isLongString(val) {
+  return typeof val === "string" && val.length > 28;
+}
+
+function valueClass(val) {
+  // uzun tek satır değerler (IBAN vb.) taşmasın:
+  if (typeof val === "string") return "break-all";
+  return "";
+}
+
+function formatCell(v) {
+  if (typeof v === "number") return format(v);
+  if (v == null) return "";
+  if (typeof v === "string") return v;
+  try {
+    return JSON.stringify(v);
+  } catch {
+    return String(v);
+  }
+}
+
 useSeo({
   title: computed(() =>
     calc.value
@@ -311,16 +521,13 @@ useSeo({
       ? calc.value.description
       : "Finans, matematik, eğitim ve sağlık için hızlı ve mobil uyumlu hesaplayıcılar."
   ),
-
   canonical: pageUrl,
   ogUrl: pageUrl,
   ogType: "website",
   ogSiteName: "Hesaplabs",
   twitterCard: "summary_large_image",
-
   schema: computed(() => {
     if (!calc.value) return [];
-
     const title = `${calc.value.seoTitle || calc.value.title} | Hesaplabs`;
 
     return [

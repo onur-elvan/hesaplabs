@@ -36,13 +36,40 @@ import ETicaretKarlilik from "./e-ticaret-karlilik.js";
 import KlimaBTU from "./klima-btu.js";
 import iban from "./iban.js";
 import netBrutMaas from "./net-brut-maas.js";
-
+import maasArtisiNet from "./maas-artisi-net";
+import saatlikAylikMaas from "./saatlik-aylik-maas";
+import krediBasinaNot from "./kredi-basina-not";
+import fizikHizYolZaman from "./fizik-hiz-yol-zaman";
+import primliMaas from "./primli-maas.js";
+import yillikIsverenMaliyeti from "./yillik-isveren-maliyeti.js";
+import partTimeMaas from "./part-time-maas.js";
+import ihbarKidem from "./ihbar-kidem.js";
+import molHesaplama from "./mol-hesaplama.js";
+import xyGrafik from "./xy-grafik.js";
+import hizZamanGrafik from "./hiz-zaman-grafik.js";
+import yuzdeDerisim from "./yuzde-derisim.js";
+import molKutleDonusum from "./mol-kutle-donusum.js";
+import phHesaplama from "./ph-hesaplama.js";
 // burada senin ekleyeceğin diğerleri de olacak:
 // import stopaj from "./stopaj"; gibi
 
 export const calculators = [
   kdv,
+  hizZamanGrafik,
+  molKutleDonusum,
+  phHesaplama,
+  yuzdeDerisim,
+  xyGrafik,
+  molHesaplama,
+  ihbarKidem,
+  partTimeMaas,
+  primliMaas,
+  yillikIsverenMaliyeti,
   LimitSeri,
+  maasArtisiNet,
+  saatlikAylikMaas,
+  krediBasinaNot,
+  fizikHizYolZaman,
   iban,
   faizBasit,
   faizBilesik,
