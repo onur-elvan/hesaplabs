@@ -41,6 +41,7 @@ import saatlikAylikMaas from "./saatlik-aylik-maas";
 import krediBasinaNot from "./kredi-basina-not";
 import fizikHizYolZaman from "./fizik-hiz-yol-zaman";
 import primliMaas from "./primli-maas.js";
+import dalgaBoyuFrekansEnerjiGrafik from "./dalga-boyu-frekans-enerji-grafik.js";
 import yillikIsverenMaliyeti from "./yillik-isveren-maliyeti.js";
 import partTimeMaas from "./part-time-maas.js";
 import ihbarKidem from "./ihbar-kidem.js";
@@ -49,13 +50,35 @@ import xyGrafik from "./xy-grafik.js";
 import hizZamanGrafik from "./hiz-zaman-grafik.js";
 import yuzdeDerisim from "./yuzde-derisim.js";
 import molKutleDonusum from "./mol-kutle-donusum.js";
+import parabolCiziciGrafik from "./parabol-cizici-grafik.js";
 import phHesaplama from "./ph-hesaplama.js";
+import sinusKosinusGrafik from "./sinus-kosinus-grafik.js";
+import fonksiyonTurevIntegralGrafik from "./fonksiyon-turev-integral-grafik.js";
+import hizZamanIvme from "./hiz-zaman-ivme.js";
+import genelAlanTrapez from "./genel-alan-trapez.js";
+import polinomKokBulmaGrafik from "./polinom-kok-bulma-grafik.js";
+import parcalıFonksiyonGrafik from "./parcalı-fonksiyon-grafik.js";
+import logaritmaGrafik from "./logaritma-grafik.js";
+import mutlakDegerGrafik from "./mutlak-deger-grafik.js";
+import dogruGrafik from "./dogru-grafik.js";
 // burada senin ekleyeceğin diğerleri de olacak:
 // import stopaj from "./stopaj"; gibi
 
 export const calculators = [
   kdv,
   hizZamanGrafik,
+  dogruGrafik,
+  logaritmaGrafik,
+  mutlakDegerGrafik,
+
+  parcalıFonksiyonGrafik,
+  polinomKokBulmaGrafik,
+  genelAlanTrapez,
+  fonksiyonTurevIntegralGrafik,
+  hizZamanIvme,
+  sinusKosinusGrafik,
+  parabolCiziciGrafik,
+  dalgaBoyuFrekansEnerjiGrafik,
   molKutleDonusum,
   phHesaplama,
   yuzdeDerisim,

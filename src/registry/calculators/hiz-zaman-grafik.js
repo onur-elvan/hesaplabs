@@ -1,25 +1,21 @@
 export default {
-  id: "hiz-zaman-grafik",
-  title: "Hız–Zaman Grafiğinden Yol",
-  seoTitle: "Hız Zaman Grafiğinden Yol Bulma – Trapez Yöntemi",
-  category: "Fizik",
+  id: "hiz-zaman-grafikten-yol",
+  title: "Hız–Zaman Grafiğinden Yol (Alan)",
+  seoTitle: "Hız Zaman Grafiğinden Yol Hesaplama – Trapez Yöntemi",
+  category: "Grafik Oluşturma",
   description:
-    "Zaman-hız noktalarını gir, grafiği çiz ve toplam yolu (alanı) trapez yöntemiyle hesapla.",
+    "Zaman–hız noktalarını gir, hız-zaman grafiğini çiz ve alan (trapez) yöntemiyle toplam yolu hesapla.",
   seoText: `
-Hız–zaman grafiğinde (v–t) eğrisinin altında kalan alan, alınan yolu verir.
+Hız–zaman grafiğinin altında kalan alan, alınan yolu verir.
+Bu araç; verdiğin (t, v) noktalarını grafiğe döker ve trapez yöntemiyle toplam yolu hesaplar.
 
-Bu araç:
-- Verdiğin (t, v) noktalarından grafiği çizer
-- Trapez yöntemiyle toplam yolu (yaklaşık integral) hesaplar
-
-Giriş formatı:
-t, v
+Giriş formatı (her satır): t, v
+Örnek:
 0, 0
 2, 4
 5, 4
 8, 0
 `.trim(),
-
   inputs: [
     {
       key: "tv",
@@ -29,20 +25,15 @@ t, v
       default: "",
     },
     {
-      key: "unitT",
-      label: "Zaman Birimi (t)",
-      type: "select",
-      default: "s",
-      options: [
-        { label: "s (saniye)", value: "s" },
-        { label: "dk (dakika)", value: "min" },
-        { label: "saat", value: "h" },
-      ],
+      key: "xLabel",
+      label: "X Etiketi",
+      type: "text",
+      default: "Zaman (s)",
       advanced: true,
     },
     {
       key: "unitV",
-      label: "Hız Birimi (v)",
+      label: "Hız Birimi",
       type: "select",
       default: "m/s",
       options: [
@@ -50,6 +41,13 @@ t, v
         { label: "km/h", value: "km/h" },
         { label: "km/s", value: "km/s" },
       ],
+      advanced: true,
+    },
+    {
+      key: "yLabel",
+      label: "Y Etiketi",
+      type: "text",
+      default: "Hız",
       advanced: true,
     },
   ],
@@ -65,10 +63,16 @@ t, v
 
     const pts = [];
     for (const line of lines) {
-      const parts = line.split(/[,\s]+/).filter(Boolean);
+      const parts = line
+        .replace(/\s+/g, " ")
+        .split(/[,\s;]+/)
+        .map((p) => p.trim())
+        .filter(Boolean);
+
       if (parts.length < 2) continue;
-      const t = Number(parts[0]);
-      const vel = Number(parts[1]);
+
+      const t = Number(String(parts[0]).replace(",", "."));
+      const vel = Number(String(parts[1]).replace(",", "."));
       if (Number.isFinite(t) && Number.isFinite(vel)) pts.push([t, vel]);
     }
 
@@ -77,214 +81,162 @@ t, v
     // t'ye göre sırala
     pts.sort((a, b) => a[0] - b[0]);
 
-    // Birim dönüşümleri
-    const tUnit = v.unitT || "s";
-    const vUnit = v.unitV || "m/s";
-
-    const toSeconds = (t) => {
-      if (tUnit === "min") return t * 60;
-      if (tUnit === "h") return t * 3600;
-      return t; // s
-    };
-
-    const toMS = (vel) => {
-      if (vUnit === "km/h") return (vel * 1000) / 3600;
-      if (vUnit === "km/s") return vel * 1000;
-      return vel; // m/s
-    };
-
-    // Trapez alanı (SI bazında: m)
-    let distanceM = 0;
-
+    // trapez alan
+    let area = 0;
     for (let i = 0; i < pts.length - 1; i++) {
       const [t1, v1] = pts[i];
       const [t2, v2] = pts[i + 1];
-
-      const dt = toSeconds(t2) - toSeconds(t1);
+      const dt = t2 - t1;
       if (dt <= 0) continue;
-
-      const v1ms = toMS(v1);
-      const v2ms = toMS(v2);
-
-      distanceM += ((v1ms + v2ms) / 2) * dt;
+      area += ((v1 + v2) / 2) * dt;
     }
 
-    const distanceKm = distanceM / 1000;
-
-    // SVG plot üret (points -> polyline)
-    const makePlotSvg = ({ points, xLabel, yLabel }) => {
-      // Grafik alanı
-      const W = 760;
-      const H = 360;
-      const padL = 60;
-      const padR = 20;
-      const padT = 20;
-      const padB = 50;
-
-      // min/max
-      let minX = points[0][0];
-      let maxX = points[0][0];
-      let minY = points[0][1];
-      let maxY = points[0][1];
-
-      for (const [x, y] of points) {
-        if (x < minX) minX = x;
-        if (x > maxX) maxX = x;
-        if (y < minY) minY = y;
-        if (y > maxY) maxY = y;
-      }
-
-      // aralık 0 olmasın
-      if (minX === maxX) {
-        minX -= 1;
-        maxX += 1;
-      }
-      if (minY === maxY) {
-        minY -= 1;
-        maxY += 1;
-      }
-
-      // biraz margin
-      const xPad = (maxX - minX) * 0.06;
-      const yPad = (maxY - minY) * 0.1;
-      minX -= xPad;
-      maxX += xPad;
-      minY -= yPad;
-      maxY += yPad;
-
-      const plotW = W - padL - padR;
-      const plotH = H - padT - padB;
-
-      const sx = (x) => padL + ((x - minX) / (maxX - minX)) * plotW;
-      const sy = (y) => padT + (1 - (y - minY) / (maxY - minY)) * plotH;
-
-      const poly = points
-        .map(([x, y]) => `${sx(x).toFixed(2)},${sy(y).toFixed(2)}`)
-        .join(" ");
-
-      // basit tick (5)
-      const ticks = 5;
-      const xTicks = Array.from({ length: ticks + 1 }, (_, i) => {
-        const x = minX + ((maxX - minX) * i) / ticks;
-        return { x, px: sx(x) };
-      });
-
-      const yTicks = Array.from({ length: ticks + 1 }, (_, i) => {
-        const y = minY + ((maxY - minY) * i) / ticks;
-        return { y, py: sy(y) };
-      });
-
-      const esc = (s) =>
-        String(s)
-          .replaceAll("&", "&amp;")
-          .replaceAll("<", "&lt;")
-          .replaceAll(">", "&gt;")
-          .replaceAll('"', "&quot;")
-          .replaceAll("'", "&#39;");
-
-      return `
-<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">
-  <rect x="0" y="0" width="${W}" height="${H}" fill="white"/>
-  
-  <!-- grid + ticks -->
-  ${xTicks
-    .map(
-      (t) => `
-    <line x1="${t.px}" y1="${padT}" x2="${t.px}" y2="${
-        H - padB
-      }" stroke="#e5e7eb" stroke-width="1"/>
-    <text x="${t.px}" y="${
-        H - padB + 18
-      }" font-size="11" text-anchor="middle" fill="#6b7280">${esc(
-        t.x.toFixed(2)
-      )}</text>
-  `
-    )
-    .join("")}
-
-  ${yTicks
-    .map(
-      (t) => `
-    <line x1="${padL}" y1="${t.py}" x2="${W - padR}" y2="${
-        t.py
-      }" stroke="#e5e7eb" stroke-width="1"/>
-    <text x="${padL - 8}" y="${
-        t.py + 4
-      }" font-size="11" text-anchor="end" fill="#6b7280">${esc(
-        t.y.toFixed(2)
-      )}</text>
-  `
-    )
-    .join("")}
-
-  <!-- axes -->
-  <line x1="${padL}" y1="${H - padB}" x2="${W - padR}" y2="${
-        H - padB
-      }" stroke="#9ca3af" stroke-width="1.5"/>
-  <line x1="${padL}" y1="${padT}" x2="${padL}" y2="${
-        H - padB
-      }" stroke="#9ca3af" stroke-width="1.5"/>
-
-  <!-- polyline -->
-  <polyline points="${poly}" fill="none" stroke="#2563eb" stroke-width="2" />
-
-  <!-- points -->
-  ${points
-    .map(
-      ([x, y]) => `
-    <circle cx="${sx(x)}" cy="${sy(y)}" r="3.5" fill="#2563eb"/>
-  `
-    )
-    .join("")}
-
-  <!-- labels -->
-  <text x="${W / 2}" y="${
-        H - 10
-      }" font-size="12" text-anchor="middle" fill="#111827">${esc(
-        xLabel
-      )}</text>
-  <text x="14" y="${
-    H / 2
-  }" font-size="12" text-anchor="middle" fill="#111827" transform="rotate(-90 14 ${
-        H / 2
-      })">${esc(yLabel)}</text>
-</svg>
-      `.trim();
-    };
-
-    const xLabel = `Zaman (t) [${
-      tUnit === "s" ? "s" : tUnit === "min" ? "dk" : "saat"
-    }]`;
-    const yLabel = `Hız (v) [${vUnit}]`;
-
-    const plotSvg = makePlotSvg({
+    const svg = makeLinePlotSvg({
+      title: "Hız–Zaman Grafiği",
+      xLabel: v.xLabel || "Zaman (s)",
+      yLabel: `${v.yLabel || "Hız"} (${v.unitV || "m/s"})`,
       points: pts,
-      xLabel,
-      yLabel,
     });
 
     return {
-      "Toplam Yol (m)": distanceM,
-      "Toplam Yol (km)": distanceKm,
+      "Toplam Yol (alan)": area,
       "Nokta Sayısı": pts.length,
-
       __plot: {
-        svg: plotSvg,
+        svg,
         caption:
-          "Alan (∫v dt) trapez yöntemiyle yaklaşık hesaplanır. Noktalar arasında doğrusal kabul edilir.",
+          "Trapez (parçalı doğrusal) yöntemi kullanılır. Alan = (v1+v2)/2 × Δt.",
       },
-
       __table: {
-        headers: ["Bilgi", "Değer"],
-        rows: [
-          { Bilgi: "Yöntem", Değer: "Trapez (parçalı doğrusal)" },
-          { Bilgi: "Zaman birimi", Değer: xLabel },
-          { Bilgi: "Hız birimi", Değer: yLabel },
-          { Bilgi: "Toplam yol", Değer: `${distanceM.toFixed(2)} m` },
-          { Bilgi: "Toplam yol", Değer: `${distanceKm.toFixed(4)} km` },
-        ],
-        note: "Eğer hız negatifse alan negatif katkı yapar (yönlü yer değiştirme gibi). Mutlak yol için hızın mutlak değerini kullanmak gerekir.",
+        headers: ["t", "v"],
+        rows: pts.map(([t, vel]) => [t, vel]),
+        note: "Tablo: sıralanmış (t,v) noktaları",
       },
     };
   },
 };
+
+// ---- ortak SVG yardımcı (dosya içinde) ----
+function makeLinePlotSvg({ title, xLabel, yLabel, points }) {
+  const W = 720,
+    H = 420;
+  const padL = 60,
+    padR = 20,
+    padT = 30,
+    padB = 55;
+
+  const xs = points.map((p) => p[0]);
+  const ys = points.map((p) => p[1]);
+
+  let minX = Math.min(...xs),
+    maxX = Math.max(...xs);
+  let minY = Math.min(...ys),
+    maxY = Math.max(...ys);
+
+  if (minX === maxX) {
+    minX -= 1;
+    maxX += 1;
+  }
+  if (minY === maxY) {
+    minY -= 1;
+    maxY += 1;
+  }
+
+  const dx = (maxX - minX) * 0.08;
+  const dy = (maxY - minY) * 0.08;
+  minX -= dx;
+  maxX += dx;
+  minY -= dy;
+  maxY += dy;
+
+  const px = (x) => padL + ((x - minX) / (maxX - minX)) * (W - padL - padR);
+  const py = (y) => padT + (1 - (y - minY) / (maxY - minY)) * (H - padT - padB);
+
+  const poly = points
+    .map(([x, y]) => `${px(x).toFixed(2)},${py(y).toFixed(2)}`)
+    .join(" ");
+
+  const x0Inside = minX <= 0 && 0 <= maxX;
+  const y0Inside = minY <= 0 && 0 <= maxY;
+
+  const xAxisY = y0Inside ? py(0) : py(minY);
+  const yAxisX = x0Inside ? px(0) : px(minX);
+
+  const gridV = Array.from({ length: 6 })
+    .map((_, i) => {
+      const gx = padL + (i * (W - padL - padR)) / 5;
+      return `<line x1="${gx}" y1="${padT}" x2="${gx}" y2="${
+        H - padB
+      }" stroke="#eef2f7"/>`;
+    })
+    .join("");
+
+  const gridH = Array.from({ length: 6 })
+    .map((_, i) => {
+      const gy = padT + (i * (H - padT - padB)) / 5;
+      return `<line x1="${padL}" y1="${gy}" x2="${
+        W - padR
+      }" y2="${gy}" stroke="#eef2f7"/>`;
+    })
+    .join("");
+
+  const ptsCircles = points
+    .map(([x, y]) => {
+      const cx = px(x),
+        cy = py(y);
+      return `<circle cx="${cx}" cy="${cy}" r="4" fill="#2563eb"/>`;
+    })
+    .join("");
+
+  return `
+<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" xmlns="http://www.w3.org/2000/svg">
+  <rect x="0" y="0" width="${W}" height="${H}" fill="white"/>
+  <text x="${
+    W / 2
+  }" y="18" text-anchor="middle" font-size="14" fill="#0f172a">${escapeXml(
+    title || ""
+  )}</text>
+
+  ${gridV}
+  ${gridH}
+
+  <line x1="${padL}" y1="${xAxisY}" x2="${
+    W - padR
+  }" y2="${xAxisY}" stroke="#94a3b8"/>
+  <line x1="${yAxisX}" y1="${padT}" x2="${yAxisX}" y2="${
+    H - padB
+  }" stroke="#94a3b8"/>
+
+  <polyline points="${poly}" fill="none" stroke="#2563eb" stroke-width="2.5"/>
+  ${ptsCircles}
+
+  <text x="${W / 2}" y="${
+    H - 15
+  }" text-anchor="middle" font-size="13" fill="#334155">${escapeXml(
+    xLabel || ""
+  )}</text>
+  <text x="18" y="${H / 2}" text-anchor="middle" font-size="13" fill="#334155"
+        transform="rotate(-90 18 ${H / 2})">${escapeXml(yLabel || "")}</text>
+
+  <text x="${padL}" y="${
+    H - padB + 18
+  }" font-size="11" fill="#64748b">${minX.toFixed(2)}</text>
+  <text x="${W - padR}" y="${
+    H - padB + 18
+  }" text-anchor="end" font-size="11" fill="#64748b">${maxX.toFixed(2)}</text>
+  <text x="${padL - 6}" y="${
+    padT + 10
+  }" text-anchor="end" font-size="11" fill="#64748b">${maxY.toFixed(2)}</text>
+  <text x="${padL - 6}" y="${
+    H - padB
+  }" text-anchor="end" font-size="11" fill="#64748b">${minY.toFixed(2)}</text>
+</svg>`.trim();
+}
+
+function escapeXml(s) {
+  return String(s)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
