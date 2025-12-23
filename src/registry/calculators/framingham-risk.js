@@ -2,6 +2,7 @@ export default {
   id: "framingham-risk",
   category: "Sağlık",
   title: "Framingham Risk Skoru (10 Yıl)",
+  createdAt: "2025-10-24",
   description:
     "Yaş, kolesterol (Total/HDL), sistolik tansiyon, tedavi durumu ve sigaraya göre 10 yıllık koroner kalp hastalığı (CHD) riskini tahmini yüzde olarak hesaplar. (Bilgilendirme amaçlıdır.)",
   info: {

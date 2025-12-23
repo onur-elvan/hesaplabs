@@ -239,6 +239,7 @@ import {
   toggleFavorite,
 } from "../registry/calculators";
 import { useSeo } from "../composables/useSeo";
+import { bumpPopularity } from "../registry/calculators";
 
 const route = useRoute();
 const calc = ref(null);
@@ -277,6 +278,10 @@ watchEffect(() => {
 
     if (typeof window.gtag === "function" && lastViewedId !== calc.value.id) {
       lastViewedId = calc.value.id;
+
+      // ✅ EN ÇOK ZİYARET EDİLENLER SAYACI
+      bumpPopularity(calc.value.id);
+
       window.gtag("event", "calculator_view", {
         calculator_id: calc.value.id,
         calculator_title: calc.value.title,

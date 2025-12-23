@@ -4,7 +4,7 @@ export default {
   category: "Finans",
   description:
     "TR IBAN doğrulama (mod 97) yapar, formatlar ve IBAN’dan banka bilgisini gösterir.",
-
+  createdAt: "2025-10-24",
   seoTitle: "IBAN Doğrulama – TR IBAN Kontrol, Formatlama ve Banka Bulma",
   seoText: `
 IBAN doğrulama aracı ile TR ile başlayan IBAN’ların doğruluğunu (MOD 97) kontrol edebilir,

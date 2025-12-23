@@ -36,10 +36,10 @@ import ETicaretKarlilik from "./e-ticaret-karlilik.js";
 import KlimaBTU from "./klima-btu.js";
 import iban from "./iban.js";
 import netBrutMaas from "./net-brut-maas.js";
-import maasArtisiNet from "./maas-artisi-net";
-import saatlikAylikMaas from "./saatlik-aylik-maas";
-import krediBasinaNot from "./kredi-basina-not";
-import fizikHizYolZaman from "./fizik-hiz-yol-zaman";
+import maasArtisiNet from "./maas-artisi-net.js";
+import saatlikAylikMaas from "./saatlik-aylik-maas.js";
+import krediBasinaNot from "./kredi-basina-not.js";
+import fizikHizYolZaman from "./fizik-hiz-yol-zaman.js";
 import primliMaas from "./primli-maas.js";
 import dalgaBoyuFrekansEnerjiGrafik from "./dalga-boyu-frekans-enerji-grafik.js";
 import yillikIsverenMaliyeti from "./yillik-isveren-maliyeti.js";
@@ -182,4 +182,27 @@ export function clearRecent() {
 export function clearFavorites() {
   localStorage.removeItem(FAV_KEY);
   return [];
+}
+/** ------- Popular (En çok ziyaret edilenler) ------- */
+const POP_KEY = "calculator_popularity_v1";
+
+// { [id]: count }
+export function getPopularityMap() {
+  try {
+    return JSON.parse(localStorage.getItem(POP_KEY) || "{}");
+  } catch {
+    return {};
+  }
+}
+
+export function bumpPopularity(id) {
+  const map = getPopularityMap();
+  map[id] = (map[id] || 0) + 1;
+  localStorage.setItem(POP_KEY, JSON.stringify(map));
+  return map;
+}
+
+export function clearPopularity() {
+  localStorage.removeItem(POP_KEY);
+  return {};
 }

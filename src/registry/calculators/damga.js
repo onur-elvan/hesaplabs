@@ -4,6 +4,7 @@ export default {
   category: "Muhasebe",
   description: "Tutar ve oran (binde) ile damga vergisini hesaplar.",
   seoTitle: "Damga Vergisi Hesaplama – Sözleşme ve Resmi Belgeler",
+  createdAt: "2025-10-24",
 
   seoText: `
 Damga vergisi hesaplama aracı ile sözleşme ve resmi belgeler için

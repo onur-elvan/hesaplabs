@@ -4,6 +4,7 @@ export default {
   seoTitle:
     "Fonksiyon Grafiği Çizdirme + Türev + İntegral Alan Hesaplama (Gölgelendirme)",
   category: "Grafik Oluşturma",
+  createdAt: "2025-12-24",
   description:
     "Fonksiyonu yaz, grafiği çiz. x0 noktasındaki türevi bul ve [a,b] aralığında integrali (alanı) gölgelendir.",
   seoText: `

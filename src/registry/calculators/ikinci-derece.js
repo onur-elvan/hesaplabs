@@ -3,6 +3,7 @@ export default {
   category: "Matematik",
   title: "2. Derece Denklem Çözücü",
   description: "ax² + bx + c = 0 denkleminin köklerini hesaplar.",
+  createdAt: "2025-10-24",
   inputs: [
     { key: "a", label: "a", type: "number", default: 1 },
     { key: "b", label: "b", type: "number", default: 0 },

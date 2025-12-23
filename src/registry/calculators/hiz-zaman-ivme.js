@@ -3,6 +3,7 @@ export default {
   title: "Hız–Zaman Grafiğinden İvme (Eğim)",
   seoTitle: "Hız Zaman Grafiğinden İvme Hesaplama – Eğim (Δv/Δt)",
   category: "Grafik Oluşturma",
+  createdAt: "2025-12-24",
   description:
     "Zaman-hız noktalarını gir; her aralık için ivmeyi (Δv/Δt) hesapla ve grafiği çiz.",
   seoText: `

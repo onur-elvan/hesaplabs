@@ -19,6 +19,7 @@ export default {
   id: "birim-donusturucu",
   category: "Matematik",
   title: "Birim Dönüştürücü",
+  createdAt: "2025-10-24",
   description: "Uzunluk / Ağırlık / Sıcaklık birim dönüşümü yapar.",
   seoTitle: "Birim Dönüştürücü – Uzunluk, Ağırlık ve Hacim Çevirme",
 

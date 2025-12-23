@@ -3,6 +3,7 @@ export default {
   title: "KDV Hesaplama",
   category: "Muhasebe",
   description: "KDV dahil/hariç tutara göre KDV ve toplamı hesaplar.",
+  createdAt: "2025-10-24",
 
   // ✅ Daha doğal ve güçlü başlık
   seoTitle: "KDV Hesaplama: %1, %10, %20 KDV Dahil/Hariç Hesaplama (Net-Brüt)",

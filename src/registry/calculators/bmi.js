@@ -3,6 +3,7 @@ export default {
   category: "Sağlık",
   title: "Vücut Kitle İndeksi (BMI)",
   description: "Boy ve kiloya göre BMI hesaplar ve sınıflandırır.",
+  createdAt: "2025-10-24",
   seoTitle:
     "Vücut Kitle İndeksi (BMI) Hesaplama – Boy ve Kilo ile İdeal Kilo Analizi",
   seoText: `

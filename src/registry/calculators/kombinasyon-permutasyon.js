@@ -33,6 +33,7 @@ export default {
   id: "kombinasyon-permutasyon",
   category: "Matematik",
   title: "Permütasyon / Kombinasyon",
+  createdAt: "2025-10-24",
   description: "nPr, nCr ve n! değerlerini hesaplar (BigInt).",
   inputs: [
     { key: "n", label: "n", type: "number", default: 10 },

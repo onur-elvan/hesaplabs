@@ -4,6 +4,7 @@ export default {
   title: "E-Ticaret Karlılık Simülatörü",
   description:
     "Alış maliyeti, KDV, platform komisyonu, kargo/paketleme, reklam vb. kalemlerle kârlılığı ve zarar etmeme satış fiyatını hesaplar.",
+  createdAt: "2025-12-24",
   seoTitle:
     "E-Ticaret Karlılık Hesaplama – Komisyon, Kargo ve KDV Dahil Net Kazanç",
   seoText: `

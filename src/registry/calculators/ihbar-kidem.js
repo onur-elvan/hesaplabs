@@ -3,6 +3,7 @@ export default {
   title: "İhbar + Kıdem Tazminatı Hesaplama",
   seoTitle: "İhbar ve Kıdem Tazminatı Hesaplama – Yaklaşık Simülasyon",
   category: "Maaş & İş",
+  createdAt: "2025-10-24",
   description:
     "Brüt maaş ve çalışma süresine göre ihbar + kıdem tazminatını yaklaşık hesapla.",
   seoText: `

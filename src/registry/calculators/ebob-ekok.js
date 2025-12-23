@@ -15,6 +15,7 @@ export default {
   title: "EBOB – EKOK",
   description: "İki sayının EBOB ve EKOK değerlerini hesaplar.",
   seoTitle: "EBOB ve EKOK Hesaplama – En Büyük ve En Küçük Ortak Kat",
+  createdAt: "2025-10-24",
 
   seoText: `
 EBOB ve EKOK hesaplama aracı ile iki veya daha fazla sayının

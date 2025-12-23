@@ -3,6 +3,7 @@ export default {
   title: "Doğru Grafiği (y = mx + b)",
   seoTitle: "Doğru Grafiği Çizdirme – y = mx + b",
   category: "Grafik Oluşturma",
+  createdAt: "2025-11-24",
   description:
     "m ve b değerlerini gir, y = mx + b doğrusunu çiz ve tablo üret.",
   seoText: `

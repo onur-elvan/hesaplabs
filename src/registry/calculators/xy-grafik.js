@@ -3,6 +3,7 @@ export default {
   title: "Değerlerden Grafik Oluştur (X-Y)",
   seoTitle: "X-Y Grafik Çizdirme – Nokta Girerek Grafik Oluştur",
   category: "Grafik Oluşturma",
+  createdAt: "2025-12-24",
   description:
     "Elindeki (x,y) değer çiftlerini gir; tabloyu ve grafiği otomatik oluştur. Negatif değerler desteklenir.",
   seoText: `

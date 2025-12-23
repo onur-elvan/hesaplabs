@@ -22,6 +22,7 @@ export default {
   category: "Matematik",
   title: "İstatistik (Ortalama, Medyan, Std. Sapma)",
   description: "Sayı listesinden temel istatistikleri hesaplar.",
+  createdAt: "2025-10-24",
   seoTitle: "İstatistik Hesaplama – Ortalama, Medyan, Mod ve Dağılım",
 
   seoText: `

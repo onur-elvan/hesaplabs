@@ -2,6 +2,7 @@ export default {
   id: "ales",
   category: "Eğitim",
   title: "ALES Puan (Tahmini) Hesaplama",
+  createdAt: "2025-10-24",
   description:
     "Sayısal/Sözel doğru-yanlışlara göre netleri hesaplar ve ALES Sayısal/Sözel/EA için tahmini skor üretir. (Gerçek ALES puanı sınav istatistiklerine göre değişebilir.)",
   inputs: [

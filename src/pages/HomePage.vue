@@ -111,6 +111,76 @@
         </RouterLink>
       </div>
     </div>
+    <!-- ✅ Son Eklenenler / En Çok Ziyaret Edilenler (arama yokken) -->
+    <section v-if="!q" class="mt-10">
+      <div class="flex items-end justify-between gap-4 flex-wrap">
+        <div>
+          <h2 class="text-2xl font-bold">Öne Çıkanlar</h2>
+          <p class="text-sm text-gray-600 mt-1">
+            Son eklenenler ve en çok ziyaret edilenler.
+          </p>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <button
+            class="text-sm px-3 py-2 rounded-lg border bg-white hover:shadow"
+            :class="
+              activeTab === 'latest' ? 'border-blue-600 text-blue-700' : ''
+            "
+            @click="activeTab = 'latest'"
+          >
+            Son eklenenler
+          </button>
+          <button
+            class="text-sm px-3 py-2 rounded-lg border bg-white hover:shadow"
+            :class="
+              activeTab === 'popular' ? 'border-blue-600 text-blue-700' : ''
+            "
+            @click="activeTab = 'popular'"
+          >
+            En çok ziyaret edilen
+          </button>
+        </div>
+      </div>
+
+      <div v-if="activeTab === 'popular'" class="mt-2 flex justify-end">
+        <button
+          v-if="mostVisited.length"
+          class="text-xs text-gray-500 hover:text-red-600"
+          @click="clearPopularity"
+          title="İstatistikleri sıfırla"
+        >
+          İstatistiği sıfırla
+        </button>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+        <RouterLink
+          v-for="c in activeTab === 'latest' ? latest : mostVisited"
+          :key="c.id"
+          :to="`/c/${c.id}`"
+          class="bg-white rounded-xl border hover:shadow p-5 transition"
+        >
+          <div class="text-sm text-gray-500">{{ c.category }}</div>
+          <div class="mt-1 text-lg font-semibold">{{ c.title }}</div>
+          <div class="mt-2 text-gray-600 text-sm">{{ c.description }}</div>
+
+          <div
+            v-if="activeTab === 'latest' && c.createdAt"
+            class="mt-3 text-xs text-gray-400"
+          >
+            Eklenme: {{ c.createdAt }}
+          </div>
+        </RouterLink>
+      </div>
+
+      <div
+        v-if="activeTab === 'popular' && !mostVisited.length"
+        class="mt-4 text-sm text-gray-500"
+      >
+        Henüz istatistik yok. Birkaç hesaplayıcı açınca burada görünecek.
+      </div>
+    </section>
 
     <!-- ✅ Popüler Hesaplamalar (arama yokken göster) -->
     <section v-if="!q && popular.length" class="mt-10">
@@ -201,6 +271,8 @@ import {
   getFavorites,
   clearFavorites as clearFavoritesRegistry,
   clearRecent as clearRecentRegistry,
+  getPopularityMap,
+  clearPopularity as clearPopularityRegistry,
 } from "../registry/calculators";
 
 const recentIds = ref([]);
@@ -258,6 +330,49 @@ function scrollToResults() {
 function clearSearch() {
   q.value = "";
   nextTick(() => searchRef.value?.focus());
+}
+const activeTab = ref("latest"); // "latest" | "popular"
+const popMap = ref({});
+
+function refreshPopularity() {
+  popMap.value = getPopularityMap();
+}
+
+onMounted(() => {
+  recentIds.value = getRecent();
+  favIds.value = getFavorites();
+  refreshPopularity();
+});
+
+// Son eklenenler: createdAt varsa ona göre, yoksa listede sona yakın olanlar
+const latest = computed(() => {
+  const withDate = calculators
+    .filter((c) => c.createdAt)
+    .slice()
+    .sort((a, b) => String(b.createdAt).localeCompare(String(a.createdAt)));
+
+  if (withDate.length) return withDate.slice(0, 9);
+
+  // fallback: array'in sonundan al (son eklenenler genelde sona eklenir)
+  return calculators.slice().reverse().slice(0, 9);
+});
+
+// En çok ziyaret edilenler: popMap sayacına göre
+const mostVisited = computed(() => {
+  const map = popMap.value || {};
+  return calculators
+    .slice()
+    .map((c) => ({ c, count: Number(map[c.id] || 0) }))
+    .filter((x) => x.count > 0)
+    .sort((a, b) => b.count - a.count)
+    .slice(0, 9)
+    .map((x) => x.c);
+});
+
+function clearPopularity() {
+  const ok = confirm("Ziyaret istatistiklerini sıfırlamak istiyor musun?");
+  if (!ok) return;
+  popMap.value = clearPopularityRegistry();
 }
 
 // Arama yazınca otomatik aşağı kaydır

@@ -5,6 +5,7 @@ export default {
   description:
     "Anapara, faiz oranı ve dönem sayısına göre bileşik faiz hesaplar.",
   seoTitle: "Bileşik Faiz Hesaplama – Faiz Faize Nasıl Eklenir?",
+  createdAt: "2025-10-24",
 
   seoText: `
 Bileşik faiz hesaplama aracı, faizin her dönem anaparaya eklenmesiyle

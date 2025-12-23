@@ -4,6 +4,7 @@ export default {
   title: "Ders Notu Hesaplama",
   description:
     "Yazılı, proje ve ders etkinlik/katılım notlarının ortalamasını hesaplar. Boş bırakılan alanlar hesaba katılmaz.",
+  createdAt: "2025-10-24",
   inputs: [
     // Yazılılar
     {

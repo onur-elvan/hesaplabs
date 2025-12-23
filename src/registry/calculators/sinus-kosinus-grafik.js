@@ -3,6 +3,7 @@ export default {
   title: "Sinüs / Kosinüs Grafiği (Genlik, Periyot, Faz, Dikey Kayma)",
   seoTitle: "Sinüs Kosinüs Grafiği Çizdirme – Genlik Periyot Faz Kayma",
   category: "Grafik Oluşturma",
+  createdAt: "2025-12-24",
   description:
     "Sinüs veya kosinüs seç. Genlik (A), periyot (T), faz (φ) ve dikey kayma (D) ile grafiği oluştur.",
   seoText: `

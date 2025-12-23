@@ -3,6 +3,7 @@ export default {
   title: "Hız–Zaman Grafiğinden Yol (Alan)",
   seoTitle: "Hız Zaman Grafiğinden Yol Hesaplama – Trapez Yöntemi",
   category: "Grafik Oluşturma",
+  createdAt: "2025-12-24",
   description:
     "Zaman–hız noktalarını gir, hız-zaman grafiğini çiz ve alan (trapez) yöntemiyle toplam yolu hesapla.",
   seoText: `

@@ -3,6 +3,7 @@ export default {
   title: "Basit Faiz Hesaplama",
   category: "Finans",
   description: "Anapara, faiz oranı ve süreye göre basit faiz hesaplar.",
+  createdAt: "2025-10-24",
   seoTitle: "Basit Faiz Hesaplama – Anapara, Faiz Oranı ve Süreye Göre",
 
   seoText: `

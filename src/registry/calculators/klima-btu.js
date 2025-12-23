@@ -2,6 +2,7 @@ export default {
   id: "klima-btu",
   title: "Klima BTU Hesaplama",
   category: "Ev & Yaşam",
+  createdAt: "2025-12-24",
   description:
     "Oda büyüklüğü, cephe, kişi sayısı ve iklime göre ideal klima BTU değerini hesaplar.",
 

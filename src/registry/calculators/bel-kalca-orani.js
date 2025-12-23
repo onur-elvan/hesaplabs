@@ -2,6 +2,7 @@ export default {
   id: "bel-kalca-orani",
   category: "Sağlık",
   title: "Bel / Kalça Oranı (WHR)",
+  createdAt: "2025-10-24",
   description: "Bel çevresinin kalça çevresine oranını hesaplar (WHR).",
   seoTitle: "Bel Kalça Oranı Hesaplama – Vücut Yağ Dağılımı",
 

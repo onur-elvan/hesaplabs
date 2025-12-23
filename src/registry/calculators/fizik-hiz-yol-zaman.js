@@ -3,6 +3,7 @@ export default {
   title: "Hız – Yol – Zaman Hesaplama",
   seoTitle: "Hız Yol Zaman Hesaplama + Tablo ve Grafik",
   category: "Fizik",
+  createdAt: "2025-10-24",
   description:
     "Sabit hızla hareket eden cismin yol, zaman ve hız ilişkisini hesapla. İstersen tablo ve hız-zaman grafiğiyle gör.",
   seoText: `Hız–yol–zaman ilişkisi sabit hızlı hareketin temel konusudur.

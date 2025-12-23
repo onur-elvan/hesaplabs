@@ -3,6 +3,7 @@ export default {
   category: "Matematik",
   title: "Hacim Hesaplama (Küre / Silindir / Kutu)",
   description: "Seçilen cismin hacmini ve (uygunsa) yüzey alanını hesaplar.",
+  createdAt: "2025-10-24",
   inputs: [
     {
       key: "solid",

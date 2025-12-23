@@ -4,6 +4,7 @@ export default {
   category: "İşletme",
   description:
     "Maliyet ve satış fiyatına göre kâr tutarı ve oranlarını hesaplar.",
+  createdAt: "2025-10-24",
   seoTitle: "Kar Marjı Hesaplama – Brüt ve Net Kar Oranı",
 
   seoText: `

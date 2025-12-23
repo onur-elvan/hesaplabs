@@ -3,6 +3,7 @@ export default {
   title: "Grafik Üzerinden Alan (Trapez) – X-Y Noktalar",
   seoTitle: "X-Y Noktalardan Alan Hesaplama – Trapez Yöntemi",
   category: "Grafik Oluşturma",
+  createdAt: "2025-10-24",
   description:
     "X-Y noktalarını gir, grafiği çiz ve trapez yöntemiyle alanı (∫y dx) hesapla.",
   seoText: `

@@ -3,6 +3,7 @@ export default {
   category: "Sağlık",
   title: "Bazal Metabolizma (BMR) + Günlük Kalori (TDEE)",
   description: "Mifflin-St Jeor ile BMR ve aktiviteye göre TDEE hesaplar.",
+  createdAt: "2025-10-24",
   inputs: [
     {
       key: "sex",

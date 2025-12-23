@@ -3,6 +3,7 @@ export default {
   title: "Dalga Boyu – Frekans – Enerji (Işık) + Grafik",
   seoTitle: "Dalga Boyu Frekans Enerji Hesaplama – E = hf, c = λf (Grafikli)",
   category: "Grafik Oluşturma",
+  createdAt: "2025-10-24",
   description:
     "Dalga boyu (λ) veya frekans (f) gir. Işığın frekansını ve foton enerjisini hesapla, grafikle göster.",
   seoText: `

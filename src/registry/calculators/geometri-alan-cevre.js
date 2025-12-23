@@ -4,6 +4,7 @@ export default {
   title: "Geometri (Alan / Çevre)",
   description: "Seçilen şeklin alan ve çevresini hesaplar.",
   seoTitle: "Geometri Alan ve Çevre Hesaplama – Kare, Dikdörtgen, Daire",
+  createdAt: "2025-12-24",
 
   seoText: `
 Geometri alan ve çevre hesaplama aracı ile temel geometrik şekillerin
