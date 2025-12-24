@@ -49,46 +49,84 @@
       <!-- Inputs -->
       <div class="grid sm:grid-cols-2 gap-4 mt-6">
         <div v-for="input in visibleInputs" :key="input.key">
-          <label class="block text-sm font-medium text-gray-700 mb-1">
+          <label
+            class="block text-sm font-medium mb-1"
+            :class="isDisabled(input) ? 'text-gray-400' : 'text-gray-700'"
+          >
             {{ input.label }}
           </label>
 
+          <!-- number -->
           <input
             v-if="input.type === 'number'"
             v-model="values[input.key]"
             type="number"
             inputmode="decimal"
-            class="w-full px-4 py-2 rounded-lg border"
+            :disabled="isDisabled(input)"
+            :class="[
+              'w-full px-4 py-2 rounded-lg border',
+              isDisabled(input)
+                ? 'bg-gray-100 text-gray-500 cursor-not-allowed'
+                : '',
+            ]"
             :placeholder="input.placeholder"
           />
 
+          <!-- text -->
           <input
             v-else-if="input.type === 'text'"
             v-model="values[input.key]"
             type="text"
-            class="w-full px-4 py-2 rounded-lg border"
+            :disabled="isDisabled(input)"
+            :class="[
+              'w-full px-4 py-2 rounded-lg border',
+              isDisabled(input)
+                ? 'bg-gray-100 text-gray-500 cursor-not-allowed'
+                : '',
+            ]"
             :placeholder="input.placeholder"
           />
 
+          <!-- textarea -->
           <textarea
             v-else-if="input.type === 'textarea'"
             v-model="values[input.key]"
-            class="w-full px-4 py-2 rounded-lg border"
+            :disabled="isDisabled(input)"
+            :class="[
+              'w-full px-4 py-2 rounded-lg border',
+              isDisabled(input)
+                ? 'bg-gray-100 text-gray-500 cursor-not-allowed'
+                : '',
+            ]"
             :placeholder="input.placeholder"
             :rows="input.rows || 5"
           ></textarea>
 
+          <!-- date -->
           <input
             v-else-if="input.type === 'date'"
             v-model="values[input.key]"
             type="date"
-            class="w-full px-4 py-2 rounded-lg border bg-white"
+            :disabled="isDisabled(input)"
+            :class="[
+              'w-full px-4 py-2 rounded-lg border bg-white',
+              isDisabled(input)
+                ? 'bg-gray-100 text-gray-500 cursor-not-allowed'
+                : '',
+            ]"
           />
 
+          <!-- select -->
           <select
             v-else-if="input.type === 'select'"
             v-model="values[input.key]"
-            class="w-full px-4 py-2 rounded-lg border bg-white"
+            :disabled="isDisabled(input)"
+            :class="[
+              'w-full px-4 py-2 rounded-lg border bg-white',
+              isDisabled(input)
+                ? 'bg-gray-100 text-gray-500 cursor-not-allowed'
+                : '',
+            ]"
           >
             <option
               v-for="opt in input.options"
@@ -99,11 +137,18 @@
             </option>
           </select>
 
+          <!-- fallback -->
           <input
             v-else
             v-model="values[input.key]"
             type="text"
-            class="w-full px-4 py-2 rounded-lg border"
+            :disabled="isDisabled(input)"
+            :class="[
+              'w-full px-4 py-2 rounded-lg border',
+              isDisabled(input)
+                ? 'bg-gray-100 text-gray-500 cursor-not-allowed'
+                : '',
+            ]"
             :placeholder="input.placeholder"
           />
         </div>
@@ -237,9 +282,9 @@ import {
   addRecent,
   getFavorites,
   toggleFavorite,
+  bumpPopularity,
 } from "../registry/calculators";
 import { useSeo } from "../composables/useSeo";
-import { bumpPopularity } from "../registry/calculators";
 import { incrementGlobalPopularity } from "../services/popularityGlobal";
 
 const route = useRoute();
@@ -260,6 +305,40 @@ const visibleInputs = computed(() => {
   return calc.value.inputs.filter((i) => !i.advanced || showAdvanced.value);
 });
 
+/* ----------------------------
+   Üçgen çözücü için disabled mantığı
+   calc.id === "ucgen-cozucu" olduğunda,
+   calc.modeFields ve values.mode'a göre aktif alanları seçiyoruz.
+-----------------------------*/
+const TRIANGLE_ID = "ucgen-cozucu";
+
+const activeTriangleKeys = computed(() => {
+  if (!calc.value || calc.value.id !== TRIANGLE_ID) return null;
+
+  const map = calc.value.modeFields || {};
+  const currentMode = values.mode || "SSS";
+  const fields = map[currentMode];
+
+  if (!fields || !fields.length) return null;
+  return new Set(fields);
+});
+
+function isDisabled(input) {
+  // Sadece üçgen çözücüde çalışsın
+  if (!calc.value || calc.value.id !== TRIANGLE_ID) return false;
+
+  // mod seçimi her zaman aktif
+  if (input.key === "mode") return false;
+
+  const active = activeTriangleKeys.value;
+  if (!active) return false;
+
+  // listedeyse aktif, değilse disabled
+  return !active.has(input.key);
+}
+
+/* ---------------------------- */
+
 const favs = ref(getFavorites());
 const isFav = computed(() => calc.value && favs.value.includes(calc.value.id));
 
@@ -276,13 +355,11 @@ watchEffect(() => {
 
   if (calc.value) {
     addRecent(calc.value.id);
-    // Global Supabase sayacını artır
     incrementGlobalPopularity(calc.value.id);
 
     if (typeof window.gtag === "function" && lastViewedId !== calc.value.id) {
       lastViewedId = calc.value.id;
 
-      // ✅ EN ÇOK ZİYARET EDİLENLER SAYACI
       bumpPopularity(calc.value.id);
 
       window.gtag("event", "calculator_view", {
@@ -372,9 +449,6 @@ function run() {
 
 /** ---------------------------
  *  SONUÇ: Grafik / Tablo / Kart
- *  Konvansiyon:
- *   result.__plot: string(svg) veya { svg, caption }
- *   result.__table: { headers?:[], rows:[] , note?:string }  (rows: array<object> veya array<array>)
  * -------------------------- */
 const plotSvg = computed(() => {
   const out = result.value;
@@ -425,12 +499,10 @@ const tableHeaders = computed(() => {
   )
     return t.headers.map(String);
 
-  // array-of-array ise headers otomatik: col1,col2...
   if (rows.length && Array.isArray(rows[0])) {
     return rows[0].map((_, idx) => `col${idx + 1}`);
   }
 
-  // array-of-object ise union keys
   const keys = new Set();
   for (const r of rows) {
     if (r && typeof r === "object" && !Array.isArray(r)) {
@@ -444,7 +516,6 @@ const normalizedTableRows = computed(() => {
   const rows = tableRows.value;
   if (!rows.length) return [];
 
-  // array-of-array -> object'a çevir
   if (Array.isArray(rows[0])) {
     const headers = tableHeaders.value;
     return rows.map((arr) => {
@@ -473,7 +544,7 @@ const resultEntries = computed(() => {
   if (!out || typeof out !== "object") return [];
 
   return Object.entries(out).filter(([k]) => {
-    if (k.startsWith("__")) return false; // __plot, __table vs
+    if (k.startsWith("__")) return false;
     if (k === "plot" || k === "table") return false;
     return true;
   });
@@ -502,7 +573,6 @@ function isLongString(val) {
 }
 
 function valueClass(val) {
-  // uzun tek satır değerler (IBAN vb.) taşmasın:
   if (typeof val === "string") return "break-all";
   return "";
 }

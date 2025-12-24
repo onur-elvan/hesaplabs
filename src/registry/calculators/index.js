@@ -33,6 +33,7 @@ import MatrisTersDet from "./matris-ters-determinant.js";
 import LineerSistem from "./lineer-sistem-cozucu.js";
 import framinghamRisk from "./framingham-risk.js";
 import ETicaretKarlilik from "./e-ticaret-karlilik.js";
+import UcgenCozucu from "./ucgen-cozucu.js";
 import KlimaBTU from "./klima-btu.js";
 import iban from "./iban.js";
 import netBrutMaas from "./net-brut-maas.js";
@@ -70,7 +71,7 @@ export const calculators = [
   dogruGrafik,
   logaritmaGrafik,
   mutlakDegerGrafik,
-
+  UcgenCozucu,
   parcalıFonksiyonGrafik,
   polinomKokBulmaGrafik,
   genelAlanTrapez,
