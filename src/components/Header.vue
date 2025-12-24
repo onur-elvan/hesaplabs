@@ -16,6 +16,9 @@
         <RouterLink to="/" class="hover:text-blue-600 transition">
           Hesaplayıcılar
         </RouterLink>
+        <RouterLink to="/json-formatter" class="hover:text-blue-600 transition">
+          JSON Formatter
+        </RouterLink>
 
         <!-- Yakında: Yapay Zeka -->
         <span
@@ -133,6 +136,9 @@
               <div class="flex flex-col gap-4 text-sm">
                 <RouterLink to="/" @click="closeMenu">
                   Hesaplayıcılar
+                </RouterLink>
+                <RouterLink to="/json-formatter" @click="closeMenu">
+                  JSON Formatter
                 </RouterLink>
 
                 <div class="text-gray-400">

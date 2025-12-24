@@ -14,10 +14,7 @@ const calculatorsPath = path.resolve(
 );
 const { calculators } = await import("file://" + calculatorsPath);
 
-const staticRoutes = [
-  "/", // ana sayfa
-  "/about", // hakkında
-];
+const staticRoutes = ["/", "/about", "/json-formatter"];
 
 const calculatorRoutes = calculators.map((c) => `/c/${c.id}`);
 
