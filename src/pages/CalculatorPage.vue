@@ -240,6 +240,7 @@ import {
 } from "../registry/calculators";
 import { useSeo } from "../composables/useSeo";
 import { bumpPopularity } from "../registry/calculators";
+import { incrementGlobalPopularity } from "../services/popularityGlobal";
 
 const route = useRoute();
 const calc = ref(null);
@@ -275,6 +276,8 @@ watchEffect(() => {
 
   if (calc.value) {
     addRecent(calc.value.id);
+    // Global Supabase sayacını artır
+    incrementGlobalPopularity(calc.value.id);
 
     if (typeof window.gtag === "function" && lastViewedId !== calc.value.id) {
       lastViewedId = calc.value.id;

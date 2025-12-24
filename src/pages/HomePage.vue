@@ -111,52 +111,19 @@
         </RouterLink>
       </div>
     </div>
-    <!-- ✅ Son Eklenenler / En Çok Ziyaret Edilenler (arama yokken) -->
-    <section v-if="!q" class="mt-10">
+
+    <!-- ✅ Öne Çıkanlar: sadece SON EKLENENLER -->
+    <section v-if="!q && latest.length" class="mt-10">
       <div class="flex items-end justify-between gap-4 flex-wrap">
         <div>
           <h2 class="text-2xl font-bold">Öne Çıkanlar</h2>
-          <p class="text-sm text-gray-600 mt-1">
-            Son eklenenler ve en çok ziyaret edilenler.
-          </p>
+          <p class="text-sm text-gray-600 mt-1">Son eklenen hesaplayıcılar.</p>
         </div>
-
-        <div class="flex items-center gap-2">
-          <button
-            class="text-sm px-3 py-2 rounded-lg border bg-white hover:shadow"
-            :class="
-              activeTab === 'latest' ? 'border-blue-600 text-blue-700' : ''
-            "
-            @click="activeTab = 'latest'"
-          >
-            Son eklenenler
-          </button>
-          <button
-            class="text-sm px-3 py-2 rounded-lg border bg-white hover:shadow"
-            :class="
-              activeTab === 'popular' ? 'border-blue-600 text-blue-700' : ''
-            "
-            @click="activeTab = 'popular'"
-          >
-            En çok ziyaret edilen
-          </button>
-        </div>
-      </div>
-
-      <div v-if="activeTab === 'popular'" class="mt-2 flex justify-end">
-        <button
-          v-if="mostVisited.length"
-          class="text-xs text-gray-500 hover:text-red-600"
-          @click="clearPopularity"
-          title="İstatistikleri sıfırla"
-        >
-          İstatistiği sıfırla
-        </button>
       </div>
 
       <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
         <RouterLink
-          v-for="c in activeTab === 'latest' ? latest : mostVisited"
+          v-for="c in latest"
           :key="c.id"
           :to="`/c/${c.id}`"
           class="bg-white rounded-xl border hover:shadow p-5 transition"
@@ -165,36 +132,27 @@
           <div class="mt-1 text-lg font-semibold">{{ c.title }}</div>
           <div class="mt-2 text-gray-600 text-sm">{{ c.description }}</div>
 
-          <div
-            v-if="activeTab === 'latest' && c.createdAt"
-            class="mt-3 text-xs text-gray-400"
-          >
+          <div v-if="c.createdAt" class="mt-3 text-xs text-gray-400">
             Eklenme: {{ c.createdAt }}
           </div>
         </RouterLink>
       </div>
-
-      <div
-        v-if="activeTab === 'popular' && !mostVisited.length"
-        class="mt-4 text-sm text-gray-500"
-      >
-        Henüz istatistik yok. Birkaç hesaplayıcı açınca burada görünecek.
-      </div>
     </section>
 
-    <!-- ✅ Popüler Hesaplamalar (arama yokken göster) -->
+    <!-- ✅ Popüler Hesaplamalar (GLOBAL kullanım sayısına göre) -->
     <section v-if="!q && popular.length" class="mt-10">
       <div class="flex items-end justify-between gap-4 flex-wrap">
         <div>
           <h2 class="text-2xl font-bold">Popüler Hesaplamalar</h2>
           <p class="text-sm text-gray-600 mt-1">
-            En çok aranan araçlara hızlıca ulaş.
+            Tüm kullanıcılar arasında en çok kullanılan hesaplayıcılar.
           </p>
         </div>
 
-        <span class="text-xs text-gray-500">
-          (Google için de keşfi hızlandırır ✅)
-        </span>
+        <div class="flex items-center gap-3 text-xs text-gray-500">
+          <span>Global kullanım istatistiklerine göre listelenir.</span>
+          <span>(Google için de keşfi hızlandırır ✅)</span>
+        </div>
       </div>
 
       <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
@@ -208,6 +166,14 @@
           <div class="mt-1 text-lg font-semibold">{{ c.title }}</div>
           <div class="mt-2 text-gray-600 text-sm">{{ c.description }}</div>
         </RouterLink>
+      </div>
+
+      <div v-if="isPopularityLoading" class="mt-3 text-xs text-gray-500">
+        Global istatistikler yükleniyor...
+      </div>
+
+      <div v-else-if="!hasRealPopularity" class="mt-3 text-xs text-gray-500">
+        Şu an gösterilen liste, varsayılan popüler hesaplamalardan oluşuyor.
       </div>
     </section>
 
@@ -271,17 +237,34 @@ import {
   getFavorites,
   clearFavorites as clearFavoritesRegistry,
   clearRecent as clearRecentRegistry,
-  getPopularityMap,
-  clearPopularity as clearPopularityRegistry,
 } from "../registry/calculators";
+import { fetchGlobalPopularity } from "../services/popularityGlobal";
 
 const recentIds = ref([]);
 const favIds = ref([]);
 
+// 🌍 Supabase'ten gelen global popülerlik map'i
+// { "kdv": 123, "net-brut-maas": 87, ... }
+const popMap = ref({});
+const isPopularityLoading = ref(false);
+
 onMounted(() => {
   recentIds.value = getRecent();
   favIds.value = getFavorites();
+  loadGlobalPopularity();
 });
+
+async function loadGlobalPopularity() {
+  isPopularityLoading.value = true;
+  try {
+    const map = await fetchGlobalPopularity();
+    popMap.value = map || {};
+  } catch (err) {
+    console.warn("[home] global popularity error", err);
+  } finally {
+    isPopularityLoading.value = false;
+  }
+}
 
 function findById(id) {
   return calculators.find((c) => c.id === id) || null;
@@ -294,10 +277,27 @@ const recent = computed(() =>
 const favorites = computed(() => favIds.value.map(findById).filter(Boolean));
 
 /**
- * ✅ Popüler hesaplar (SEO + UX)
- * İd’leri burada sabit tutuyoruz.
+ * Son eklenenler:
+ * createdAt varsa ona göre, yoksa array sonundan.
  */
-const popularIds = [
+const latest = computed(() => {
+  const withDate = calculators
+    .filter((c) => c.createdAt)
+    .slice()
+    .sort((a, b) => String(b.createdAt).localeCompare(String(a.createdAt)));
+
+  if (withDate.length) return withDate.slice(0, 9);
+
+  // fallback: array'in sonundan al
+  return calculators.slice().reverse().slice(0, 9);
+});
+
+/**
+ * Popüler hesaplar:
+ * - Supabase global view_count'a göre
+ * - Hiç veri yoksa sabit id listesi (seed)
+ */
+const popularitySeedIds = [
   "net-brut-maas",
   "kdv",
   "faiz-basit",
@@ -312,9 +312,28 @@ const popularIds = [
   "lineer-sistem-cozucu",
 ];
 
-const popular = computed(() =>
-  popularIds.map(findById).filter(Boolean).slice(0, 12)
-);
+const hasRealPopularity = computed(() => {
+  const m = popMap.value || {};
+  return Object.values(m).some((v) => Number(v) > 0);
+});
+
+const popular = computed(() => {
+  const map = popMap.value || {};
+
+  if (hasRealPopularity.value) {
+    // Supabase verisine göre sırala
+    return calculators
+      .slice()
+      .map((c) => ({ c, count: Number(map[c.id] || 0) }))
+      .filter((x) => x.count > 0)
+      .sort((a, b) => b.count - a.count)
+      .slice(0, 12)
+      .map((x) => x.c);
+  }
+
+  // veri yoksa seed list
+  return popularitySeedIds.map(findById).filter(Boolean).slice(0, 12);
+});
 
 const q = ref("");
 const selectedCategory = ref("Tümü");
@@ -330,49 +349,6 @@ function scrollToResults() {
 function clearSearch() {
   q.value = "";
   nextTick(() => searchRef.value?.focus());
-}
-const activeTab = ref("latest"); // "latest" | "popular"
-const popMap = ref({});
-
-function refreshPopularity() {
-  popMap.value = getPopularityMap();
-}
-
-onMounted(() => {
-  recentIds.value = getRecent();
-  favIds.value = getFavorites();
-  refreshPopularity();
-});
-
-// Son eklenenler: createdAt varsa ona göre, yoksa listede sona yakın olanlar
-const latest = computed(() => {
-  const withDate = calculators
-    .filter((c) => c.createdAt)
-    .slice()
-    .sort((a, b) => String(b.createdAt).localeCompare(String(a.createdAt)));
-
-  if (withDate.length) return withDate.slice(0, 9);
-
-  // fallback: array'in sonundan al (son eklenenler genelde sona eklenir)
-  return calculators.slice().reverse().slice(0, 9);
-});
-
-// En çok ziyaret edilenler: popMap sayacına göre
-const mostVisited = computed(() => {
-  const map = popMap.value || {};
-  return calculators
-    .slice()
-    .map((c) => ({ c, count: Number(map[c.id] || 0) }))
-    .filter((x) => x.count > 0)
-    .sort((a, b) => b.count - a.count)
-    .slice(0, 9)
-    .map((x) => x.c);
-});
-
-function clearPopularity() {
-  const ok = confirm("Ziyaret istatistiklerini sıfırlamak istiyor musun?");
-  if (!ok) return;
-  popMap.value = clearPopularityRegistry();
 }
 
 // Arama yazınca otomatik aşağı kaydır
