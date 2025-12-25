@@ -34,17 +34,17 @@
         </span>
 
         <!-- Yakında: Döviz / Finans -->
-        <span
-          class="relative text-gray-400 cursor-not-allowed select-none"
-          title="Yakında geliyor"
+        <RouterLink
+          to="/piyasalar"
+          class="hover:text-blue-600 transition flex items-center gap-1"
         >
           Piyasalar
           <span
-            class="ml-1 text-[10px] px-1.5 py-0.5 rounded bg-gray-200 text-gray-600"
+            class="text-[10px] px-1.5 py-0.5 rounded bg-gray-200 text-gray-600"
           >
-            yakında
+            beta
           </span>
-        </span>
+        </RouterLink>
 
         <RouterLink to="/about" class="hover:text-blue-600 transition">
           Hakkında
@@ -150,14 +150,16 @@
                   </span>
                 </div>
 
-                <div class="text-gray-400">
-                  Piyasalar
-                  <span
-                    class="ml-2 text-[10px] bg-gray-200 px-2 py-0.5 rounded"
-                  >
-                    yakında
+                <RouterLink
+                  to="/piyasalar"
+                  @click="closeMenu"
+                  class="flex items-center gap-2"
+                >
+                  <span>Piyasalar</span>
+                  <span class="text-[10px] bg-gray-200 px-2 py-0.5 rounded">
+                    beta
                   </span>
-                </div>
+                </RouterLink>
 
                 <RouterLink to="/about" @click="closeMenu">
                   Hakkında
