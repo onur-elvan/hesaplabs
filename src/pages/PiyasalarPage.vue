@@ -363,9 +363,6 @@ const hasMetals = computed(
 );
 
 const metalsLastUpdate = computed(() => {
-  // MetalpriceAPI response formatına göre uygula;
-  // çoğu zaman "timestamp" veya "date" alanı oluyor.
-  // Yoksa boş string dönüyoruz.
   if (!metalsData.value) return "";
   return metalsData.value.date || "";
 });
@@ -373,13 +370,22 @@ const metalsLastUpdate = computed(() => {
 // 1 ons = 31.1034768 gram
 const OUNCE_IN_GRAM = 31.1034768;
 
-const ounceGoldUsd = computed(() => metalsData.value?.rates?.XAU ?? null);
+// ❗ ÖNEMLİ DÜZELTME: MetalpriceAPI base=USD iken
+// rates.XAU = 1 USD'nin karşılığı (XAU).
+// Yani 1 XAU = 1 / rates.XAU USD.
+const ounceGoldUsd = computed(() => {
+  const xau = metalsData.value?.rates?.XAU;
+  if (!xau) return null;
+  return 1 / xau; // <-- eskiden direkt xau kullanıyorduk, burada ters çeviriyoruz
+});
 
+// 1 XAU (ons) USD * USD/TRY = TL
 const ounceGoldTry = computed(() => {
   if (!ounceGoldUsd.value || !usdTry.value) return null;
   return ounceGoldUsd.value * usdTry.value;
 });
 
+// Gram altın = ons / 31.1034768
 const gramGoldTry = computed(() => {
   if (!ounceGoldTry.value) return null;
   return ounceGoldTry.value / OUNCE_IN_GRAM;
