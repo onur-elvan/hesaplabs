@@ -63,6 +63,7 @@ import polinomKokBulmaGrafik from "./polinom-kok-bulma-grafik.js";
 import parcalıFonksiyonGrafik from "./parcalı-fonksiyon-grafik.js";
 import BasitHarmonikHareket from "./basit-harmonik-hareket.js";
 import Carpisma1D from "./carpisma-1d.js";
+import PersonelMaliyetBordro from "./personelMaliyetBordro.js";
 import logaritmaGrafik from "./logaritma-grafik.js";
 import mutlakDegerGrafik from "./mutlak-deger-grafik.js";
 import DikeyAtisSerbestDusme from "./dikey-atis-serbest-dusme.js";
@@ -70,19 +71,41 @@ import DonmeHareketi from "./donme-hareketi.js";
 import dogruGrafik from "./dogru-grafik.js";
 import UsluLogHesaplayici from "./uslu-log-hesaplayici.js";
 import MutlakDegerDenklemEsitsizlik from "./mutlak-deger-denklem-esitsizlik.js";
+import serbestMeslekMakbuzu from "./serbestMeslekMakbuzu.js";
+import KiraGeliriStopaj from "./kiraGeliriStopaj";
 import EgikAtis from "./egik-atis.js";
 import Momentum from "./momentum.js";
 import IsGucZaman from "./is-guc-zaman.js";
 import KuvvetKutleIvme from "./kuvvet-kutle-ivme.js";
+import taksitliSatisVadeFarki from "./taksitliSatisVadeFarki.js";
+import BasabasAnalizi from "./basabasAnalizi";
+import NakitDonusumSuresi from "./nakitDonusumSuresi";
+import cozeltiKaristirma from "./cozelti-karistirma.js";
+import cozeltiSeyreltme from "./cozelti-seyreltme.js";
+import asitBazNotralizasyon from "./asit-baz-notralizasyon";
+import bufferphhesaplayici from "./buffer-ph-hesaplayici.js";
+import zayifasitph from "./zayif-asit-ph.js";
+import asitbaztitrasyon from "./asit-baz-titrasyon.js";
 // burada senin ekleyeceğin diğerleri de olacak:
 // import stopaj from "./stopaj"; gibi
 
 export const calculators = [
   kdv,
+  asitBazNotralizasyon,
+  asitbaztitrasyon,
+  zayifasitph,
   hizZamanGrafik,
+  cozeltiKaristirma,
+  cozeltiSeyreltme,
+  PersonelMaliyetBordro,
+  serbestMeslekMakbuzu,
   UsluLogHesaplayici,
+  BasabasAnalizi,
+  NakitDonusumSuresi,
+  taksitliSatisVadeFarki,
   BasitHarmonikHareket,
   DikeyAtisSerbestDusme,
+  KiraGeliriStopaj,
   DonmeHareketi,
   Carpisma1D,
   IsGucZaman,
