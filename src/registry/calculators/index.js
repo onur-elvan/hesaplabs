@@ -11,6 +11,7 @@ import damga from "./damga.js";
 import OranOranti from "./oran-oranti.js";
 import EbobEkok from "./ebob-ekok.js";
 import IkinciDerece from "./ikinci-derece.js";
+import DiziHesaplayici from "./dizi-hesaplayici.js";
 import Istatistik from "./istatistik.js";
 import GeometriAlanCevre from "./geometri-alan-cevre.js";
 import Hacim from "./hacim.js";
@@ -33,6 +34,7 @@ import MatrisTersDet from "./matris-ters-determinant.js";
 import LineerSistem from "./lineer-sistem-cozucu.js";
 import framinghamRisk from "./framingham-risk.js";
 import ETicaretKarlilik from "./e-ticaret-karlilik.js";
+import DikUcgenCozucu from "./dik-ucgen-cozucu.js";
 import UcgenCozucu from "./ucgen-cozucu.js";
 import KlimaBTU from "./klima-btu.js";
 import iban from "./iban.js";
@@ -59,18 +61,37 @@ import hizZamanIvme from "./hiz-zaman-ivme.js";
 import genelAlanTrapez from "./genel-alan-trapez.js";
 import polinomKokBulmaGrafik from "./polinom-kok-bulma-grafik.js";
 import parcalıFonksiyonGrafik from "./parcalı-fonksiyon-grafik.js";
+import BasitHarmonikHareket from "./basit-harmonik-hareket.js";
+import Carpisma1D from "./carpisma-1d.js";
 import logaritmaGrafik from "./logaritma-grafik.js";
 import mutlakDegerGrafik from "./mutlak-deger-grafik.js";
+import DikeyAtisSerbestDusme from "./dikey-atis-serbest-dusme.js";
+import DonmeHareketi from "./donme-hareketi.js";
 import dogruGrafik from "./dogru-grafik.js";
+import UsluLogHesaplayici from "./uslu-log-hesaplayici.js";
+import MutlakDegerDenklemEsitsizlik from "./mutlak-deger-denklem-esitsizlik.js";
+import EgikAtis from "./egik-atis.js";
+import Momentum from "./momentum.js";
+import IsGucZaman from "./is-guc-zaman.js";
+import KuvvetKutleIvme from "./kuvvet-kutle-ivme.js";
 // burada senin ekleyeceğin diğerleri de olacak:
 // import stopaj from "./stopaj"; gibi
 
 export const calculators = [
   kdv,
   hizZamanGrafik,
+  UsluLogHesaplayici,
+  BasitHarmonikHareket,
+  DikeyAtisSerbestDusme,
+  DonmeHareketi,
+  Carpisma1D,
+  IsGucZaman,
+  EgikAtis,
   dogruGrafik,
+  Momentum,
   logaritmaGrafik,
   mutlakDegerGrafik,
+  MutlakDegerDenklemEsitsizlik,
   UcgenCozucu,
   parcalıFonksiyonGrafik,
   polinomKokBulmaGrafik,
@@ -79,6 +100,7 @@ export const calculators = [
   hizZamanIvme,
   sinusKosinusGrafik,
   parabolCiziciGrafik,
+  KuvvetKutleIvme,
   dalgaBoyuFrekansEnerjiGrafik,
   molKutleDonusum,
   phHesaplama,
@@ -107,6 +129,7 @@ export const calculators = [
   yuzdeArtis,
   tarihFark,
   zamIndirim,
+  DikUcgenCozucu,
   ales,
   ortalama,
   karMarj,
@@ -125,6 +148,7 @@ export const calculators = [
   BMI,
   BMRTDEE,
   BelKalcaOrani,
+  DiziHesaplayici,
   VucutYagOrani,
   vizeFinal,
   takdirTesekkur,

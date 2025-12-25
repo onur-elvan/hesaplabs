@@ -3,462 +3,553 @@
 
   <url>
     <loc>https://hesaplabs.com/</loc>
-    <lastmod>2025-12-24T18:28:20.105Z</lastmod>
+    <lastmod>2025-12-25T10:15:59.733Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
 
   <url>
     <loc>https://hesaplabs.com/about</loc>
-    <lastmod>2025-12-24T18:28:20.105Z</lastmod>
+    <lastmod>2025-12-25T10:15:59.733Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://hesaplabs.com/json-formatter</loc>
-    <lastmod>2025-12-24T18:28:20.105Z</lastmod>
+    <lastmod>2025-12-25T10:15:59.733Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://hesaplabs.com/c/kdv</loc>
-    <lastmod>2025-12-24T18:28:20.105Z</lastmod>
+    <lastmod>2025-12-25T10:15:59.733Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://hesaplabs.com/c/hiz-zaman-grafikten-yol</loc>
-    <lastmod>2025-12-24T18:28:20.105Z</lastmod>
+    <lastmod>2025-12-25T10:15:59.733Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://hesaplabs.com/c/uslu-log-hesaplayici</loc>
+    <lastmod>2025-12-25T10:15:59.733Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://hesaplabs.com/c/basit-harmonik-hareket</loc>
+    <lastmod>2025-12-25T10:15:59.733Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://hesaplabs.com/c/dikey-atis-serbest-dusme</loc>
+    <lastmod>2025-12-25T10:15:59.733Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://hesaplabs.com/c/donme-hareketi</loc>
+    <lastmod>2025-12-25T10:15:59.733Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://hesaplabs.com/c/carpisma-1d</loc>
+    <lastmod>2025-12-25T10:15:59.733Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://hesaplabs.com/c/is-guc-zaman</loc>
+    <lastmod>2025-12-25T10:15:59.733Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://hesaplabs.com/c/egik-atis</loc>
+    <lastmod>2025-12-25T10:15:59.733Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://hesaplabs.com/c/dogru-grafik</loc>
-    <lastmod>2025-12-24T18:28:20.105Z</lastmod>
+    <lastmod>2025-12-25T10:15:59.733Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://hesaplabs.com/c/momentum</loc>
+    <lastmod>2025-12-25T10:15:59.733Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://hesaplabs.com/c/logaritma-grafik</loc>
-    <lastmod>2025-12-24T18:28:20.105Z</lastmod>
+    <lastmod>2025-12-25T10:15:59.733Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://hesaplabs.com/c/mutlak-deger-grafik</loc>
-    <lastmod>2025-12-24T18:28:20.105Z</lastmod>
+    <lastmod>2025-12-25T10:15:59.733Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://hesaplabs.com/c/mutlak-deger-denklem-esitsizlik</loc>
+    <lastmod>2025-12-25T10:15:59.733Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://hesaplabs.com/c/ucgen-cozucu</loc>
+    <lastmod>2025-12-25T10:15:59.733Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://hesaplabs.com/c/parcali-fonksiyon-grafik</loc>
-    <lastmod>2025-12-24T18:28:20.105Z</lastmod>
+    <lastmod>2025-12-25T10:15:59.733Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://hesaplabs.com/c/polinom-kok-bulma-grafik</loc>
-    <lastmod>2025-12-24T18:28:20.105Z</lastmod>
+    <lastmod>2025-12-25T10:15:59.733Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://hesaplabs.com/c/xy-alan-trapez</loc>
-    <lastmod>2025-12-24T18:28:20.105Z</lastmod>
+    <lastmod>2025-12-25T10:15:59.733Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://hesaplabs.com/c/fonksiyon-turev-integral-grafik</loc>
-    <lastmod>2025-12-24T18:28:20.105Z</lastmod>
+    <lastmod>2025-12-25T10:15:59.733Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://hesaplabs.com/c/hiz-zaman-grafikten-ivme</loc>
-    <lastmod>2025-12-24T18:28:20.105Z</lastmod>
+    <lastmod>2025-12-25T10:15:59.733Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://hesaplabs.com/c/sinus-kosinus-grafik</loc>
-    <lastmod>2025-12-24T18:28:20.105Z</lastmod>
+    <lastmod>2025-12-25T10:15:59.733Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://hesaplabs.com/c/parabol-cizici-grafik</loc>
-    <lastmod>2025-12-24T18:28:20.105Z</lastmod>
+    <lastmod>2025-12-25T10:15:59.733Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://hesaplabs.com/c/kuvvet-kutle-ivme</loc>
+    <lastmod>2025-12-25T10:15:59.733Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://hesaplabs.com/c/dalga-boyu-frekans-enerji-grafik</loc>
-    <lastmod>2025-12-24T18:28:20.105Z</lastmod>
+    <lastmod>2025-12-25T10:15:59.733Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://hesaplabs.com/c/mol-kutle-donusum</loc>
-    <lastmod>2025-12-24T18:28:20.105Z</lastmod>
+    <lastmod>2025-12-25T10:15:59.733Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://hesaplabs.com/c/ph-hesaplama</loc>
-    <lastmod>2025-12-24T18:28:20.105Z</lastmod>
+    <lastmod>2025-12-25T10:15:59.733Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://hesaplabs.com/c/yuzde-derisim</loc>
-    <lastmod>2025-12-24T18:28:20.105Z</lastmod>
+    <lastmod>2025-12-25T10:15:59.733Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://hesaplabs.com/c/xy-grafik</loc>
-    <lastmod>2025-12-24T18:28:20.105Z</lastmod>
+    <lastmod>2025-12-25T10:15:59.733Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://hesaplabs.com/c/mol-hesaplama</loc>
-    <lastmod>2025-12-24T18:28:20.105Z</lastmod>
+    <lastmod>2025-12-25T10:15:59.733Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://hesaplabs.com/c/ihbar-kidem</loc>
-    <lastmod>2025-12-24T18:28:20.105Z</lastmod>
+    <lastmod>2025-12-25T10:15:59.733Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://hesaplabs.com/c/part-time-maas</loc>
-    <lastmod>2025-12-24T18:28:20.105Z</lastmod>
+    <lastmod>2025-12-25T10:15:59.733Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://hesaplabs.com/c/primli-maas</loc>
-    <lastmod>2025-12-24T18:28:20.105Z</lastmod>
+    <lastmod>2025-12-25T10:15:59.733Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://hesaplabs.com/c/yillik-isveren-maliyeti</loc>
-    <lastmod>2025-12-24T18:28:20.105Z</lastmod>
+    <lastmod>2025-12-25T10:15:59.733Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://hesaplabs.com/c/limit-seri</loc>
-    <lastmod>2025-12-24T18:28:20.105Z</lastmod>
+    <lastmod>2025-12-25T10:15:59.733Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://hesaplabs.com/c/maas-artisi-net</loc>
-    <lastmod>2025-12-24T18:28:20.105Z</lastmod>
+    <lastmod>2025-12-25T10:15:59.733Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://hesaplabs.com/c/saatlik-aylik-maas</loc>
-    <lastmod>2025-12-24T18:28:20.105Z</lastmod>
+    <lastmod>2025-12-25T10:15:59.733Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://hesaplabs.com/c/kredi-basina-not</loc>
-    <lastmod>2025-12-24T18:28:20.105Z</lastmod>
+    <lastmod>2025-12-25T10:15:59.733Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://hesaplabs.com/c/fizik-hiz-yol-zaman</loc>
-    <lastmod>2025-12-24T18:28:20.105Z</lastmod>
+    <lastmod>2025-12-25T10:15:59.733Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://hesaplabs.com/c/iban</loc>
-    <lastmod>2025-12-24T18:28:20.105Z</lastmod>
+    <lastmod>2025-12-25T10:15:59.733Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://hesaplabs.com/c/basit-faiz</loc>
-    <lastmod>2025-12-24T18:28:20.105Z</lastmod>
+    <lastmod>2025-12-25T10:15:59.733Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://hesaplabs.com/c/bilesik-faiz</loc>
-    <lastmod>2025-12-24T18:28:20.105Z</lastmod>
+    <lastmod>2025-12-25T10:15:59.733Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://hesaplabs.com/c/matris-ters-determinant</loc>
-    <lastmod>2025-12-24T18:28:20.105Z</lastmod>
+    <lastmod>2025-12-25T10:15:59.733Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://hesaplabs.com/c/lineer-sistem-cozucu</loc>
-    <lastmod>2025-12-24T18:28:20.105Z</lastmod>
+    <lastmod>2025-12-25T10:15:59.733Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://hesaplabs.com/c/sayisal-kalkulus</loc>
-    <lastmod>2025-12-24T18:28:20.105Z</lastmod>
+    <lastmod>2025-12-25T10:15:59.733Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://hesaplabs.com/c/net-brut-maas</loc>
-    <lastmod>2025-12-24T18:28:20.105Z</lastmod>
+    <lastmod>2025-12-25T10:15:59.733Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://hesaplabs.com/c/framingham-risk</loc>
-    <lastmod>2025-12-24T18:28:20.105Z</lastmod>
+    <lastmod>2025-12-25T10:15:59.733Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://hesaplabs.com/c/e-ticaret-karlilik</loc>
-    <lastmod>2025-12-24T18:28:20.105Z</lastmod>
+    <lastmod>2025-12-25T10:15:59.733Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://hesaplabs.com/c/klima-btu</loc>
-    <lastmod>2025-12-24T18:28:20.105Z</lastmod>
+    <lastmod>2025-12-25T10:15:59.733Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://hesaplabs.com/c/yuzde-artis</loc>
-    <lastmod>2025-12-24T18:28:20.105Z</lastmod>
+    <lastmod>2025-12-25T10:15:59.733Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://hesaplabs.com/c/tarih-fark</loc>
-    <lastmod>2025-12-24T18:28:20.105Z</lastmod>
+    <lastmod>2025-12-25T10:15:59.733Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://hesaplabs.com/c/zam-indirim</loc>
-    <lastmod>2025-12-24T18:28:20.105Z</lastmod>
+    <lastmod>2025-12-25T10:15:59.733Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://hesaplabs.com/c/dik-ucgen-cozucu</loc>
+    <lastmod>2025-12-25T10:15:59.733Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://hesaplabs.com/c/ales</loc>
-    <lastmod>2025-12-24T18:28:20.105Z</lastmod>
+    <lastmod>2025-12-25T10:15:59.733Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://hesaplabs.com/c/ortalama</loc>
-    <lastmod>2025-12-24T18:28:20.105Z</lastmod>
+    <lastmod>2025-12-25T10:15:59.733Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://hesaplabs.com/c/kar-marj</loc>
-    <lastmod>2025-12-24T18:28:20.105Z</lastmod>
+    <lastmod>2025-12-25T10:15:59.733Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://hesaplabs.com/c/stopaj</loc>
-    <lastmod>2025-12-24T18:28:20.105Z</lastmod>
+    <lastmod>2025-12-25T10:15:59.733Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://hesaplabs.com/c/damga-vergisi</loc>
-    <lastmod>2025-12-24T18:28:20.105Z</lastmod>
+    <lastmod>2025-12-25T10:15:59.733Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://hesaplabs.com/c/oran-oranti</loc>
-    <lastmod>2025-12-24T18:28:20.105Z</lastmod>
+    <lastmod>2025-12-25T10:15:59.733Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://hesaplabs.com/c/ebob-ekok</loc>
-    <lastmod>2025-12-24T18:28:20.105Z</lastmod>
+    <lastmod>2025-12-25T10:15:59.733Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://hesaplabs.com/c/ikinci-derece</loc>
-    <lastmod>2025-12-24T18:28:20.105Z</lastmod>
+    <lastmod>2025-12-25T10:15:59.733Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://hesaplabs.com/c/istatistik</loc>
-    <lastmod>2025-12-24T18:28:20.105Z</lastmod>
+    <lastmod>2025-12-25T10:15:59.733Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://hesaplabs.com/c/tyt</loc>
-    <lastmod>2025-12-24T18:28:20.105Z</lastmod>
+    <lastmod>2025-12-25T10:15:59.733Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://hesaplabs.com/c/geometri-alan-cevre</loc>
-    <lastmod>2025-12-24T18:28:20.105Z</lastmod>
+    <lastmod>2025-12-25T10:15:59.733Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://hesaplabs.com/c/hacim</loc>
-    <lastmod>2025-12-24T18:28:20.105Z</lastmod>
+    <lastmod>2025-12-25T10:15:59.733Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://hesaplabs.com/c/kombinasyon-permutasyon</loc>
-    <lastmod>2025-12-24T18:28:20.105Z</lastmod>
+    <lastmod>2025-12-25T10:15:59.733Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://hesaplabs.com/c/birim-donusturucu</loc>
-    <lastmod>2025-12-24T18:28:20.105Z</lastmod>
+    <lastmod>2025-12-25T10:15:59.733Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://hesaplabs.com/c/su-ihtiyaci</loc>
-    <lastmod>2025-12-24T18:28:20.105Z</lastmod>
+    <lastmod>2025-12-25T10:15:59.733Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://hesaplabs.com/c/bmi</loc>
-    <lastmod>2025-12-24T18:28:20.105Z</lastmod>
+    <lastmod>2025-12-25T10:15:59.733Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://hesaplabs.com/c/bmr-tdee</loc>
-    <lastmod>2025-12-24T18:28:20.105Z</lastmod>
+    <lastmod>2025-12-25T10:15:59.733Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://hesaplabs.com/c/bel-kalca-orani</loc>
-    <lastmod>2025-12-24T18:28:20.105Z</lastmod>
+    <lastmod>2025-12-25T10:15:59.733Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://hesaplabs.com/c/dizi-hesaplayici</loc>
+    <lastmod>2025-12-25T10:15:59.733Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://hesaplabs.com/c/vucut-yag-orani</loc>
-    <lastmod>2025-12-24T18:28:20.105Z</lastmod>
+    <lastmod>2025-12-25T10:15:59.733Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://hesaplabs.com/c/vize-final</loc>
-    <lastmod>2025-12-24T18:28:20.105Z</lastmod>
+    <lastmod>2025-12-25T10:15:59.733Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://hesaplabs.com/c/takdir-tesekkur</loc>
-    <lastmod>2025-12-24T18:28:20.105Z</lastmod>
+    <lastmod>2025-12-25T10:15:59.733Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://hesaplabs.com/c/ders-notu</loc>
-    <lastmod>2025-12-24T18:28:20.105Z</lastmod>
+    <lastmod>2025-12-25T10:15:59.733Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://hesaplabs.com/c/kpss</loc>
-    <lastmod>2025-12-24T18:28:20.105Z</lastmod>
+    <lastmod>2025-12-25T10:15:59.733Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>

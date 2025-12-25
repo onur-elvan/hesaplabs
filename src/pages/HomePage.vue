@@ -53,10 +53,23 @@
       </div>
     </div>
 
-    <!-- Favoriler (arama yokken göster) -->
+    <!-- ✅ Favoriler (accordion) -->
     <div v-if="!q && favorites.length" class="mt-8">
       <div class="flex items-center justify-between gap-3">
-        <h2 class="text-lg font-semibold">Favoriler</h2>
+        <div class="flex items-center gap-2">
+          <h2 class="text-lg font-semibold">Favoriler</h2>
+          <button
+            type="button"
+            class="w-7 h-7 flex items-center justify-center rounded-full border bg-white text-xs hover:shadow"
+            @click="toggleSection('favorites')"
+            :aria-label="
+              sectionsOpen.favorites ? 'Favorileri gizle' : 'Favorileri göster'
+            "
+          >
+            <span v-if="sectionsOpen.favorites">▲</span>
+            <span v-else>▼</span>
+          </button>
+        </div>
 
         <button
           class="text-sm text-gray-500 hover:text-red-600"
@@ -67,27 +80,48 @@
         </button>
       </div>
 
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-3">
-        <RouterLink
-          v-for="c in favorites"
-          :key="c.id"
-          :to="`/c/${c.id}`"
-          class="bg-white rounded-xl border hover:shadow p-5 transition"
+      <transition name="fade">
+        <div
+          v-if="sectionsOpen.favorites"
+          class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-3"
         >
-          <div class="text-sm text-gray-500">{{ c.category }}</div>
-          <div class="mt-1 text-lg font-semibold">{{ c.title }}</div>
-          <div class="mt-2 text-gray-600 text-sm">{{ c.description }}</div>
-        </RouterLink>
-      </div>
+          <RouterLink
+            v-for="c in favorites"
+            :key="c.id"
+            :to="`/c/${c.id}`"
+            class="bg-white rounded-xl border hover:shadow p-5 transition"
+          >
+            <div class="text-sm text-gray-500">{{ c.category }}</div>
+            <div class="mt-1 text-lg font-semibold">{{ c.title }}</div>
+            <div class="mt-2 text-gray-600 text-sm">{{ c.description }}</div>
+          </RouterLink>
+        </div>
+      </transition>
     </div>
 
-    <!-- Son Kullanılanlar (arama yokken göster) -->
+    <!-- ✅ Son Kullanılanlar (accordion) -->
     <div v-if="!q && recent.length" class="mt-8">
       <div class="flex items-center justify-between gap-3">
-        <h2 class="text-lg font-semibold">
-          Son Kullanılanlar
-          <span class="text-xs text-gray-500 font-normal">(son 3)</span>
-        </h2>
+        <div class="flex items-center gap-2">
+          <h2 class="text-lg font-semibold">
+            Son Kullanılanlar
+            <span class="text-xs text-gray-500 font-normal">(son 3)</span>
+          </h2>
+
+          <button
+            type="button"
+            class="w-7 h-7 flex items-center justify-center rounded-full border bg-white text-xs hover:shadow"
+            @click="toggleSection('recent')"
+            :aria-label="
+              sectionsOpen.recent
+                ? 'Son kullanılanları gizle'
+                : 'Son kullanılanları göster'
+            "
+          >
+            <span v-if="sectionsOpen.recent">▲</span>
+            <span v-else>▼</span>
+          </button>
+        </div>
 
         <button
           class="text-sm text-gray-500 hover:text-red-600"
@@ -98,84 +132,131 @@
         </button>
       </div>
 
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-3">
-        <RouterLink
-          v-for="c in recent"
-          :key="c.id"
-          :to="`/c/${c.id}`"
-          class="bg-white rounded-xl border hover:shadow p-4 transition"
+      <transition name="fade">
+        <div
+          v-if="sectionsOpen.recent"
+          class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-3"
         >
-          <div class="text-sm text-gray-500">{{ c.category }}</div>
-          <div class="mt-1 text-lg font-semibold">{{ c.title }}</div>
-          <div class="mt-2 text-gray-600 text-sm">{{ c.description }}</div>
-        </RouterLink>
-      </div>
+          <RouterLink
+            v-for="c in recent"
+            :key="c.id"
+            :to="`/c/${c.id}`"
+            class="bg-white rounded-xl border hover:shadow p-4 transition"
+          >
+            <div class="text-sm text-gray-500">{{ c.category }}</div>
+            <div class="mt-1 text-lg font-semibold">{{ c.title }}</div>
+            <div class="mt-2 text-gray-600 text-sm">{{ c.description }}</div>
+          </RouterLink>
+        </div>
+      </transition>
     </div>
 
-    <!-- ✅ Öne Çıkanlar: sadece SON EKLENENLER -->
+    <!-- ✅ Öne Çıkanlar: sadece SON EKLENENLER (accordion) -->
     <section v-if="!q && latest.length" class="mt-10">
       <div class="flex items-end justify-between gap-4 flex-wrap">
-        <div>
-          <h2 class="text-2xl font-bold">Öne Çıkanlar</h2>
-          <p class="text-sm text-gray-600 mt-1">Son eklenen hesaplayıcılar.</p>
+        <div class="flex items-center gap-2">
+          <div class="text-left">
+            <h2 class="text-2xl font-bold">Son Eklenenler</h2>
+          </div>
+          <button
+            type="button"
+            class="w-8 h-8 flex items-center justify-center rounded-full border bg-white text-xs hover:shadow mt-1"
+            @click="toggleSection('latest')"
+            :aria-label="
+              sectionsOpen.latest
+                ? 'Öne çıkanları gizle'
+                : 'Öne çıkanları göster'
+            "
+          >
+            <span v-if="sectionsOpen.latest">▲</span>
+            <span v-else>▼</span>
+          </button>
         </div>
       </div>
 
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
-        <RouterLink
-          v-for="c in latest"
-          :key="c.id"
-          :to="`/c/${c.id}`"
-          class="bg-white rounded-xl border hover:shadow p-5 transition"
+      <transition name="fade">
+        <div
+          v-if="sectionsOpen.latest"
+          class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4"
         >
-          <div class="text-sm text-gray-500">{{ c.category }}</div>
-          <div class="mt-1 text-lg font-semibold">{{ c.title }}</div>
-          <div class="mt-2 text-gray-600 text-sm">{{ c.description }}</div>
+          <RouterLink
+            v-for="c in latest"
+            :key="c.id"
+            :to="`/c/${c.id}`"
+            class="bg-white rounded-xl border hover:shadow p-5 transition"
+          >
+            <div class="text-sm text-gray-500">{{ c.category }}</div>
+            <div class="mt-1 text-lg font-semibold">{{ c.title }}</div>
+            <div class="mt-2 text-gray-600 text-sm">{{ c.description }}</div>
 
-          <div v-if="c.createdAt" class="mt-3 text-xs text-gray-400">
-            Eklenme: {{ c.createdAt }}
-          </div>
-        </RouterLink>
-      </div>
+            <div v-if="c.createdAt" class="mt-3 text-xs text-gray-400">
+              Eklenme: {{ c.createdAt }}
+            </div>
+          </RouterLink>
+        </div>
+      </transition>
     </section>
+    <hr class="mt-10 border-gray-200" />
 
     <!-- ✅ Popüler Hesaplamalar (GLOBAL kullanım sayısına göre) -->
     <section v-if="!q && popular.length" class="mt-10">
       <div class="flex items-end justify-between gap-4 flex-wrap">
-        <div>
+        <div class="flex items-center gap-2">
           <h2 class="text-2xl font-bold">Popüler Hesaplamalar</h2>
-          <p class="text-sm text-gray-600 mt-1">
-            Tüm kullanıcılar arasında en çok kullanılan hesaplayıcılar.
-          </p>
+
+          <!-- 🔹 Mobilde aç/kapa; desktop'ta her zaman açık -->
+          <button
+            v-if="isMobile"
+            type="button"
+            class="w-8 h-8 flex items-center justify-center rounded-full border bg-white text-xs hover:shadow"
+            @click="mobilePopularOpen = !mobilePopularOpen"
+            :aria-label="
+              mobilePopularOpen
+                ? 'Popüler hesaplamaları gizle'
+                : 'Popüler hesaplamaları göster'
+            "
+          >
+            <span v-if="mobilePopularOpen">▲</span>
+            <span v-else>▼</span>
+          </button>
         </div>
 
         <div class="flex items-center gap-3 text-xs text-gray-500">
           <span>Global kullanım istatistiklerine göre listelenir.</span>
-          <span>(Google için de keşfi hızlandırır ✅)</span>
         </div>
       </div>
 
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
-        <RouterLink
-          v-for="c in popular"
-          :key="c.id"
-          :to="`/c/${c.id}`"
-          class="bg-white rounded-xl border hover:shadow p-5 transition"
+      <transition name="fade">
+        <div
+          v-if="!isMobile || mobilePopularOpen"
+          class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4"
         >
-          <div class="text-sm text-gray-500">{{ c.category }}</div>
-          <div class="mt-1 text-lg font-semibold">{{ c.title }}</div>
-          <div class="mt-2 text-gray-600 text-sm">{{ c.description }}</div>
-        </RouterLink>
-      </div>
+          <RouterLink
+            v-for="c in popular"
+            :key="c.id"
+            :to="`/c/${c.id}`"
+            class="bg-white rounded-xl border hover:shadow p-5 transition"
+          >
+            <div class="text-sm text-gray-500">{{ c.category }}</div>
+            <div class="mt-1 text-lg font-semibold">{{ c.title }}</div>
+            <div class="mt-2 text-gray-600 text-sm">{{ c.description }}</div>
+          </RouterLink>
+        </div>
+      </transition>
 
-      <div v-if="isPopularityLoading" class="mt-3 text-xs text-gray-500">
-        Global istatistikler yükleniyor...
-      </div>
-
-      <div v-else-if="!hasRealPopularity" class="mt-3 text-xs text-gray-500">
-        Şu an gösterilen liste, varsayılan popüler hesaplamalardan oluşuyor.
+      <div
+        v-if="!isMobile || mobilePopularOpen"
+        class="mt-3 text-xs text-gray-500"
+      >
+        <span v-if="isPopularityLoading"
+          >Global istatistikler yükleniyor...</span
+        >
+        <span v-else-if="!hasRealPopularity">
+          Şu an gösterilen liste, varsayılan popüler hesaplamalardan oluşuyor.
+        </span>
       </div>
     </section>
+    <hr class="mt-10 border-gray-200" />
 
     <!-- Filtreler -->
     <div class="mt-10">
@@ -230,7 +311,15 @@
 </template>
 
 <script setup>
-import { computed, ref, onMounted, watch, nextTick } from "vue";
+import {
+  computed,
+  ref,
+  onMounted,
+  watch,
+  nextTick,
+  reactive,
+  onUnmounted,
+} from "vue";
 import {
   calculators,
   getRecent,
@@ -248,10 +337,41 @@ const favIds = ref([]);
 const popMap = ref({});
 const isPopularityLoading = ref(false);
 
+// responsive için
+const isMobile = ref(false);
+const mobilePopularOpen = ref(false);
+
+// accordion state'leri (başlangıçta hepsi kapalı)
+const sectionsOpen = reactive({
+  favorites: false,
+  recent: false,
+  latest: false,
+});
+
+function updateIsMobile() {
+  if (typeof window === "undefined") return;
+  isMobile.value = window.innerWidth < 768;
+}
+
+function toggleSection(key) {
+  if (Object.prototype.hasOwnProperty.call(sectionsOpen, key)) {
+    sectionsOpen[key] = !sectionsOpen[key];
+  }
+}
+
 onMounted(() => {
+  updateIsMobile();
+  window.addEventListener("resize", updateIsMobile);
+
   recentIds.value = getRecent();
   favIds.value = getFavorites();
   loadGlobalPopularity();
+});
+
+onUnmounted(() => {
+  if (typeof window !== "undefined") {
+    window.removeEventListener("resize", updateIsMobile);
+  }
 });
 
 async function loadGlobalPopularity() {
@@ -296,6 +416,7 @@ const latest = computed(() => {
  * Popüler hesaplar:
  * - Supabase global view_count'a göre
  * - Hiç veri yoksa sabit id listesi (seed)
+ * - Maks 6 tane
  */
 const popularitySeedIds = [
   "net-brut-maas",
@@ -321,18 +442,18 @@ const popular = computed(() => {
   const map = popMap.value || {};
 
   if (hasRealPopularity.value) {
-    // Supabase verisine göre sırala
+    // Supabase verisine göre sırala (maks 6)
     return calculators
       .slice()
       .map((c) => ({ c, count: Number(map[c.id] || 0) }))
       .filter((x) => x.count > 0)
       .sort((a, b) => b.count - a.count)
-      .slice(0, 12)
+      .slice(0, 6)
       .map((x) => x.c);
   }
 
-  // veri yoksa seed list
-  return popularitySeedIds.map(findById).filter(Boolean).slice(0, 12);
+  // veri yoksa seed list (maks 6)
+  return popularitySeedIds.map(findById).filter(Boolean).slice(0, 6);
 });
 
 const q = ref("");
@@ -400,3 +521,15 @@ function clearRecent() {
   recentIds.value = clearRecentRegistry();
 }
 </script>
+
+<style scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+  transform: translateY(-4px);
+}
+</style>

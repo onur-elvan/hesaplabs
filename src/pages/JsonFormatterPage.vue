@@ -48,7 +48,7 @@
           </div>
         </div>
 
-        <div class="h-[520px]">
+        <div class="h-[680px]">
           <MonacoEditor
             v-model:value="input"
             language="json"
@@ -170,7 +170,7 @@
           </div>
         </div>
 
-        <div class="h-[520px]">
+        <div class="h-[680px]">
           <MonacoEditor
             v-model:value="output"
             language="json"
