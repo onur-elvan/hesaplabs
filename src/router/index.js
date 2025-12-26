@@ -3,7 +3,6 @@ import HomePage from "../pages/HomePage.vue";
 import CalculatorPage from "../pages/CalculatorPage.vue";
 import AboutPage from "../pages/AboutPage.vue";
 import JsonFormatterPage from "../pages/JsonFormatterPage.vue";
-import PiyasalarPage from "../pages/PiyasalarPage.vue";
 import NotFoundPage from "../pages/NotFoundPage.vue";
 
 const routes = [
@@ -15,12 +14,6 @@ const routes = [
     name: "json-formatter",
     component: JsonFormatterPage,
   },
-  {
-    path: "/piyasalar",
-    name: "piyasalar",
-    component: PiyasalarPage,
-  },
-
   // 404 her zaman en sonda
   { path: "/:pathMatch(.*)*", name: "notfound", component: NotFoundPage },
 ];

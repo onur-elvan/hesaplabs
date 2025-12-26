@@ -33,19 +33,6 @@
           </span>
         </span>
 
-        <!-- Yakında: Döviz / Finans -->
-        <RouterLink
-          to="/piyasalar"
-          class="hover:text-blue-600 transition flex items-center gap-1"
-        >
-          Piyasalar
-          <span
-            class="text-[10px] px-1.5 py-0.5 rounded bg-gray-200 text-gray-600"
-          >
-            beta
-          </span>
-        </RouterLink>
-
         <RouterLink to="/about" class="hover:text-blue-600 transition">
           Hakkında
         </RouterLink>
@@ -149,17 +136,6 @@
                     yakında
                   </span>
                 </div>
-
-                <RouterLink
-                  to="/piyasalar"
-                  @click="closeMenu"
-                  class="flex items-center gap-2"
-                >
-                  <span>Piyasalar</span>
-                  <span class="text-[10px] bg-gray-200 px-2 py-0.5 rounded">
-                    beta
-                  </span>
-                </RouterLink>
 
                 <RouterLink to="/about" @click="closeMenu">
                   Hakkında
