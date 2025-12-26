@@ -78,11 +78,11 @@ import Momentum from "./momentum.js";
 import IsGucZaman from "./is-guc-zaman.js";
 import KuvvetKutleIvme from "./kuvvet-kutle-ivme.js";
 import taksitliSatisVadeFarki from "./taksitliSatisVadeFarki.js";
-import BasabasAnalizi from "./basabasAnalizi";
-import NakitDonusumSuresi from "./nakitDonusumSuresi";
+import BasabasAnalizi from "./basabasAnalizi.js";
+import NakitDonusumSuresi from "./nakitDonusumSuresi.js";
 import cozeltiKaristirma from "./cozelti-karistirma.js";
 import cozeltiSeyreltme from "./cozelti-seyreltme.js";
-import asitBazNotralizasyon from "./asit-baz-notralizasyon";
+import asitBazNotralizasyon from "./asit-baz-notralizasyon.js";
 import bufferphhesaplayici from "./buffer-ph-hesaplayici.js";
 import zayifasitph from "./zayif-asit-ph.js";
 import asitbaztitrasyon from "./asit-baz-titrasyon.js";
@@ -92,6 +92,7 @@ import asitbaztitrasyon from "./asit-baz-titrasyon.js";
 export const calculators = [
   kdv,
   asitBazNotralizasyon,
+  bufferphhesaplayici,
   asitbaztitrasyon,
   zayifasitph,
   hizZamanGrafik,
