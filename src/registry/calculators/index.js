@@ -72,7 +72,7 @@ import dogruGrafik from "./dogru-grafik.js";
 import UsluLogHesaplayici from "./uslu-log-hesaplayici.js";
 import MutlakDegerDenklemEsitsizlik from "./mutlak-deger-denklem-esitsizlik.js";
 import serbestMeslekMakbuzu from "./serbestMeslekMakbuzu.js";
-import KiraGeliriStopaj from "./kiraGeliriStopaj";
+import KiraGeliriStopaj from "./kiraGeliriStopaj.js";
 import EgikAtis from "./egik-atis.js";
 import Momentum from "./momentum.js";
 import IsGucZaman from "./is-guc-zaman.js";
