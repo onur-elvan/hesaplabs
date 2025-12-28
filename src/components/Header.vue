@@ -128,8 +128,11 @@
                 <RouterLink to="/" @click="closeMenu">
                   Hesaplayıcılar
                 </RouterLink>
-                <RouterLink to="/json-formatter" @click="closeMenu">
-                  JSON Formatter
+                <RouterLink
+                  to="/kodlama-araclari"
+                  class="hover:text-blue-600 transition"
+                >
+                  Kodlama Araçları
                 </RouterLink>
 
                 <div class="text-gray-400">
