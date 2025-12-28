@@ -24,7 +24,6 @@
       content="Finans, matematik, eğitim, sağlık ve günlük ihtiyaçlar için hızlı ve mobil uyumlu hesaplayıcılar."
     />
     <meta property="og:url" content="https://hesaplabs.com/" />
-    <!-- Şimdilik sosyal paylaşım görseli olarak favicon kullanıyoruz -->
     <meta property="og:image" content="https://hesaplabs.com/favicon.png" />
 
     <!-- Twitter / X -->
@@ -39,10 +38,8 @@
     />
     <meta name="twitter:image" content="https://hesaplabs.com/favicon.png" />
 
-    <!-- Branding -->
     <meta name="theme-color" content="#2563eb" />
 
-    <!-- Simple Schema.org -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -53,7 +50,7 @@
       }
     </script>
 
-    <!-- ✅ Google tag (gtag.js) - buraya taşındı -->
+    <!-- Google tag -->
     <script
       async
       src="https://www.googletagmanager.com/gtag/js?id=G-V8J85ELBST"
@@ -69,6 +66,24 @@
   </head>
 
   <body>
+    <!--  🔥 Netlify’in formu tanıması için GİZLİ FORM  -->
+    <!--  Kullanıcı bunu görmez ama Netlify backend’i oluşturur -->
+    <form
+      name="iletisim"
+      method="POST"
+      data-netlify="true"
+      netlify-honeypot="bot-field"
+      hidden
+    >
+      <input type="hidden" name="form-name" value="iletisim" />
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <input type="text" name="subject" />
+      <textarea name="message"></textarea>
+      <input name="bot-field" />
+    </form>
+
+    <!-- Vue uygulaması -->
     <div id="app"></div>
     <script type="module" src="/src/main.js"></script>
   </body>

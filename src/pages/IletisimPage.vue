@@ -10,7 +10,7 @@
       iletilir.
     </p>
 
-    <!-- 🛡 Güçlendirilmiş Netlify Form -->
+    <!-- 🛡 Netlify Forms uyumlu form -->
     <form
       name="iletisim"
       method="POST"
@@ -19,10 +19,10 @@
       data-netlify-recaptcha="true"
       class="bg-white border border-slate-200 rounded-xl shadow-sm p-6 space-y-4"
     >
-      <!-- Netlify'nin formu tanıması için zorunlu -->
+      <!-- Netlify'nin formu tanıyabilmesi için zorunlu -->
       <input type="hidden" name="form-name" value="iletisim" />
 
-      <!-- Honeypot alan (gizli bot tuzağı) -->
+      <!-- Honeypot alan (bot tuzağı, gizli kalıyor) -->
       <p class="hidden">
         <label>
           Bot musun?
@@ -31,6 +31,7 @@
       </p>
 
       <div class="grid gap-4 sm:grid-cols-2">
+        <!-- Ad -->
         <div class="sm:col-span-2">
           <label class="block text-sm font-medium text-slate-700 mb-1">
             Adınız (isteğe bağlı)
@@ -43,6 +44,7 @@
           />
         </div>
 
+        <!-- E-posta -->
         <div class="sm:col-span-2">
           <label class="block text-sm font-medium text-slate-700 mb-1">
             E-posta adresiniz <span class="text-red-500">*</span>
@@ -56,6 +58,7 @@
           />
         </div>
 
+        <!-- Konu -->
         <div class="sm:col-span-2">
           <label class="block text-sm font-medium text-slate-700 mb-1">
             Konu (isteğe bağlı)
@@ -68,6 +71,7 @@
           />
         </div>
 
+        <!-- Mesaj -->
         <div class="sm:col-span-2">
           <label class="block text-sm font-medium text-slate-700 mb-1">
             Mesajınız <span class="text-red-500">*</span>
@@ -82,12 +86,14 @@
         </div>
       </div>
 
-      <!-- 🧩 reCAPTCHA alanı (Netlify buraya widget ekliyor) -->
+      <!-- 🧩 reCAPTCHA alanı (Netlify burada widget oluşturur) -->
       <div class="pt-2">
         <div data-netlify-recaptcha="true"></div>
       </div>
 
-      <div class="flex items-center justify-between pt-4">
+      <div
+        class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 pt-4"
+      >
         <p class="text-xs text-slate-500">
           Bu form üzerinden gönderdiğiniz bilgiler yalnızca size geri dönüş
           yapmak için kullanılır.
@@ -95,7 +101,7 @@
 
         <button
           type="submit"
-          class="inline-flex items-center px-4 py-2 rounded-md bg-blue-600 text-white text-sm font-medium hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1"
+          class="inline-flex items-center justify-center px-4 py-2 rounded-md bg-blue-600 text-white text-sm font-medium hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1"
         >
           Gönder
         </button>
@@ -105,5 +111,6 @@
 </template>
 
 <script setup>
-// Ekstra JS zorunlu değil, Netlify HTML formu otomatik yakalıyor.
+// Netlify Forms için ekstra JS gerekmiyor.
+// Submit doğrudan HTML form POST'u olarak gider.
 </script>
