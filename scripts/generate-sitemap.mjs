@@ -7,29 +7,26 @@ const __dirname = path.dirname(__filename);
 
 const SITE = "https://hesaplabs.com";
 
-// calculators
+// Registry dosyalarını içe aktarırken hata payını azaltmak için
 const calculatorsPath = path.resolve(
   __dirname,
   "../src/registry/calculators/index.js"
 );
 const { calculators } = await import("file://" + calculatorsPath);
 
-// tools (kodlama araçları)
 const toolsPath = path.resolve(__dirname, "../src/registry/tools/index.js");
 const { tools } = await import("file://" + toolsPath);
 
-// sabit sayfalar
-const staticRoutes = ["/", "/about"];
-
-// hesaplayıcı URL’leri
-const calculatorRoutes = calculators.map((c) => `/c/${c.id}`);
-
-// kodlama aracı URL’leri
-const toolRoutes = tools.map((t) => `/kodlama/${t.slug}`);
+// 1. DÜZELTME: Tüm URL'lerin sonuna "/" (slash) ekliyoruz.
+// Google çoğu zaman slash olmayan URL'yi slashlı olana yönlendirir, bu da çakışma yaratır.
+const staticRoutes = ["/", "/about/"];
+const calculatorRoutes = calculators.map((c) => `/c/${c.id}/`);
+const toolRoutes = tools.map((t) => `/kodlama/${t.slug}/`);
 
 const urls = [...staticRoutes, ...calculatorRoutes, ...toolRoutes];
 
-const today = new Date().toISOString();
+// 2. DÜZELTME: lastmod tarihini daha temiz bir formatta (YYYY-MM-DD) gönderelim.
+const today = new Date().toISOString().split("T")[0];
 
 const xml =
   `<?xml version="1.0" encoding="UTF-8"?>\n` +
@@ -42,11 +39,10 @@ const xml =
     <lastmod>${today}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>${url === "/" ? "1.0" : "0.8"}</priority>
-  </url>
-`
+  </url>`
     )
     .join("") +
-  `</urlset>`;
+  `\n</urlset>`;
 
 fs.writeFileSync("public/sitemap.xml", xml.trim());
-console.log("✅ Sitemap oluşturuldu. URL sayısı:", urls.length);
+console.log("✅ Sitemap düzeltildi ve oluşturuldu. URL sayısı:", urls.length);

@@ -17,4 +17,12 @@ export const tools = [
     slug: "json-compare",
     path: "/kodlama/json-compare",
   },
+  {
+    slug: "jwt-decoder",
+    path: "/kodlama/jwt-decoder",
+  },
+  {
+    slug: "uuid",
+    path: "/kodlama/uuid-generator",
+  },
 ];

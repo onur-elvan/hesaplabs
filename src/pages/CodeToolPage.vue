@@ -37,6 +37,8 @@ import JsonFormatterTool from "../tools/JsonFormatterTool.vue";
 import Base64Tool from "../tools/Base64Tool.vue";
 import UrlEncodeTool from "../tools/UrlEncodeTool.vue";
 import JsonDiffTool from "../tools/JsonDiffTool.vue";
+import JwtDecoderTool from "../tools/JwtDecoderTool.vue";
+import UuidTool from "../tools/UuidTool.vue";
 
 // import UrlEncoderTool from "../tools/UrlEncoderTool.vue";
 
@@ -46,7 +48,9 @@ const mapSlugToComponent = {
   "json-formatter": JsonFormatterTool,
   "base64-encoder-decoder": Base64Tool,
   "url-encoder-decoder": UrlEncodeTool,
+  "uuid-generator": UuidTool,
   "json-compare": JsonDiffTool,
+  "jwt-decoder": JwtDecoderTool,
   //   "url-encoder-decoder": UrlEncoderTool,
 };
 

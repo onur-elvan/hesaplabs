@@ -59,4 +59,52 @@ export const codeTools = [
     metaDescription:
       "İki JSON metnini yan yana karşılaştıran, farkları satır bazında renklendiren ücretsiz JSON diff aracı. Tüm işlemler tarayıcı içinde yapılır.",
   },
+  {
+    slug: "jwt-decoder",
+    name: "JWT Decoder & İnceleyici",
+    shortDescription:
+      "JWT token’larını decode edip header ve payload içeriğini güvenli bir şekilde görüntüleyin.",
+    category: "Güvenlik & Kimlik",
+    difficulty: "Orta",
+    metaTitle: "JWT Decoder | JSON Web Token Çözücü | Hesaplabs",
+    metaDescription:
+      "JSON Web Token (JWT) değerlerini tarayıcı içinde güvenle decode edin. Header ve payload kısımlarını okunabilir JSON formatında görüntüleyin. İmza doğrulaması yapmayan, sadece inceleme amaçlı JWT decode aracı.",
+  },
+  {
+    slug: "uuid-generator",
+    name: "UUID Generator (Rastgele ID Üretici)",
+    category: "Geliştirici Araçları",
+    difficulty: "Kolay",
+    shortDescription:
+      "Version 4 UUID üret; birden fazla rastgele ID oluştur, tek tıkla kopyala.",
+    metaTitle: "UUID Generator | Rastgele UUID v4 Üretici | Hesaplabs",
+    metaDescription:
+      "Version 4 UUID üretmek için ücretsiz online UUID generator. Birden fazla benzersiz ID oluştur, küçük/büyük harf ve tireli/tresiz biçimleri seç, tek tıkla kopyala.",
+    seoText: `
+UUID (Universally Unique Identifier), sistemler arasında çakışma ihtimali çok düşük, 128 bitlik benzersiz kimlikler üretmek için kullanılan bir standarttır. En çok kullanılan sürüm olan UUID v4, kriptografik olarak güçlü rastgele sayılara dayanır.
+
+Bu araç, özellikle şunlar için idealdir:
+
+- Veritabanında benzersiz kayıt ID’leri üretmek (örneğin: kullanıcı_id, siparis_id, oturum_id).
+- Mikro servisler arasında benzersiz istek kimlikleri (request ID) oluşturmak.
+- Dosya isimleri, token benzeri yapılar veya izleme ID’leri üretmek.
+- Geliştirme ortamında hızlıca test verisi oluşturmak.
+
+UUID v4 yapısı genelde şöyle görünür:
+xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx
+
+- Toplam 32 hex karakter + 4 tane tire = 36 karakterlik bir string.
+- 4. grup içindeki ilk karakter her zaman "4" olur (bu, version 4 olduğunu gösterir).
+- 3. grup içindeki ilk bitler, varyant bilgisini taşır (genellikle “8”, “9”, “a” veya “b” ile başlar).
+
+Bu UUID Generator aracı ile:
+
+1) Kaç adet UUID üretmek istediğini seçebilirsin (örneğin: 1, 10, 100).
+2) Tireli (standart) veya tiresiz (sadece 32 karakterlik) biçimi tercih edebilirsin.
+3) Küçük harf veya BÜYÜK HARF formatını seçebilirsin.
+4) Tüm üretilen UUID'leri tek tıkla panoya kopyalayıp, doğrudan koduna veya konfigürasyon dosyana yapıştırabilirsin.
+
+Tüm işlemler tarayıcı içinde çalışır; sunucuya veri gönderilmez. Bu da hem hız hem de gizlilik açısından avantaj sağlar.
+`.trim(),
+  },
 ];
