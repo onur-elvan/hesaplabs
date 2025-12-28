@@ -7,18 +7,27 @@ const __dirname = path.dirname(__filename);
 
 const SITE = "https://hesaplabs.com";
 
-// calculators listesini import et
+// calculators
 const calculatorsPath = path.resolve(
   __dirname,
   "../src/registry/calculators/index.js"
 );
 const { calculators } = await import("file://" + calculatorsPath);
 
-const staticRoutes = ["/", "/about", "/json-formatter"];
+// tools (kodlama araçları)
+const toolsPath = path.resolve(__dirname, "../src/registry/tools/index.js");
+const { tools } = await import("file://" + toolsPath);
 
+// sabit sayfalar
+const staticRoutes = ["/", "/about"];
+
+// hesaplayıcı URL’leri
 const calculatorRoutes = calculators.map((c) => `/c/${c.id}`);
 
-const urls = [...staticRoutes, ...calculatorRoutes];
+// kodlama aracı URL’leri
+const toolRoutes = tools.map((t) => `/kodlama/${t.slug}`);
+
+const urls = [...staticRoutes, ...calculatorRoutes, ...toolRoutes];
 
 const today = new Date().toISOString();
 

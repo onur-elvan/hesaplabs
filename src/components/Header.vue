@@ -16,8 +16,12 @@
         <RouterLink to="/" class="hover:text-blue-600 transition">
           Hesaplayıcılar
         </RouterLink>
-        <RouterLink to="/json-formatter" class="hover:text-blue-600 transition">
-          JSON Formatter
+        <!-- Yeni -->
+        <RouterLink
+          to="/kodlama-araclari"
+          class="hover:text-blue-600 transition"
+        >
+          Kodlama Araçları
         </RouterLink>
 
         <!-- Yakında: Yapay Zeka -->
