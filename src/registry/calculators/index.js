@@ -24,6 +24,7 @@ import BelKalcaOrani from "./bel-kalca-orani.js";
 import VucutYagOrani from "./vucut-yag-orani.js";
 import vizeFinal from "./vize-final.js";
 import takdirTesekkur from "./takdir-tesekkur.js";
+import ulkelerArasiSaatFarkiGenis from "./ulkeler-arasi-saat-farki-genis.js";
 import dersNotu from "./ders-notu.js";
 import kpss from "./kpss.js";
 import tyt from "./tyt.js";
@@ -72,29 +73,53 @@ import dogruGrafik from "./dogru-grafik.js";
 import UsluLogHesaplayici from "./uslu-log-hesaplayici.js";
 import MutlakDegerDenklemEsitsizlik from "./mutlak-deger-denklem-esitsizlik.js";
 import serbestMeslekMakbuzu from "./serbestMeslekMakbuzu.js";
+import elektrikliAracSarjHesaplama from "./elektrikli-arac-sarj-hesaplama.js";
 import KiraGeliriStopaj from "./kiraGeliriStopaj.js";
 import EgikAtis from "./egik-atis.js";
 import Momentum from "./momentum.js";
+import seyahatButcesiHesaplama from "./seyahat-butcesi-hesaplama.js";
 import IsGucZaman from "./is-guc-zaman.js";
 import KuvvetKutleIvme from "./kuvvet-kutle-ivme.js";
 import taksitliSatisVadeFarki from "./taksitliSatisVadeFarki.js";
+import arsaPayiHesaplama from "./arsa-payi-hesaplama.js";
 import BasabasAnalizi from "./basabasAnalizi.js";
 import NakitDonusumSuresi from "./nakitDonusumSuresi.js";
+import karbonhidratIhtiyaciVeRehberi from "./karbonhidrat-ihtiyaci-ve-rehberi.js";
 import cozeltiKaristirma from "./cozelti-karistirma.js";
 import cozeltiSeyreltme from "./cozelti-seyreltme.js";
 import asitBazNotralizasyon from "./asit-baz-notralizasyon.js";
 import bufferphhesaplayici from "./buffer-ph-hesaplayici.js";
 import zayifasitph from "./zayif-asit-ph.js";
 import asitbaztitrasyon from "./asit-baz-titrasyon.js";
+import krediMasrafi from "./kredi-masrafi.js";
+import metrekareHesaplama from "./metrekare-hesaplama.js";
+import krediKartiEkTaksit from "./kredi-karti-ek-taksit.js";
+import adetGunuHesaplama from "./adet-gunu-hesaplama.js";
+import hicriTakvimHesaplama from "./hicri-takvim-hesaplama.js";
+import yakitTuketimiHesaplama from "./yakit-tuketimi-hesaplama.js";
+import yillikIzinUcretiHesaplama from "./yillik-izin-ucreti-hesaplama.js";
+import daskPrimHesaplama from "./dask-prim-hesaplama.js";
 // burada senin ekleyeceğin diğerleri de olacak:
 // import stopaj from "./stopaj"; gibi
 
 export const calculators = [
   kdv,
   asitBazNotralizasyon,
+  yillikIzinUcretiHesaplama,
+  yakitTuketimiHesaplama,
+  daskPrimHesaplama,
+  arsaPayiHesaplama,
+  elektrikliAracSarjHesaplama,
+  adetGunuHesaplama,
+  hicriTakvimHesaplama,
+  metrekareHesaplama,
+  krediKartiEkTaksit,
+  seyahatButcesiHesaplama,
+  krediMasrafi,
   bufferphhesaplayici,
   asitbaztitrasyon,
   zayifasitph,
+  karbonhidratIhtiyaciVeRehberi,
   hizZamanGrafik,
   cozeltiKaristirma,
   cozeltiSeyreltme,
@@ -106,6 +131,7 @@ export const calculators = [
   taksitliSatisVadeFarki,
   BasitHarmonikHareket,
   DikeyAtisSerbestDusme,
+  ulkelerArasiSaatFarkiGenis,
   KiraGeliriStopaj,
   DonmeHareketi,
   Carpisma1D,

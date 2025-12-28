@@ -241,22 +241,42 @@
         </div>
 
         <!-- Normal sonuç kartları -->
-        <div v-if="resultEntries.length" class="grid sm:grid-cols-2 gap-3 mt-4">
+        <div v-if="resultEntries.length" class="space-y-4 mt-4">
           <div
             v-for="[key, val] in resultEntries"
             :key="key"
-            class="bg-white rounded-lg border p-3"
+            class="bg-white rounded-lg border p-4 shadow-sm"
           >
-            <h3 class="text-xs uppercase tracking-wide text-gray-500">
+            <h3
+              class="text-xs font-bold uppercase tracking-wider text-gray-500 mb-2 border-b pb-1"
+            >
               {{ key }}
             </h3>
 
-            <div
-              class="text-lg font-semibold text-gray-800 overflow-x-auto"
-              :class="valueClass(val)"
-              :title="isLongString(val) ? String(val) : ''"
-            >
-              {{ format(val) }}
+            <div class="text-gray-800">
+              <ul v-if="Array.isArray(val)" class="space-y-2">
+                <li
+                  v-for="(item, i) in val"
+                  :key="i"
+                  class="text-sm p-2 rounded-md bg-gray-50 border-l-4 border-blue-500"
+                >
+                  <div v-if="typeof item === 'object' && item !== null">
+                    <div v-for="(v, k) in item" :key="k" class="mb-1">
+                      <span class="font-semibold text-gray-700">{{ k }}:</span>
+                      {{ v }}
+                    </div>
+                  </div>
+                  <span v-else>{{ item }}</span>
+                </li>
+              </ul>
+
+              <div
+                v-else
+                class="text-lg font-semibold"
+                :class="valueClass(val)"
+              >
+                {{ format(val) }}
+              </div>
             </div>
           </div>
         </div>
