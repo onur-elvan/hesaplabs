@@ -6,6 +6,7 @@ import CalculatorPage from "../pages/CalculatorPage.vue";
 import AboutPage from "../pages/AboutPage.vue";
 import NotFoundPage from "../pages/NotFoundPage.vue";
 import IletisimPage from "../pages/IletisimPage.vue";
+import IletisimTesekkurPage from "../pages/IletisimTesekkurPage.vue";
 
 // Yeni eklediğimiz sayfalar
 import KodlamaAraclariPage from "../pages/KodlamaAraclariPage.vue";
@@ -30,6 +31,17 @@ const routes = [
       title: "İletişim | Hesaplabs",
       description:
         "Hesaplabs ile ilgili soru, öneri ve iş birlikleri için bizimle iletişime geçin. Geri bildirimlerinizle hesaplama araçlarımızı geliştirmemize yardımcı olun.",
+    },
+  },
+  // İletişim sonrası teşekkür sayfası
+  {
+    path: "/iletisim-tesekkur",
+    name: "iletisim-tesekkur",
+    component: IletisimTesekkurPage,
+    meta: {
+      title: "Teşekkürler | Hesaplabs",
+      description:
+        "Mesajınız başarıyla alındı. Hesaplabs ekibi en kısa sürede size geri dönüş yapacaktır.",
     },
   },
 

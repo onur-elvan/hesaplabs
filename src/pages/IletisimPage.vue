@@ -17,6 +17,7 @@
       data-netlify="true"
       netlify-honeypot="bot-field"
       data-netlify-recaptcha="true"
+      action="/iletisim-tesekkur"
       class="bg-white border border-slate-200 rounded-xl shadow-sm p-6 space-y-4"
     >
       <!-- Netlify'nin formu tanıyabilmesi için zorunlu -->
