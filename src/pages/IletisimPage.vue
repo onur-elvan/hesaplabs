@@ -10,14 +10,14 @@
       iletilir.
     </p>
 
-    <!-- 🛡 Netlify Forms uyumlu form -->
+    <!-- 🛡 Netlify Forms + JS submit -->
     <form
       name="iletisim"
       method="POST"
       data-netlify="true"
       netlify-honeypot="bot-field"
       data-netlify-recaptcha="true"
-      action="/iletisim-tesekkur"
+      @submit.prevent="handleSubmit"
       class="bg-white border border-slate-200 rounded-xl shadow-sm p-6 space-y-4"
     >
       <!-- Netlify'nin formu tanıyabilmesi için zorunlu -->
@@ -27,7 +27,7 @@
       <p class="hidden">
         <label>
           Bot musun?
-          <input name="bot-field" />
+          <input name="bot-field" v-model="form.botField" />
         </label>
       </p>
 
@@ -40,6 +40,7 @@
           <input
             name="name"
             type="text"
+            v-model="form.name"
             class="block w-full rounded-md border-slate-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm sm:text-base"
             placeholder="Adınızı buraya yazabilirsiniz"
           />
@@ -54,6 +55,7 @@
             name="email"
             type="email"
             required
+            v-model="form.email"
             class="block w-full rounded-md border-slate-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm sm:text-base"
             placeholder="ornek@mail.com"
           />
@@ -67,6 +69,7 @@
           <input
             name="subject"
             type="text"
+            v-model="form.subject"
             class="block w-full rounded-md border-slate-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm sm:text-base"
             placeholder="Örn: Hata bildirimi, öneri, iş birliği..."
           />
@@ -81,6 +84,7 @@
             name="message"
             rows="6"
             required
+            v-model="form.message"
             class="block w-full rounded-md border-slate-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm sm:text-base"
             placeholder="Bize iletmek istediğiniz her şeyi buraya yazabilirsiniz."
           ></textarea>
@@ -102,9 +106,11 @@
 
         <button
           type="submit"
-          class="inline-flex items-center justify-center px-4 py-2 rounded-md bg-blue-600 text-white text-sm font-medium hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1"
+          :disabled="isSubmitting"
+          class="inline-flex items-center justify-center px-4 py-2 rounded-md bg-blue-600 text-white text-sm font-medium hover:bg-blue-700 disabled:opacity-60 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1"
         >
-          Gönder
+          <span v-if="!isSubmitting">Gönder</span>
+          <span v-else>Gönderiliyor...</span>
         </button>
       </div>
     </form>
@@ -112,6 +118,55 @@
 </template>
 
 <script setup>
-// Netlify Forms için ekstra JS gerekmiyor.
-// Submit doğrudan HTML form POST'u olarak gider.
+import { reactive, ref } from "vue";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+
+const form = reactive({
+  name: "",
+  email: "",
+  subject: "",
+  message: "",
+  botField: "", // honeypot
+});
+
+const isSubmitting = ref(false);
+
+function encode(data) {
+  return Object.keys(data)
+    .map(
+      (key) =>
+        encodeURIComponent(key) + "=" + encodeURIComponent(data[key] ?? "")
+    )
+    .join("&");
+}
+
+const handleSubmit = async (event) => {
+  // Bot doldurduysa hiçbir şey yapma
+  if (form.botField) return;
+
+  isSubmitting.value = true;
+
+  try {
+    const formEl = event.target;
+
+    await fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: encode({
+        "form-name": formEl.getAttribute("name"),
+        ...form,
+      }),
+    });
+
+    // 🟢 Başarılıysa Vue router ile teşekkür sayfasına git
+    router.push("/iletisim-tesekkur");
+  } catch (err) {
+    console.error("Form gönderilirken hata:", err);
+    alert("Mesajınız gönderilirken bir hata oluştu. Lütfen tekrar deneyin.");
+  } finally {
+    isSubmitting.value = false;
+  }
+};
 </script>
