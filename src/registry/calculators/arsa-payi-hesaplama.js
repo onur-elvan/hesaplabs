@@ -1,6 +1,6 @@
 export default {
   id: "arsa-payi-hesaplama",
-  category: "Gayrimenkul",
+  category: "Günlük",
   title: "Arsa Payı Hesaplama Aracı",
   createdAt: "2025-12-28",
   description:

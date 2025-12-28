@@ -1,6 +1,6 @@
 export default {
   id: "elektrikli-arac-sarj-hesaplama",
-  category: "Otomobil",
+  category: "Günlük",
   title: "Elektrikli Araç Şarj Hesaplama Aracı",
   createdAt: "2025-12-28",
   description:
