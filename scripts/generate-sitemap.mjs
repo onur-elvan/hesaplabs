@@ -7,25 +7,29 @@ const __dirname = path.dirname(__filename);
 
 const SITE = "https://hesaplabs.com";
 
-// Registry dosyalarını içe aktarırken hata payını azaltmak için
+// calculators
 const calculatorsPath = path.resolve(
   __dirname,
   "../src/registry/calculators/index.js"
 );
 const { calculators } = await import("file://" + calculatorsPath);
 
+// code tools
 const toolsPath = path.resolve(__dirname, "../src/registry/tools/index.js");
 const { tools } = await import("file://" + toolsPath);
 
-// 1. DÜZELTME: Tüm URL'lerin sonuna "/" (slash) ekliyoruz.
-// Google çoğu zaman slash olmayan URL'yi slashlı olana yönlendirir, bu da çakışma yaratır.
-const staticRoutes = ["/", "/about/"];
+// 🔹 Statik sayfalar (hepsini slash’lı tutuyoruz)
+const staticRoutes = ["/", "/about/", "/iletisim/"];
+
+// 🔹 Hesaplayıcılar
 const calculatorRoutes = calculators.map((c) => `/c/${c.id}/`);
+
+// 🔹 Kodlama araçları
 const toolRoutes = tools.map((t) => `/kodlama/${t.slug}/`);
 
 const urls = [...staticRoutes, ...calculatorRoutes, ...toolRoutes];
 
-// 2. DÜZELTME: lastmod tarihini daha temiz bir formatta (YYYY-MM-DD) gönderelim.
+// 🔹 YYYY-MM-DD formatı
 const today = new Date().toISOString().split("T")[0];
 
 const xml =

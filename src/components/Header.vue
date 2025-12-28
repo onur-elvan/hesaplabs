@@ -40,6 +40,12 @@
         <RouterLink to="/about" class="hover:text-blue-600 transition">
           Hakkında
         </RouterLink>
+        <RouterLink
+          to="/iletisim"
+          class="text-sm text-slate-600 hover:text-slate-900"
+        >
+          İletişim
+        </RouterLink>
       </nav>
 
       <!-- Mobile Menü Butonu -->
@@ -146,6 +152,12 @@
 
                 <RouterLink to="/about" @click="closeMenu">
                   Hakkında
+                </RouterLink>
+                <RouterLink
+                  to="/iletisim"
+                  class="text-sm text-slate-600 hover:text-slate-900"
+                >
+                  İletişim
                 </RouterLink>
               </div>
 

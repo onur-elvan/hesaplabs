@@ -5,6 +5,7 @@ import HomePage from "../pages/HomePage.vue";
 import CalculatorPage from "../pages/CalculatorPage.vue";
 import AboutPage from "../pages/AboutPage.vue";
 import NotFoundPage from "../pages/NotFoundPage.vue";
+import IletisimPage from "../pages/IletisimPage.vue";
 
 // Yeni eklediğimiz sayfalar
 import KodlamaAraclariPage from "../pages/KodlamaAraclariPage.vue";
@@ -19,6 +20,18 @@ const routes = [
 
   // Hakkında
   { path: "/about", name: "about", component: AboutPage },
+
+  // İletişim
+  {
+    path: "/iletisim",
+    name: "iletisim",
+    component: IletisimPage,
+    meta: {
+      title: "İletişim | Hesaplabs",
+      description:
+        "Hesaplabs ile ilgili soru, öneri ve iş birlikleri için bizimle iletişime geçin. Geri bildirimlerinizle hesaplama araçlarımızı geliştirmemize yardımcı olun.",
+    },
+  },
 
   // 🔹 Kodlama araçları listesi (JSON formatter, Base64, URL encode vs.)
   {
