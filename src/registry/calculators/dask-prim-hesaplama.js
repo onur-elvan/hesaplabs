@@ -1,6 +1,6 @@
 export default {
   id: "dask-prim-hesaplama-gelismis",
-  category: "Sigorta",
+  category: "Muhasebe",
   title: "DASK Prim Hesaplama Aracı",
   createdAt: "2025-12-28",
   description:

@@ -1,6 +1,6 @@
 export default {
   id: "hicri-takvim-hesaplama",
-  category: "Zaman",
+  category: "Günlük",
   title: "Hicri Takvim Hesaplama (Hassas Çevirici)",
   createdAt: "2025-12-28",
   description:
