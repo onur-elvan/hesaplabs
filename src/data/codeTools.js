@@ -107,4 +107,17 @@ Bu UUID Generator aracı ile:
 Tüm işlemler tarayıcı içinde çalışır; sunucuya veri gönderilmez. Bu da hem hız hem de gizlilik açısından avantaj sağlar.
 `.trim(),
   },
+  {
+    slug: "json-to-toon-converter",
+    name: "JSON to TOON Converter",
+    category: "JSON & Metin Araçları",
+    difficulty: "Orta",
+    shortDescription:
+      "JSON verisini TOON formatına dönüştürerek LLM tarafında %30–60’a kadar token tasarrufu sağlar.",
+    metaTitle: "JSON to TOON Converter | TOON Formatı | Hesaplabs",
+    metaDescription:
+      "JSON verilerini TOON (Token-Oriented Object Notation) formatına dönüştür. LLM isteklerinde daha az token kullan, maliyeti düşür, daha fazla veriyi aynı context’e sığdır.",
+    // küçük info butonu için
+    docsRoute: "/kodlama/json-to-toon-bilgi",
+  },
 ];

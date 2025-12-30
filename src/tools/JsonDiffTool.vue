@@ -4,9 +4,6 @@
     <div
       class="bg-white border border-slate-200 shadow-sm rounded-xl p-4 sm:p-6"
     >
-      <h2 class="text-lg sm:text-xl font-semibold text-slate-900 mb-2">
-        JSON Karşılaştırma Aracı
-      </h2>
       <p class="text-slate-600 text-sm sm:text-base mb-4">
         İki JSON metnini yan yana gir, araç senin için biçimlendirip satır
         bazında farkları vurgulasın. Hem doğrulama hem de görsel karşılaştırma

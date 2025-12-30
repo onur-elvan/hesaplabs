@@ -25,4 +25,8 @@ export const tools = [
     slug: "uuid",
     path: "/kodlama/uuid-generator",
   },
+  {
+    slug: "json-to-toon-converter",
+    path: "/kodlama/json-to-toon-bilgi",
+  },
 ];

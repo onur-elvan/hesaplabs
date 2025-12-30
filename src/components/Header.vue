@@ -40,10 +40,7 @@
         <RouterLink to="/about" class="hover:text-blue-600 transition">
           Hakkında
         </RouterLink>
-        <RouterLink
-          to="/iletisim"
-          class="text-sm text-slate-600 hover:text-slate-900"
-        >
+        <RouterLink to="/iletisim" class="hover:text-blue-600 transition">
           İletişim
         </RouterLink>
       </nav>

@@ -3,9 +3,6 @@
   <main class="space-y-10">
     <!-- Başlık ve kısa açıklama -->
     <section>
-      <h1 class="text-2xl sm:text-3xl font-semibold text-slate-900 mb-2">
-        UUID Generator
-      </h1>
       <p class="text-slate-600 text-sm sm:text-base max-w-2xl">
         Tek tıkla benzersiz UUID’ler (Universally Unique Identifier) üretin.
         Versiyon 4 rastgele UUID’ler, çoğu uygulama için fazlasıyla yeterlidir.

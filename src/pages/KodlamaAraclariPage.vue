@@ -21,29 +21,31 @@
       <div
         class="grid gap-4 sm:gap-5 md:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
       >
-        <article
+        <RouterLink
           v-for="tool in codeTools"
           :key="tool.slug"
-          class="group rounded-2xl border border-slate-200 bg-white hover:border-blue-500 hover:shadow-md transition-all p-4 flex flex-col justify-between"
+          :to="{ name: 'code-tool-detail', params: { slug: tool.slug } }"
+          class="group block rounded-2xl border p-4 sm:p-5 bg-white hover:shadow-md hover:border-blue-200 transition focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
         >
-          <div>
-            <p class="text-xs font-medium text-blue-600 mb-1">
-              {{ tool.category }}
-            </p>
-            <h3 class="text-base sm:text-lg font-semibold text-slate-900 mb-1">
-              {{ tool.name }}
-            </h3>
-            <p class="text-xs sm:text-sm text-slate-600 line-clamp-3">
-              {{ tool.shortDescription }}
-            </p>
+          <div class="text-xs font-medium text-slate-500 mb-2">
+            {{ tool.category }}
           </div>
+
+          <h2 class="text-base sm:text-lg font-semibold text-slate-900 mb-1">
+            {{ tool.name }}
+          </h2>
+
+          <p class="text-xs sm:text-sm text-slate-600 mb-4">
+            {{ tool.shortDescription }}
+          </p>
 
           <div
             class="mt-4 flex items-center justify-between text-xs text-slate-500"
           >
             <span>{{ tool.difficulty }}</span>
-            <RouterLink
-              :to="{ name: 'code-tool-detail', params: { slug: tool.slug } }"
+
+            <!-- Artık sadece görsel bir metin, link değil -->
+            <span
               class="inline-flex items-center text-blue-600 font-medium group-hover:text-blue-700"
             >
               Aracı aç
@@ -52,9 +54,9 @@
               >
                 →
               </span>
-            </RouterLink>
+            </span>
           </div>
-        </article>
+        </RouterLink>
       </div>
     </section>
   </main>

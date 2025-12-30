@@ -18,8 +18,17 @@ const { calculators } = await import("file://" + calculatorsPath);
 const toolsPath = path.resolve(__dirname, "../src/registry/tools/index.js");
 const { tools } = await import("file://" + toolsPath);
 
-// 🔹 Statik sayfalar (hepsini slash’lı tutuyoruz)
-const staticRoutes = ["/", "/about/", "/iletisim/"];
+// 🔹 Statik sayfalar
+const staticRoutes = [
+  "/", // ana sayfa
+  "/about/", // hakkında
+  "/iletisim/", // iletişim
+  "/iletisim-tesekkur/", // teşekkür
+  "/kodlama-araclari/", // araç listesi
+  "/kodlama/json-to-toon-bilgi/", // toon docs
+  "/gizlilik-politikasi/", // gizlilik
+  "/cerez-politikasi/", // çerez
+];
 
 // 🔹 Hesaplayıcılar
 const calculatorRoutes = calculators.map((c) => `/c/${c.id}/`);
@@ -49,4 +58,4 @@ const xml =
   `\n</urlset>`;
 
 fs.writeFileSync("public/sitemap.xml", xml.trim());
-console.log("✅ Sitemap düzeltildi ve oluşturuldu. URL sayısı:", urls.length);
+console.log("✅ Sitemap oluşturuldu. Toplam URL:", urls.length);

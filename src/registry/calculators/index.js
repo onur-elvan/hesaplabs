@@ -98,7 +98,7 @@ import adetGunuHesaplama from "./adet-gunu-hesaplama.js";
 import hicriTakvimHesaplama from "./hicri-takvim-hesaplama.js";
 import yakitTuketimiHesaplama from "./yakit-tuketimi-hesaplama.js";
 import yillikIzinUcretiHesaplama from "./yillik-izin-ucreti-hesaplama.js";
-import daskPrimHesaplama from "./dask-prim-hesaplama.js";
+
 // burada senin ekleyeceğin diğerleri de olacak:
 // import stopaj from "./stopaj"; gibi
 
@@ -107,7 +107,6 @@ export const calculators = [
   asitBazNotralizasyon,
   yillikIzinUcretiHesaplama,
   yakitTuketimiHesaplama,
-  daskPrimHesaplama,
   arsaPayiHesaplama,
   elektrikliAracSarjHesaplama,
   adetGunuHesaplama,

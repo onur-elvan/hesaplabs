@@ -4,8 +4,6 @@
     <!-- Açıklama -->
     <header class="space-y-2">
       <p class="text-sm text-slate-600">
-        JSON Web Token (JWT), özellikle API güvenliğinde kullanılan, üç parçadan
-        oluşan bir erişim kimliğidir:
         <code class="font-mono">header.payload.signature</code>. Bu araç,
         tarayıcı içinde çalışarak gönderdiğin JWT'nin <strong>header</strong> ve
         <strong>payload</strong> kısımlarını güvenli bir şekilde çözüp

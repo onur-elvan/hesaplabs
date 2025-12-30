@@ -1,9 +1,24 @@
 <template>
   <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
     <section v-if="tool">
-      <h1 class="text-2xl sm:text-3xl font-semibold text-slate-900 mb-2">
-        {{ tool.name }}
+      <!-- Başlık + i butonu -->
+      <h1
+        class="text-2xl sm:text-3xl font-semibold text-slate-900 mb-2 flex items-center gap-2"
+      >
+        <span>{{ tool.name }}</span>
+
+        <!-- Doküman sayfası varsa küçük "i" butonu -->
+        <RouterLink
+          v-if="tool.docsRoute"
+          :to="tool.docsRoute"
+          class="inline-flex items-center justify-center w-6 h-6 text-xs rounded-full border border-slate-300 text-slate-600 hover:bg-slate-100"
+          title="Detaylı bilgiyi gör"
+          aria-label="Detaylı bilgiyi gör"
+        >
+          i
+        </RouterLink>
       </h1>
+
       <p class="text-slate-600 text-sm sm:text-base max-w-2xl mb-6">
         {{ tool.shortDescription }}
       </p>
@@ -29,7 +44,7 @@
 </template>
 
 <script setup>
-import { computed } from "vue";
+import { computed, watchEffect } from "vue";
 import { useRoute } from "vue-router";
 import { codeTools } from "../data/codeTools";
 
@@ -39,8 +54,7 @@ import UrlEncodeTool from "../tools/UrlEncodeTool.vue";
 import JsonDiffTool from "../tools/JsonDiffTool.vue";
 import JwtDecoderTool from "../tools/JwtDecoderTool.vue";
 import UuidTool from "../tools/UuidTool.vue";
-
-// import UrlEncoderTool from "../tools/UrlEncoderTool.vue";
+import JsonToToonTool from "../tools/JsonToToonTool.vue";
 
 const route = useRoute();
 
@@ -51,7 +65,7 @@ const mapSlugToComponent = {
   "uuid-generator": UuidTool,
   "json-compare": JsonDiffTool,
   "jwt-decoder": JwtDecoderTool,
-  //   "url-encoder-decoder": UrlEncoderTool,
+  "json-to-toon-converter": JsonToToonTool,
 };
 
 const tool = computed(() =>
@@ -63,12 +77,27 @@ const toolComponent = computed(() => {
   return mapSlugToComponent[tool.value.slug] || null;
 });
 
-// SEO: route'a girince meta'ları güncelle
-if (tool.value) {
-  document.title = tool.value.metaTitle;
-  const desc = document.querySelector('meta[name="description"]');
-  if (desc) {
-    desc.setAttribute("content", tool.value.metaDescription);
+/**
+ * Basit SEO: ilgili araca göre title + description güncelle.
+ * Route değiştiğinde yeniden çalışsın diye watchEffect kullandık.
+ */
+watchEffect(() => {
+  if (tool.value) {
+    document.title = tool.value.metaTitle || tool.value.name + " | Hesaplabs";
+
+    const desc = document.querySelector('meta[name="description"]');
+    if (desc && tool.value.metaDescription) {
+      desc.setAttribute("content", tool.value.metaDescription);
+    }
+  } else {
+    document.title = "Kodlama Araçları | Hesaplabs";
+    const desc = document.querySelector('meta[name="description"]');
+    if (desc) {
+      desc.setAttribute(
+        "content",
+        "JSON formatter, Base64, URL encode/decode ve daha fazlası için ücretsiz kodlama araçları."
+      );
+    }
   }
-}
+});
 </script>

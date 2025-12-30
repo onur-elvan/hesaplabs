@@ -9,9 +9,6 @@
 
     <!-- Başlık -->
     <header class="space-y-2">
-      <h1 class="text-2xl md:text-3xl font-semibold text-slate-900">
-        URL Encode / Decode Aracı
-      </h1>
       <p class="text-slate-600 max-w-3xl">
         Metinlerinizi web adreslerinde güvenle kullanabileceğiniz URL formatına
         dönüştürün veya URL içinde gördüğünüz kodlu ifadeleri normal metne geri

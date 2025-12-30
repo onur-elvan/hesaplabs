@@ -4,12 +4,6 @@
     <div class="bg-white border rounded-2xl p-6">
       <div class="flex items-start justify-between gap-4 flex-wrap">
         <div>
-          <h1 class="text-2xl font-bold">JSON Formatter / Validator</h1>
-          <p class="text-gray-600 mt-2">
-            JSON metnini doğrula, beautify (pretty), minify, JSONPath ile ara,
-            dosya yükle/indir. Tamamen tarayıcı içinde çalışır.
-          </p>
-
           <div class="flex flex-wrap gap-2 mt-3">
             <span class="px-3 py-1 rounded-full border text-sm bg-gray-50">
               ⚡ Hızlı

@@ -3,15 +3,6 @@
   <div class="max-w-6xl mx-auto space-y-10">
     <!-- Başlık -->
     <header class="space-y-2">
-      <nav class="text-[11px] sm:text-xs text-slate-500 mb-1">
-        <span>Encode / Decode</span>
-        <span class="mx-1">·</span>
-        <span>Zorluk: Kolay</span>
-      </nav>
-
-      <h1 class="text-2xl sm:text-3xl font-semibold text-slate-900">
-        Base64 Encode / Decode Aracı
-      </h1>
       <p class="text-sm sm:text-base text-slate-600">
         Metin veya dosyalarınızı güvenli bir şekilde Base64 formatına dönüştürün
         ya da Base64 kodlarını geri çözüp orijinal haline getirin.

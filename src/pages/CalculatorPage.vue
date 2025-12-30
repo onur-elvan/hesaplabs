@@ -7,17 +7,71 @@
           <h1 class="text-2xl font-bold mt-1">{{ calc.title }}</h1>
         </div>
 
-        <button
-          @click="onToggleFav"
-          class="shrink-0 w-10 h-10 rounded-lg border bg-white hover:shadow active:scale-[0.99]"
-          :aria-label="isFav ? 'Favorilerden çıkar' : 'Favorilere ekle'"
-          title="Favori"
-        >
-          <span class="text-xl">{{ isFav ? "⭐" : "☆" }}</span>
-        </button>
+        <!-- Sağ taraftaki butonlar: Sitene ekle + Favori -->
+        <div class="flex items-center gap-2">
+          <!-- Sitene ekle butonu -->
+          <button
+            type="button"
+            @click="showEmbed = !showEmbed"
+            class="px-3 py-2 text-xs sm:text-sm rounded-lg border bg-white hover:bg-gray-50 hover:shadow"
+            :aria-expanded="showEmbed ? 'true' : 'false'"
+          >
+            {{ showEmbed ? "Gömülü kodu gizle" : "Sitene ekle" }}
+          </button>
+
+          <!-- Favori butonu -->
+          <button
+            @click="onToggleFav"
+            class="shrink-0 w-10 h-10 rounded-lg border bg-white hover:shadow active:scale-[0.99]"
+            :aria-label="isFav ? 'Favorilerden çıkar' : 'Favorilere ekle'"
+            title="Favori"
+          >
+            <span class="text-xl">{{ isFav ? "⭐" : "☆" }}</span>
+          </button>
+        </div>
       </div>
 
       <p class="text-gray-600 mt-2">{{ calc.description }}</p>
+
+      <!-- 🔗 EMBED KARTI (Artık sadece showEmbed true iken görünüyor) -->
+      <div
+        v-if="showEmbed"
+        class="mt-4 rounded-xl border border-dashed border-slate-300 bg-slate-50 p-4 text-xs sm:text-sm text-slate-700 space-y-3"
+      >
+        <div
+          class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2"
+        >
+          <div>
+            <h2 class="font-semibold text-slate-900 text-sm sm:text-base">
+              Bu hesaplayıcıyı kendi sitene göm
+            </h2>
+            <p class="text-slate-600 text-xs sm:text-[13px] mt-0.5">
+              Aşağıdaki <code>&lt;iframe&gt;</code> kodunu kopyalayıp kendi
+              sitenin HTML'ine yapıştırman yeterli. Gömülü hesaplayıcı tamamen
+              Hesaplabs üzerinde çalışır.
+            </p>
+          </div>
+
+          <button
+            type="button"
+            @click="copyEmbedCode"
+            class="inline-flex items-center justify-center px-3 py-2 rounded-md border border-slate-300 bg-white text-xs sm:text-sm font-medium text-slate-700 hover:bg-slate-100"
+          >
+            {{ copiedEmbed ? "Kopyalandı ✓" : "Embed kodunu kopyala" }}
+          </button>
+        </div>
+
+        <pre
+          class="mt-1 bg-slate-900 text-slate-100 rounded-lg p-3 text-[11px] sm:text-xs overflow-x-auto"
+        ><code>{{ embedCode }}</code></pre>
+
+        <p class="text-[11px] text-slate-500">
+          Genişlik / yükseklik değerlerini ihtiyacına göre düzenleyebilirsin.
+          Önerilen yükseklik:
+          <span class="font-semibold">560–720px</span>.
+        </p>
+      </div>
+      <!-- /EMBED KARTI -->
 
       <!-- ✅ SEO Bilgi -->
       <div
@@ -288,6 +342,36 @@
           Not: Bu hesaplama grafik/tablo formatında sonuç üretir.
         </div>
       </div>
+
+      <!-- ÖNERİLEN HESAPLAYICILAR -->
+      <div
+        v-if="recommendedCalculators.length"
+        class="mt-10 pt-6 border-t border-gray-200"
+      >
+        <h2 class="text-lg font-semibold text-gray-900 mb-3">
+          İlgini çekebilecek diğer hesaplayıcılar
+        </h2>
+
+        <div class="grid gap-4 sm:grid-cols-2">
+          <router-link
+            v-for="rec in recommendedCalculators"
+            :key="rec.id"
+            :to="{ name: 'calculator', params: { id: rec.id } }"
+            class="block rounded-lg border bg-white p-4 hover:border-blue-500 hover:shadow-sm transition"
+          >
+            <div class="text-[11px] font-medium text-gray-500 mb-1">
+              {{ rec.category }}
+            </div>
+            <div class="text-sm font-semibold text-gray-900 mb-1">
+              {{ rec.title }}
+            </div>
+            <p class="text-xs text-gray-600 line-clamp-2">
+              {{ rec.description }}
+            </p>
+          </router-link>
+        </div>
+      </div>
+      <!-- /ÖNERİLEN HESAPLAYICILAR -->
     </div>
 
     <div v-else class="text-gray-600">Böyle bir hesaplayıcı bulunamadı.</div>
@@ -300,6 +384,7 @@ import { useRoute } from "vue-router";
 import {
   findCalculatorById,
   addRecent,
+  calculators,
   getFavorites,
   toggleFavorite,
   bumpPopularity,
@@ -308,6 +393,8 @@ import { useSeo } from "../composables/useSeo";
 import { incrementGlobalPopularity } from "../services/popularityGlobal";
 
 const route = useRoute();
+const showEmbed = ref(false);
+
 const calc = ref(null);
 const values = reactive({});
 const result = ref(null);
@@ -315,6 +402,51 @@ const showAdvanced = ref(false);
 
 const baseUrl = "https://hesaplabs.com";
 const pageUrl = computed(() => `${baseUrl}${route.fullPath}`);
+
+/* 🔗 EMBED İÇİN YENİ ALANLAR */
+const copiedEmbed = ref(false);
+
+const embedUrl = computed(() =>
+  calc.value ? `${baseUrl}/embed/c/${calc.value.id}` : ""
+);
+
+const embedCode = computed(() =>
+  embedUrl.value
+    ? `<iframe src="${embedUrl.value}" width="100%" height="600" style="border:0;" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>`
+    : ""
+);
+
+async function copyEmbedCode() {
+  if (!embedCode.value) return;
+  try {
+    await navigator.clipboard.writeText(embedCode.value);
+    copiedEmbed.value = true;
+    setTimeout(() => {
+      copiedEmbed.value = false;
+    }, 2000);
+  } catch (e) {
+    console.error("Embed kodu kopyalanamadı:", e);
+  }
+}
+/* /EMBED KISMI */
+
+/* ÖNERİLEN HESAPLAYICILAR */
+const recommendedCalculators = computed(() => {
+  if (!calc.value) return [];
+
+  const sameCategory = calculators.filter(
+    (c) => c.id !== calc.value.id && c.category === calc.value.category
+  );
+
+  const others = calculators.filter(
+    (c) => c.id !== calc.value.id && c.category !== calc.value.category
+  );
+
+  const merged = [...sameCategory, ...others];
+
+  return merged.slice(0, 4); // en fazla 4 öneri
+});
+/* /ÖNERİLEN HESAPLAYICILAR */
 
 const hasAdvanced = computed(
   () => calc.value?.inputs?.some((i) => i.advanced) ?? false
@@ -327,8 +459,6 @@ const visibleInputs = computed(() => {
 
 /* ----------------------------
    Üçgen çözücü için disabled mantığı
-   calc.id === "ucgen-cozucu" olduğunda,
-   calc.modeFields ve values.mode'a göre aktif alanları seçiyoruz.
 -----------------------------*/
 const TRIANGLE_ID = "ucgen-cozucu";
 
@@ -344,19 +474,14 @@ const activeTriangleKeys = computed(() => {
 });
 
 function isDisabled(input) {
-  // Sadece üçgen çözücüde çalışsın
   if (!calc.value || calc.value.id !== TRIANGLE_ID) return false;
-
-  // mod seçimi her zaman aktif
   if (input.key === "mode") return false;
 
   const active = activeTriangleKeys.value;
   if (!active) return false;
 
-  // listedeyse aktif, değilse disabled
   return !active.has(input.key);
 }
-
 /* ---------------------------- */
 
 const favs = ref(getFavorites());
@@ -393,6 +518,8 @@ watchEffect(() => {
 
   result.value = null;
   showAdvanced.value = false;
+  showEmbed.value = false; // hesaplayıcı değişince embed panelini kapat
+  copiedEmbed.value = false; // kopyalandı state'ini sıfırla
 
   Object.keys(values).forEach((k) => delete values[k]);
   if (calc.value) {
